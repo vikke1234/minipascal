@@ -6,9 +6,6 @@
 
 #include "lexer.h"
 
-std::string read_file(std::string_view filename);
-using identifier = int (*)(int);
-
 /**
  * Parses the current word or number, identifies which by the identifier
  * function `f`
@@ -18,21 +15,23 @@ using identifier = int (*)(int);
  * @param i       - index in content
  * @param length  - length of content
  */
-std::string parse(std::string_view content, identifier f,
-                       std::size_t &i, const std::size_t length) {
+std::string Lexer::parse(identifier f) {
 
-    std::string word = std::string();
+    std::string word = std::string(1, current_char);
 
-    while(f(content[i]) && i < length) {
-        word.push_back(content[i]);
-        i++;
+    while(true) {
+        char c = peek_char();
+
+        if (!f(c) || c == EOF) {
+            break;
+        }
+        word.push_back(get_char());
     }
-
     return word;
 }
 
 
-std::string read_file(std::string_view filename) {
+std::string Lexer::read_file(std::string_view filename) {
     constexpr std::size_t read_size = std::size_t(4096);
     std::ifstream file(filename.data(), std::ios::in);
     file.exceptions(std::ios::badbit);
@@ -47,32 +46,132 @@ std::string read_file(std::string_view filename) {
     return out;
 }
 
-lextype *lex(std::string_view filename) {
-    lextype *lexed = new lextype;
-    std::vector<std::string> *statement = new std::vector<std::string>;
+struct Token Lexer::get_token() {
 
-    const std::string content = read_file(filename);
-    const std::size_t length = content.length();
     std::string current = std::string();
+    enum token_type type;
 
-    std::cout << "lexing\n";
-    for (std::size_t i = 0; i < length;) {
-        if(std::isspace(content[i])) {
-            i++;
-            continue;
-        }
-
-        if(std::isalpha(content[i])) {
-            current = parse(content, isalnum, i, length);
-        } else if(std::isdigit(content[i])) {
-            current = parse(content, isdigit, i, length);
-        } else {
-            current = std::string(1, content[i++]);
-        }
-
-        std::cout << current << "\n";
-        statement->push_back(current);
+    // todo fix symbol bug, skips symbol if parse was called
+    char c = get_char();
+    if (std::isspace(c)) {
+        skip_wspace();
+        c = get_char();
     }
-    return lexed;
+
+    if (c == EOF) {
+        return {0, "", NO_SYMBOLS};
+    }
+    if(std::isalpha(c)) {
+        current = parse(isalnum);
+        type = IDENTIFIER;
+    } else if(std::isdigit(c)) {
+        current = parse(isdigit);
+        type = DIGIT;
+    } else {
+        switch (c) {
+            case '/': // fallthrough
+            case '*': // fallthrough
+            case '+': // fallthrough
+            case '-':
+                type = OPERATOR;
+                break;
+            case ':':
+                if (peek_char() == '=') {
+                    type = ASSIGN;
+                } else {
+                    type = TYPE_DELIM;
+                }
+                break;
+            case ';':
+                type = DELIM;
+                break;
+            case '(': // fallthrough
+            case ')':
+                type = PARENTHESES;
+                break;
+
+            default:
+                type = UNKNOWN;
+        }
+        if (type == ASSIGN) {
+            current = std::string(1, c);
+            current.push_back(get_char());
+        } else {
+            current = std::string(1, c);
+        }
+    }
+
+    struct Token t = {line, current, type};
+    return t;
 }
 
+/**
+ * Gets the next character from the file
+ *
+ * Note: skips comments
+ */
+char Lexer::get_char(void) {
+    enum comment_type comment_type = NONE;
+    // skip whitespace and comments
+    while (index < length) {
+        current_char = content[index++];
+        if(current_char == '\n') {
+            line++;
+        }
+
+        comment_type = is_comment();
+
+        if (comment_type) {
+            skip_comment(comment_type);
+            comment_type = NONE;
+        }
+
+        return current_char;
+    }
+    return EOF;
+}
+
+char Lexer::peek_char(void) {
+    if (index < length) {
+        return content[index];
+    }
+
+    return EOF;
+}
+
+// Skips characters until it gets to the end of a comment
+void Lexer::skip_comment(Lexer::comment_type type) {
+    while (peek_char() != EOF) {
+        if (current_char == '\n' && type == CPP_COMMENT) {
+            return;
+        }
+
+        if (is_comment() == C_COMMENT_END && type == C_COMMENT) {
+            return;
+        }
+        get_char();
+    }
+}
+
+void Lexer::skip_wspace(void) {
+    while (std::isspace(peek_char())) {
+        get_char();
+    }
+}
+
+enum Lexer::comment_type Lexer::is_comment(void) {
+    char next_char = peek_char();
+    if(current_char == '/' && next_char == '*') {
+        return CPP_COMMENT;
+    }
+
+    if (current_char == '/' && next_char == '/') {
+        return C_COMMENT;
+    }
+
+    if (current_char == '*' && next_char == '/') {
+        return C_COMMENT_END;
+    }
+
+    return NONE;
+}
