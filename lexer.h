@@ -5,19 +5,48 @@
 #include <vector>
 #include <string>
 #include <string_view>
+#include <unordered_map>
 
 enum token_type {
     IDENTIFIER,
-    COMMENT,
-    OPERATOR,
-    DIGIT,
-    STRING,
-    KEYWORD,
+
+    // operators
+    ADDITION,
+    SUBTRACTION,
+    MULTIPLICATION,
+    DIVISION,
+    LT,
+    NOT,
+    EQ,
+    AND,
+
+    // symbols
     PARENTHESES,
     TYPE_DELIM,
-    DELIM,
-    UNKNOWN,
+    SEMICOLON,
     ASSIGN,
+
+    // literals
+    DIGIT,
+    STRING,
+
+    // Keywords
+    VAR,
+    FOR,
+    END,
+    IN,
+    DO,
+    READ,
+    PRINT,
+    INT,
+    STRING_TYPE,
+    BOOL,
+    ASSERT,
+    IF,
+    ELSE,
+
+    // errors (essientially)
+    UNKNOWN,
     NO_SYMBOLS
 };
 
@@ -32,6 +61,7 @@ class Lexer {
     std::size_t index;
     std::size_t line;
     std::string content;
+    std::unordered_map<std::string, enum token_type> reserved;
     char current_char;
 
     enum comment_type {
@@ -47,8 +77,27 @@ public:
         std::cout << content;
         length = content.length();
         index = 0ULL;
-        line = 0ULL;
+        line = 1ULL;
         current_char = EOF;
+        reserved = {
+                {"!", NOT},  {"+", ADDITION}, {"-", SUBTRACTION},
+                {"&", AND}, {"*", MULTIPLICATION}, {"<", LT}, {"=", EQ},
+                {":=", ASSIGN}, {"\"", STRING}, {"(", PARENTHESES}, {";", SEMICOLON},
+
+                {"var", VAR},
+                {"for", FOR},
+                {"end", END},
+                {"in", IN},
+                {"do", DO},
+                {"read", READ},
+                {"print", PRINT},
+                {"int", INT},
+                {"string", STRING_TYPE},
+                {"bool", BOOL},
+                {"assert", ASSERT},
+                {"if", IF},
+                {"else", ELSE}
+            };
     }
     struct Token get_token(void);
 
@@ -57,13 +106,16 @@ private:
 
     std::string read_file(std::string_view filename);
     std::string parse(identifier f);
-    bool is_assign(void);
+
     Lexer::comment_type is_comment(void);
     void skip_comment(Lexer::comment_type);
     void skip_wspace(void);
-    bool is_keyword(void);
+
+    std::string get_string(void);
     char get_char(void);
     char peek_char(void);
+
+    enum token_type get_token_type(std::string current);
 };
 
 #endif /* LEXER_H */

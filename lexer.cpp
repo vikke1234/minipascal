@@ -63,41 +63,18 @@ struct Token Lexer::get_token() {
     }
     if(std::isalpha(c)) {
         current = parse(isalnum);
-        type = IDENTIFIER;
+        type = get_token_type(current);
     } else if(std::isdigit(c)) {
         current = parse(isdigit);
         type = DIGIT;
     } else {
-        switch (c) {
-            case '/': // fallthrough
-            case '*': // fallthrough
-            case '+': // fallthrough
-            case '-':
-                type = OPERATOR;
-                break;
-            case ':':
-                if (peek_char() == '=') {
-                    type = ASSIGN;
-                } else {
-                    type = TYPE_DELIM;
-                }
-                break;
-            case ';':
-                type = DELIM;
-                break;
-            case '(': // fallthrough
-            case ')':
-                type = PARENTHESES;
-                break;
+        current = std::string(1, c);
+        type = get_token_type(current);
 
-            default:
-                type = UNKNOWN;
-        }
         if (type == ASSIGN) {
-            current = std::string(1, c);
             current.push_back(get_char());
-        } else {
-            current = std::string(1, c);
+        } else if(type == STRING) {
+            current = get_string();
         }
     }
 
@@ -174,4 +151,50 @@ enum Lexer::comment_type Lexer::is_comment(void) {
     }
 
     return NONE;
+}
+
+std::string Lexer::get_string() {
+    std::string str;
+    int start = line;
+
+    bool escape = false;
+    while(true) {
+        char c = get_char();
+
+        if (escape) {
+            escape = false;
+            str.push_back(c);
+            continue;
+        }
+
+        escape = c == '\\';
+
+        if (c == '"') {
+            break;
+        }
+
+        if (c == EOF) {
+            std::cout << "Error: missing \" on line " << start << "\n";
+        }
+        str.push_back(c);
+    }
+
+    return str;
+}
+
+enum token_type Lexer::get_token_type(std::string current) {
+    enum token_type type;
+
+    if (current == ":") {
+        // only symbol which depends on the next symbol
+        type = peek_char() == '=' ? ASSIGN : TYPE_DELIM;
+    } else {
+        if (reserved.find(current) == reserved.end()) {
+            return IDENTIFIER;
+        } else {
+            type = reserved.at(current);
+        }
+    }
+
+    return type;
 }
