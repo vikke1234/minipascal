@@ -3,6 +3,9 @@
 #include <string>
 #include <unistd.h>
 
+#include "lexer.h"
+#include "parser.h"
+
 const char * usage = "./minipascal filename\n";
 
 int main(int argc, char **argv) {
@@ -31,5 +34,7 @@ int main(int argc, char **argv) {
     }
 
     filename = argv[optind];
+    Parser parser(filename);
+    parser.parse_file();
     return EXIT_SUCCESS;
 }
