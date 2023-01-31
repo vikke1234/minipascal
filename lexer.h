@@ -25,6 +25,7 @@ enum token_type {
     TYPE_DELIM,
     SEMICOLON,
     ASSIGN,
+    RANGE,
 
     // literals
     DIGIT,
@@ -82,7 +83,8 @@ public:
         reserved = {
                 {"!", NOT},  {"+", ADDITION}, {"-", SUBTRACTION},
                 {"&", AND}, {"*", MULTIPLICATION}, {"<", LT}, {"=", EQ},
-                {":=", ASSIGN}, {"\"", STRING}, {"(", PARENTHESES}, {";", SEMICOLON},
+                {":=", ASSIGN}, {"\"", STRING}, {"(", PARENTHESES},
+                {";", SEMICOLON}, {"..", RANGE},
 
                 {"var", VAR},
                 {"for", FOR},

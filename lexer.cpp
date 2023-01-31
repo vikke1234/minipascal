@@ -71,7 +71,7 @@ struct Token Lexer::get_token() {
         current = std::string(1, c);
         type = get_token_type(current);
 
-        if (type == ASSIGN) {
+        if (type == ASSIGN || type == RANGE) {
             current.push_back(get_char());
         } else if(type == STRING) {
             current = get_string();
@@ -186,8 +186,9 @@ enum token_type Lexer::get_token_type(std::string current) {
     enum token_type type;
 
     if (current == ":") {
-        // only symbol which depends on the next symbol
         type = peek_char() == '=' ? ASSIGN : TYPE_DELIM;
+    } else if (current == ".") {
+        type = peek_char() == '.' ? RANGE : UNKNOWN;
     } else {
         if (reserved.find(current) == reserved.end()) {
             return IDENTIFIER;
