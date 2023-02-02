@@ -61,6 +61,7 @@ struct Token Lexer::get_token() {
     if (c == EOF) {
         return {0, "", NO_SYMBOLS};
     }
+
     if(std::isalpha(c)) {
         current = parse(isalnum);
         type = get_token_type(current);
@@ -79,9 +80,13 @@ struct Token Lexer::get_token() {
     }
 
     struct Token t = {line, current, type};
+    previous = t;
     return t;
 }
 
+Token Lexer::get_previous() {
+    return previous;
+}
 /**
  * Gets the next character from the file
  *

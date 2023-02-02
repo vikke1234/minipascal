@@ -58,12 +58,13 @@ struct Token {
 };
 
 class Lexer {
+    std::string content;
     std::size_t length;
     std::size_t index;
     std::size_t line;
-    std::string content;
-    std::unordered_map<std::string, enum token_type> reserved;
     char current_char;
+    Token previous;
+    const std::unordered_map<std::string, enum token_type> reserved;
 
     enum comment_type {
         NONE,
@@ -73,14 +74,9 @@ class Lexer {
     };
 
 public:
-    Lexer(std::string_view filename) {
-        content = read_file(filename);
-        std::cout << content;
-        length = content.length();
-        index = 0ULL;
-        line = 1ULL;
-        current_char = EOF;
-        reserved = {
+    Lexer(std::string_view filename) :
+        content(read_file(filename)), length(content.length()), index(0ULL),
+        line(1ULL), current_char(EOF), previous{0, "", NO_SYMBOLS}, reserved{
                 {"!", NOT},  {"+", ADDITION}, {"-", SUBTRACTION},
                 {"&", AND}, {"*", MULTIPLICATION}, {"<", LT}, {"=", EQ},
                 {":=", ASSIGN}, {"\"", STRING}, {"(", PARENTHESES},
@@ -99,9 +95,13 @@ public:
                 {"assert", ASSERT},
                 {"if", IF},
                 {"else", ELSE}
-            };
+            }
+    {
+
+        std::cout << content << "\n\n";
     }
     struct Token get_token(void);
+    struct Token get_previous(void);
 
 private:
     using identifier = int (*)(int);
