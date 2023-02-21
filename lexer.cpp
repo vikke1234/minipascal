@@ -46,20 +46,24 @@ std::string Lexer::read_file(std::string_view filename) {
     return out;
 }
 
-struct Token Lexer::get_token() {
+std::unique_ptr<Token> Lexer::get_token(bool consume) {
+    std::size_t start = 0ULL;
 
     std::string current = std::string();
     enum token_type type;
 
-    // todo fix symbol bug, skips symbol if parse was called
     char c = get_char();
     if (std::isspace(c)) {
         skip_wspace();
         c = get_char();
     }
 
+    if (!consume) {
+        start = index - 1;
+    }
+
     if (c == EOF) {
-        return {0, "", NO_SYMBOLS};
+        return std::make_unique<Token>("", 0, NO_SYMBOLS);
     }
 
     if(std::isalpha(c)) {
@@ -79,13 +83,16 @@ struct Token Lexer::get_token() {
         }
     }
 
-    struct Token t = {line, current, type};
-    previous = t;
+    if (!consume) {
+        index = start;
+    }
+
+    std::unique_ptr<Token> t = std::make_unique<Token>(current, line, type);
     return t;
 }
 
-Token Lexer::get_previous() {
-    return previous;
+std::unique_ptr<Token> Lexer::peek_token() {
+    return get_token(false);
 }
 /**
  * Gets the next character from the file

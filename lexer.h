@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <vector>
+#include <memory>
 #include <string>
 #include <string_view>
 #include <unordered_map>
@@ -52,9 +53,12 @@ enum token_type {
 };
 
 struct Token {
-    std::size_t line;
     std::string token;
+    std::size_t line;
     enum token_type type;
+
+    Token(std::string token, std::size_t line, enum token_type type) :
+        token{std::move(token)}, line{line}, type{type} {}
 };
 
 class Lexer {
@@ -76,7 +80,7 @@ class Lexer {
 public:
     Lexer(std::string_view filename) :
         content(read_file(filename)), length(content.length()), index(0ULL),
-        line(1ULL), current_char(EOF), previous{0, "", NO_SYMBOLS}, reserved{
+        line(1ULL), current_char(EOF), previous{"", 0, NO_SYMBOLS}, reserved{
                 {"!", NOT},  {"+", ADDITION}, {"-", SUBTRACTION},
                 {"&", AND}, {"*", MULTIPLICATION}, {"<", LT}, {"=", EQ},
                 {":=", ASSIGN}, {"\"", STRING}, {"(", PARENTHESES},
@@ -100,8 +104,11 @@ public:
 
         std::cout << content << "\n\n";
     }
-    struct Token get_token(void);
-    struct Token get_previous(void);
+    std::unique_ptr<Token> get_token(bool consume = true);
+    std::unique_ptr<Token> peek_token(void);
+    bool is_reserved(std::string_view lexeme) {
+        return reserved.find(lexeme.data()) == reserved.end();
+    }
 
 private:
     using identifier = int (*)(int);
