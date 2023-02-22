@@ -10,10 +10,7 @@
  * Parses the current word or number, identifies which by the identifier
  * function `f`
  *
- * @param content - file content
  * @param f       - identifier function (isalpha, isdigit)
- * @param i       - index in content
- * @param length  - length of content
  */
 std::string Lexer::parse(identifier f) {
 
@@ -31,6 +28,13 @@ std::string Lexer::parse(identifier f) {
 }
 
 
+/**
+ * Reads all of the content in a file.
+ *
+ * @param filename - name of the file
+ *
+ * @return a string that contains all of the content in the file
+ */
 std::string Lexer::read_file(std::string_view filename) {
     constexpr std::size_t read_size = std::size_t(4096);
     std::ifstream file(filename.data(), std::ios::in);
@@ -46,6 +50,13 @@ std::string Lexer::read_file(std::string_view filename) {
     return out;
 }
 
+/**
+ * Gets the next token
+ *
+ * @param consume - whether to consume the returned token or not.
+ *
+ * @return The next token from the file.
+ */
 std::unique_ptr<Token> Lexer::get_token(bool consume) {
     std::size_t start = 0ULL;
 
@@ -91,8 +102,13 @@ std::unique_ptr<Token> Lexer::get_token(bool consume) {
     return t;
 }
 
+/**
+ * Skips all whitespace and returns the next token,
+ * it does not consume the token.
+ */
 std::unique_ptr<Token> Lexer::peek_token() {
-    return get_token(false);
+    auto token = get_token(false);
+    return token;
 }
 /**
  * Gets the next character from the file
@@ -142,6 +158,9 @@ void Lexer::skip_comment(Lexer::comment_type type) {
     }
 }
 
+/**
+ * Goes forward in the content untill it encounters non-whitespace.
+ */
 void Lexer::skip_wspace(void) {
     while (std::isspace(peek_char())) {
         get_char();
