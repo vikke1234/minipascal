@@ -22,7 +22,8 @@ enum token_type {
     AND,
 
     // symbols
-    PARENTHESES,
+    LPARENTHESES,
+    RPARENTHESES,
     TYPE_DELIM,
     SEMICOLON,
     ASSIGN,
@@ -83,7 +84,8 @@ public:
         line(1ULL), current_char(EOF), previous{"", 0, NO_SYMBOLS}, reserved{
                 {"!", NOT},  {"+", ADDITION}, {"-", SUBTRACTION},
                 {"&", AND}, {"*", MULTIPLICATION}, {"<", LT}, {"=", EQ},
-                {":=", ASSIGN}, {"\"", STRING}, {"(", PARENTHESES},
+                {":=", ASSIGN}, {"\"", STRING}, {"(", LPARENTHESES},
+                {")", RPARENTHESES},
                 {";", SEMICOLON}, {"..", RANGE},
 
                 {"var", VAR},
@@ -107,7 +109,7 @@ public:
     std::unique_ptr<Token> get_token(bool consume = true);
     std::unique_ptr<Token> peek_token(void);
     bool is_reserved(std::string_view lexeme) {
-        return reserved.find(lexeme.data()) == reserved.end();
+        return reserved.find(lexeme.data()) != reserved.end();
     }
 
 private:
