@@ -1,34 +1,26 @@
 #include "parser.h"
+#include "expr.h"
 #include <iostream>
 
 void Parser::parse_file() {
     while (true) {
-        Token token = lexer.get_token();
-        std::cout << token.token << "\n";
-        if (token.type == NO_SYMBOLS) {
+        std::unique_ptr<Token> token = lexer.peek_token();
+
+        if (token->type == NO_SYMBOLS) {
             break;
         }
 
-        switch(token.type) {
-            case token_type::IF:
-                break;
-
-            case token_type::FOR:
+        switch(token->type) {
+            case token_type::IDENTIFIER:
+                {
+                    auto e = statement();
+                    e->visit();
+                }
                 break;
 
             default:
                 break;
         }
     }
-
 }
 
-void Parser::match(enum token_type type) {
-    std::unordered_map<enum token_type, std::pair<char, char>> matchers = {
-        {token_type::PARENTHESES, {'(', ')'}}
-    };
-
-    if (matchers.find(type) != matchers.end()) {
-        lexer.get_token();
-    }
-}
