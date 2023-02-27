@@ -3,6 +3,7 @@
  */
 #ifndef EXPR_H
 #define EXPR_H
+#include <memory>
 #include <string>
 #include <variant>
 
@@ -14,6 +15,7 @@ protected:
     std::unique_ptr<Token> token;
 public:
     Expr(std::unique_ptr<Token> t) : token{std::move(t)} {}
+    Expr() = default;
     virtual ~Expr() = default;
 
     virtual void interpet(void) = 0;
@@ -25,27 +27,41 @@ class Statement : public Expr {
     Statement * next;
 
 public:
-    Statement(std::unique_ptr<Token> &t) : Expr(std::move(t)) { }
-    virtual void interpet(void) {}
-    virtual void visit(void) {}
+    Statement(std::unique_ptr<Token> t) : Expr(std::move(t)) { }
+    virtual void interpet(void) override {}
+    virtual void visit(void) override  {}
 };
 
-/*
 class StatementList : public Expr {
-    Statement *stmt;
+    std::unique_ptr<Expr> statement;
+    std::unique_ptr<StatementList> next;
 
 public:
-    StatementList *next;
+    StatementList(std::unique_ptr<Expr> stmt)
+        : statement{std::move(stmt)} {}
 
-    StatementList(Statement *s) : stmt(s) {}
     void interpet(void){}
-    void visit(void){}
+    void visit(void) override  {
+        statement->visit();
+        std::cout << "\n";
+        if (next != nullptr) {
+            next->visit();
+        }
+    }
+    void add_child(std::unique_ptr<Expr> stmt) {
+        if (next == nullptr) {
+            next = std::make_unique<StatementList>(std::move(stmt));
+        } else {
+            next->add_child(std::move(stmt));
+        }
+    }
 };
-*/
 
 class Literal : public Expr {
-    std::variant<int, std::string> value;
+    std::variant<int, bool, std::string> value;
 public:
+    Literal(std::variant<int, bool, std::string> value) : Expr{std::make_unique<Token>("", 0, token_type::UNKNOWN)}, value{value} { }
+
     Literal(std::unique_ptr<Token> &tok) : Expr(std::move(tok)) {
         switch (token->type) {
             case token_type::DIGIT:
@@ -61,8 +77,8 @@ public:
         }
     }
 
-    virtual void interpet(void) {}
-    virtual void visit(void) {
+    virtual void interpet(void) override {}
+    virtual void visit(void) override  {
         std::visit([](const auto &x) { std::cout << x << " "; }, value);
     }
 };
@@ -75,23 +91,37 @@ class Bop : public Expr {
         Bop(std::unique_ptr<Token> tok, std::unique_ptr<Expr> left, std::unique_ptr<Expr> right)
             : Expr(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
 
-        virtual void interpet(void) {}
-        virtual void visit(void) {
+        virtual void interpet(void) override {}
+        virtual void visit(void) override  {
             std::cout << token->token << " ( ";
             left->visit();
-            right->visit();
-            std::cout << ")\n";
+            if (right)
+                right->visit();
+            std::cout << ") ";
         }
 };
 
-class Ident : public Expr {
+class VarInst : public Expr {
+    enum token_type type;
 
     public:
-        Ident(std::unique_ptr<Token> tok) :
+        VarInst(std::unique_ptr<Token> tok, std::unique_ptr<Token> type) :
+            Expr(std::move(tok)), type{type->type} {}
+
+        virtual void interpet() {}
+        virtual void visit () {
+            std::cout << token->token << " ";
+        }
+};
+
+class VarAssign : public Expr {
+
+    public:
+        VarAssign(std::unique_ptr<Token> tok) :
             Expr(std::move(tok)) {}
 
-        virtual void interpet(void) {}
-        virtual void visit(void) {
+        virtual void interpet(void) override {}
+        virtual void visit(void) override  {
             std::cout << token->token << " ";
         }
 };
@@ -102,13 +132,13 @@ class Type : public Expr {
 public:
     Type(Token t) : type(t) { }
     void interpet(void){}
-    void visit(void){}
+    void visit(void) override {}
 };
 
 class Var : public Expr {
 public:
     void interpet(void){}
-    void visit(void){}
+    void visit(void) override {}
 };
 */
 
