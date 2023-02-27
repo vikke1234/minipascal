@@ -53,6 +53,8 @@ enum token_type {
     NO_SYMBOLS
 };
 
+extern std::string type_to_str(token_type type);
+
 struct Token {
     std::string token;
     std::size_t line;

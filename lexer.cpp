@@ -230,3 +230,35 @@ enum token_type Lexer::get_token_type(std::string current) {
 
     return type;
 }
+
+extern std::string type_to_str(token_type type) {
+    static std::unordered_map<token_type, std::string> to_str = {
+                {NOT, "!"},  {ADDITION, "+"}, {SUBTRACTION, "-"},
+                {AND, "&"}, {MULTIPLICATION, "*"}, {LT, "<"}, {EQ, "="},
+                {ASSIGN, ":="}, {STRING, "\""}, {LPARENTHESES, "("},
+                {RPARENTHESES, ")"},
+                {SEMICOLON, ";"}, {RANGE, ".."},
+
+                {VAR, "var"},
+                {FOR, "for"},
+                {END, "end"},
+                {IN, "in"},
+                {DO, "do"},
+                {READ, "read"},
+                {PRINT, "print"},
+                {INT, "int"},
+                {STRING_TYPE, "string"},
+                {BOOL, "bool"},
+                {ASSERT, "assert"},
+                {IF, "if"},
+                {ELSE, "else"},
+                {IDENTIFIER, "identifier"},
+                {DIGIT, "digit"},
+                {NO_SYMBOLS, "EOF"}
+            };
+
+            if (to_str.find(type) != to_str.end()) {
+                return to_str.at(type);
+            }
+            return "could not find type";
+}
