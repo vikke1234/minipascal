@@ -51,9 +51,11 @@ std::unique_ptr<Expr> Parser::factor() {
         case token_type::IDENTIFIER:
             lexer.get_token();
             return std::make_unique<VarAssign>(std::move(symbol));
+
         case token_type::DIGIT:
             lexer.get_token();
             return std::make_unique<Literal>(symbol);
+
         case token_type::LPARENTHESES:
             {
                 lexer.get_token();
@@ -61,6 +63,7 @@ std::unique_ptr<Expr> Parser::factor() {
                 match(token_type::RPARENTHESES);
                 return expr;
             }
+
         default:
             std::cout << "Parse error in factoring\n";
             break;
@@ -77,9 +80,6 @@ std::unique_ptr<Expr> Parser::factor_tail(std::unique_ptr<Expr> ident) {
                 auto fac = factor();
                 return std::make_unique<Bop>(std::move(symbol), std::move(ident), factor_tail(std::move(fac)));
             }
-            break;
-
-        case token_type::SEMICOLON:
             break;
 
         default:
@@ -100,6 +100,7 @@ std::unique_ptr<Expr> Parser::expression() {
                 return op;
             }
             break;
+
         default:
             std::cout << "Parse error in expression expr, got token "
                 << symbol->token;
@@ -107,8 +108,8 @@ std::unique_ptr<Expr> Parser::expression() {
     return nullptr;
 }
 std::unique_ptr<Expr> Parser::terminal() {
-    std::cout << "Term\n";
     auto symbol = lexer.peek_token();
+
     switch(symbol->type) {
         case token_type::IDENTIFIER: // fallthrough
         case token_type::DIGIT:      // fallthrough
@@ -118,6 +119,7 @@ std::unique_ptr<Expr> Parser::terminal() {
                 auto tail = factor_tail(std::move(ident));
                 return tail;
             }
+
         default:
             break;
     }
@@ -137,9 +139,11 @@ std::unique_ptr<Expr> Parser::var() {
     if (has_assign->type == token_type::ASSIGN) {
         lexer.get_token();
         std::unique_ptr<Expr> init = expression();
-        assign = std::make_unique<Bop>(std::move(has_assign), std::move(variable), std::move(init));
+        assign = std::make_unique<Bop>(std::move(has_assign),
+                                       std::move(variable), std::move(init));
     } else {
         std::variant<int, bool, std::string> default_init;
+
         switch(type->type) {
             case token_type::INT:
                 default_init = 0;
@@ -155,6 +159,7 @@ std::unique_ptr<Expr> Parser::var() {
             default:
                 std::cout << "Invalid type\n";
         }
+
         auto as_tok = std::make_unique<Token>(":=", 0, token_type::ASSIGN);
         auto literal = std::make_unique<Literal>(default_init);
         assign = std::make_unique<Bop>(std::move(as_tok), std::move(variable), std::move(literal));
@@ -166,6 +171,7 @@ std::unique_ptr<Expr> Parser::var() {
 
 std::unique_ptr<Expr> Parser::statement() {
     auto symbol = lexer.peek_token();
+
     if (!lexer.is_reserved(symbol->token)) {
         lexer.get_token();
         std::cout << "Statement\n";
@@ -190,6 +196,7 @@ std::unique_ptr<Expr> Parser::statement() {
             case token_type::VAR:
                 lexer.get_token();
                 return var();
+
             default:
                 return nullptr;
         }
