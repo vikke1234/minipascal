@@ -7,7 +7,8 @@
 #include <string>
 #include <variant>
 
-#include <lexer.h>
+#include "token.h"
+#include "lexer.h"
 
 
 class Expr {
@@ -40,10 +41,9 @@ public:
     StatementList(std::unique_ptr<Expr> stmt)
         : statement{std::move(stmt)} {}
 
-    void interpet(void){}
+    void interpet(void) override{}
     void visit(void) override  {
         statement->visit();
-        std::cout << "\n";
         if (next != nullptr) {
             next->visit();
         }
@@ -126,20 +126,31 @@ class VarAssign : public Expr {
         }
 };
 
-/*
-class Type : public Expr {
-    Token type;
-public:
-    Type(Token t) : type(t) { }
-    void interpet(void){}
-    void visit(void) override {}
-};
+class If : public Expr {
+    std::unique_ptr<Expr> condition;
+    std::unique_ptr<Expr> truthy;
+    std::unique_ptr<Expr> falsy;
 
-class Var : public Expr {
-public:
-    void interpet(void){}
-    void visit(void) override {}
+    public:
+        If(std::unique_ptr<Expr> condition, std::unique_ptr<Expr> truthy,
+                std::unique_ptr<Expr> falsy) :
+            Expr(), condition{std::move(condition)}, truthy{std::move(truthy)},
+            falsy{std::move(falsy)} {}
+
+        void interpet() override {}
+        void visit() override {
+            std::cout << "( IF ";
+            condition->visit();
+            std::cout << "(";
+            truthy->visit();
+            std::cout << ")";
+            if (falsy) {
+                std::cout << " ELSE (";
+                falsy->visit();
+                std::cout << ")";
+            }
+            std::cout << ")";
+        }
 };
-*/
 
 #endif

@@ -1,5 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
+#include "token.h"
 #include "lexer.h"
 #include "expr.h"
 #include "symbols.h"
@@ -26,10 +27,39 @@ private:
      * Parses a statement
      */
     std::unique_ptr<Expr> statement();
+
+    std::unique_ptr<Expr> statement_list(bool is_block);
+
     /**
      * Parses a var expression
      */
     std::unique_ptr<Expr> var();
+
+    std::unique_ptr<Expr> if_stmt() {
+        std::unique_ptr<Expr> condition = expression();
+        match(token_type::DO);
+        std::unique_ptr<Expr> list = statement_list(true);
+        std::unique_ptr<Expr> else_stmt = nullptr;
+
+        auto token = lexer.peek_token();
+        switch(token->type) {
+            case token_type::ELSE:
+                lexer.get_token();
+                else_stmt = statement_list(true);
+
+                // fallthrough
+            case token_type::END:
+                match(token_type::END); // expect an end if coming from else
+                break;
+
+            default:
+                break;
+        }
+
+        auto if_ = std::make_unique<If>(std::move(condition),
+                std::move(list), std::move(else_stmt));
+        return if_;
+    }
 
     /**
      * Fetches a terminal, e.g. digit or identifier
@@ -72,8 +102,5 @@ private:
             " got " << type_to_str(token->type) << "(" << token->token << ")\n";
         return nullptr;
     }
-
-    Expr comparison(void);
-
 };
 #endif

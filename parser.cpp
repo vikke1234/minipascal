@@ -4,14 +4,22 @@
 #include <memory>
 
 void Parser::parse_file() {
+    std::unique_ptr<Expr> program = statement_list(false);
+
+    program->visit();
+}
+
+std::unique_ptr<Expr> Parser::statement_list(bool is_block) {
     std::unique_ptr<StatementList> program;
 
     while (true) {
         std::unique_ptr<Token> token = lexer.peek_token();
 
-        if (token->type == NO_SYMBOLS) {
+        if (token->type == token_type::NO_SYMBOLS ||
+                (is_block && (token->type == token_type::END || token->type == token_type::ELSE))) {
             break;
         }
+
         std::unique_ptr<Expr> e = statement();
 
         if (program != nullptr) {
@@ -20,7 +28,8 @@ void Parser::parse_file() {
             program = std::make_unique<StatementList>(std::move(e));
         }
     }
-    program->visit();
+
+    return program;
 }
 
 std::unique_ptr<Expr> Parser::term_tail(std::unique_ptr<Expr> expr) {
@@ -31,12 +40,15 @@ std::unique_ptr<Expr> Parser::term_tail(std::unique_ptr<Expr> expr) {
         case token_type::SUBTRACTION:
             {
                 lexer.get_token();
-                auto bop = std::make_unique<Bop>(std::move(symbol), std::move(expr), terminal());
-                return bop;
+                std::unique_ptr<Expr> bop = std::make_unique<Bop>(std::move(symbol), std::move(expr), terminal());
+
+                return term_tail(std::move(bop));
             }
 
+        case token_type::DO:
         case token_type::SEMICOLON:
             break;
+
         default:
             std::cout << "Parse error term_tail " << type_to_str(symbol->type) << " \n";
             break;
@@ -185,7 +197,7 @@ std::unique_ptr<Expr> Parser::statement() {
             return nullptr;
         }
 
-        std::unique_ptr<Expr> expr = expression();
+        auto expr = expression();
         std::unique_ptr<Expr> assign = std::make_unique<Bop>(
                 std::move(eq), std::move(ident), std::move(expr));
 
@@ -197,6 +209,9 @@ std::unique_ptr<Expr> Parser::statement() {
                 lexer.get_token();
                 return var();
 
+            case token_type::IF:
+                lexer.get_token();
+                return if_stmt();
             default:
                 return nullptr;
         }
