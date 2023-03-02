@@ -108,8 +108,8 @@ class VarInst : public Expr {
         VarInst(std::unique_ptr<Token> tok, std::unique_ptr<Token> type) :
             Expr(std::move(tok)), type{type->type} {}
 
-        virtual void interpet() {}
-        virtual void visit () {
+        virtual void interpet() override {}
+        virtual void visit () override {
             std::cout << token->token << " ";
         }
 };
@@ -149,6 +149,50 @@ class If : public Expr {
                 falsy->visit();
                 std::cout << ")";
             }
+            std::cout << ")";
+        }
+};
+
+class Range : public Expr {
+    int start;
+    int end;
+    int current;
+
+    public:
+        Range(std::unique_ptr<Token> start, std::unique_ptr<Token> end) : Expr() {
+            this->start = std::atoi(start->token.c_str());
+            this->end = std::atoi(end->token.c_str());
+        }
+
+        int get_next() {
+            return current++;
+        }
+
+        bool is_done() {
+            return start <= end;
+        }
+
+        virtual void interpet() override {}
+        virtual void visit() override {
+            std::cout << start << ".." << end;
+        }
+};
+
+class For : public Expr {
+    std::unique_ptr<Range> range;
+    std::unique_ptr<StatementList> loop;
+
+    public:
+        For(std::unique_ptr<Token> variable, std::unique_ptr<Range> range,
+                std::unique_ptr<StatementList> statement_list) : Expr(std::move(variable)),
+                    range{std::move(range)}, loop{std::move(statement_list)} {}
+
+        virtual void interpet() override {}
+        virtual void visit() override {
+            std::cout << "(FOR " << token->token << " ";
+            range->visit();
+            std::cout << " ( ";
+            loop->visit();
             std::cout << ")";
         }
 };
