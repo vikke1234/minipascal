@@ -36,6 +36,8 @@ std::unique_ptr<Expr> Parser::term_tail(std::unique_ptr<Expr> expr) {
     std::cout << "Term tail\n";
     auto symbol = lexer.peek_token();
     switch (symbol->type) {
+        case token_type::EQ:       // fallthrough
+        case token_type::LT:       // fallthrough
         case token_type::ADDITION: // fallthrough
         case token_type::SUBTRACTION:
             {
