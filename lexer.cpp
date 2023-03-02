@@ -1,8 +1,8 @@
 #include <cctype>
 #include <fstream>
 #include <string_view>
-#include <iostream>
 #include <sstream>
+#include <iostream>
 
 #include "lexer.h"
 

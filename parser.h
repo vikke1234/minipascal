@@ -6,6 +6,7 @@
 #include "symbols.h"
 #include <memory>
 #include <string_view>
+#include <iostream>
 
 struct Ast {
     std::string symbol;

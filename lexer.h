@@ -1,7 +1,7 @@
 #ifndef LEXER_H
 #define LEXER_H
 
-#include <iostream>
+#include <iosfwd>
 #include <vector>
 #include <memory>
 #include <string>
@@ -51,10 +51,8 @@ public:
                 {"if", IF},
                 {"else", ELSE}
             }
-    {
+    {}
 
-        std::cout << content << "\n\n";
-    }
     std::unique_ptr<Token> get_token(bool consume = true);
     std::unique_ptr<Token> peek_token(void);
     bool is_reserved(std::string_view lexeme) {

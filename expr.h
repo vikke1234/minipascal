@@ -6,6 +6,7 @@
 #include <memory>
 #include <string>
 #include <variant>
+#include <iostream>
 
 #include "token.h"
 #include "lexer.h"
