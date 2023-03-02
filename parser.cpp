@@ -9,7 +9,7 @@ void Parser::parse_file() {
     program->visit();
 }
 
-std::unique_ptr<Expr> Parser::statement_list(bool is_block) {
+std::unique_ptr<StatementList> Parser::statement_list(bool is_block) {
     std::unique_ptr<StatementList> program;
 
     while (true) {
@@ -212,6 +212,9 @@ std::unique_ptr<Expr> Parser::statement() {
             case token_type::IF:
                 lexer.get_token();
                 return if_stmt();
+            case token_type::FOR:
+                lexer.get_token();
+                return for_loop();
             default:
                 return nullptr;
         }

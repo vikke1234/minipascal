@@ -28,12 +28,26 @@ private:
      */
     std::unique_ptr<Expr> statement();
 
-    std::unique_ptr<Expr> statement_list(bool is_block);
+    std::unique_ptr<StatementList> statement_list(bool is_block);
 
     /**
      * Parses a var expression
      */
     std::unique_ptr<Expr> var();
+
+    std::unique_ptr<Expr> for_loop() {
+        std::unique_ptr<Token> identifier = match(token_type::IDENTIFIER);
+        match(token_type::IN);
+        auto start = match(token_type::DIGIT);
+        match(token_type::RANGE);
+        auto end = match(token_type::DIGIT);
+        std::unique_ptr<Range> range =
+            std::make_unique<Range>(std::move(start), std::move(end));
+        match(token_type::DO);
+        std::unique_ptr<StatementList> body = statement_list(true);
+        match(token_type::END);
+        return std::make_unique<For>(std::move(identifier), std::move(range), std::move(body));;
+    }
 
     std::unique_ptr<Expr> if_stmt() {
         std::unique_ptr<Expr> condition = expression();
