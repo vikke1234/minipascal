@@ -88,6 +88,7 @@ std::unique_ptr<Expr> Parser::factor_tail(std::unique_ptr<Expr> ident) {
     auto symbol = lexer.peek_token();
     switch (symbol->type) {
         case token_type::DIVISION: //fallthrough
+        case token_type::AND: // fallthrough
         case token_type::MULTIPLICATION:
             {
                 lexer.get_token();
