@@ -3,10 +3,11 @@
 #include <iostream>
 #include <memory>
 
-void Parser::parse_file() {
-    std::unique_ptr<Expr> program = statement_list(false);
+std::unique_ptr<StatementList> Parser::parse_file() {
+    std::unique_ptr<StatementList> program = statement_list(false);
 
     program->visit();
+    return program;
 }
 
 std::unique_ptr<StatementList> Parser::statement_list(bool is_block) {
@@ -64,7 +65,7 @@ std::unique_ptr<Expr> Parser::factor() {
     switch(symbol->type) {
         case token_type::IDENTIFIER:
             lexer.get_token();
-            return std::make_unique<VarAssign>(std::move(symbol));
+            return std::make_unique<Var>(std::move(symbol));
 
         case token_type::DIGIT:
             lexer.get_token();
@@ -190,8 +191,8 @@ std::unique_ptr<Expr> Parser::statement() {
     if (!lexer.is_reserved(symbol->token)) {
         lexer.get_token();
         std::cout << "Statement\n";
-        std::unique_ptr<Expr> ident =
-            std::make_unique<VarAssign>(std::move(symbol));
+        std::unique_ptr<Var> ident =
+            std::make_unique<Var>(std::move(symbol));
 
 
         auto eq = match(token_type::ASSIGN);

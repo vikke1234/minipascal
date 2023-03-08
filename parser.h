@@ -16,10 +16,9 @@ struct Ast {
 
 class Parser {
     Lexer lexer;
-    SymbolTable symbols;
 public:
-    Parser(std::string_view filename) : lexer(filename), symbols{} {}
-    void parse_file();
+    Parser(std::string_view filename) : lexer(filename) {}
+    std::unique_ptr<StatementList> parse_file();
 
 private:
     // grammar translators
@@ -39,11 +38,13 @@ private:
     std::unique_ptr<Expr> for_loop() {
         std::unique_ptr<Token> identifier = match(token_type::IDENTIFIER);
         match(token_type::IN);
+
         auto start = match(token_type::DIGIT);
         match(token_type::RANGE);
         auto end = match(token_type::DIGIT);
         std::unique_ptr<Range> range =
             std::make_unique<Range>(std::move(start), std::move(end));
+
         match(token_type::DO);
         std::unique_ptr<StatementList> body = statement_list(true);
         match(token_type::END);
