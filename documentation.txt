@@ -1,0 +1,28 @@
+0. Building
+The project requires the build system `meson` and `ninja`,  compilation is trivial; if you
+want to specify which compiler to use set the environmental variable `CC`.
+
+`meson build && cd build && ninja`
+
+0.1. Running
+`./minipascal foo.mpl`
+
+
+1. Brief introduction to the minipascal interpreter
+
+The project interpreter is quite small consisting of ~1000 lines, and each
+phase is split into it's respective files, parsing can be found in
+parser.{h,cpp} while the lexer is in lexer.{h,cpp} etc.
+
+The parser has a quite a bit of boilerplate code due to the nature of making
+one in C++. The different nodes for the AST can be found in expr.h, recursive
+descent is used to build the tree.
+
+
+2. Lexing
+
+
+3. Parsing
+
+
+4. Semantical analysis
