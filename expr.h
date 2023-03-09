@@ -213,4 +213,43 @@ class For : public Expr {
         }
 };
 
+class Print : public Expr {
+    std::unique_ptr<Operand> op;
+    Print(std::unique_ptr<Operand> op) : Expr(), op{std::move(op)} {}
+};
+
+class Read : public Expr {
+    std::unique_ptr<Operand> op;
+    Read(std::unique_ptr<Operand> op) : Expr(), op{std::move(op)} {}
+};
+
+class Unary : public Operand {
+    std::unique_ptr<Operand> op;
+
+
+    public:
+        Unary(std::unique_ptr<Operand> op) : Operand(), op {std::move(op)} {}
+
+        virtual Literal *get_value() override {
+            return nullptr;
+        }
+
+        virtual int get_type() override {
+           return 1;
+        }
+
+        virtual void interpet(void) override {
+
+        }
+
+        virtual void visit(void) const override {
+            std::cout << "( ! ";
+            op->visit();
+            std::cout << ") ";
+        }
+
+        virtual bool analyse() const override {
+            return false;
+        }
+};
 #endif
