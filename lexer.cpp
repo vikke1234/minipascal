@@ -209,7 +209,6 @@ std::string Lexer::get_string() {
         }
         str.push_back(c);
     }
-
     return str;
 }
 
@@ -235,7 +234,7 @@ extern std::string type_to_str(token_type type) {
     static std::unordered_map<token_type, std::string> to_str = {
                 {NOT, "!"},  {ADDITION, "+"}, {SUBTRACTION, "-"},
                 {AND, "&"}, {MULTIPLICATION, "*"}, {LT, "<"}, {EQ, "="},
-                {ASSIGN, ":="}, {STRING, "\""}, {LPARENTHESES, "("},
+                {ASSIGN, ":="}, {STRING, "string"}, {LPARENTHESES, "("},
                 {RPARENTHESES, ")"},
                 {SEMICOLON, ";"}, {RANGE, ".."},
 
