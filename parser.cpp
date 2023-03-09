@@ -164,7 +164,7 @@ std::unique_ptr<Expr> Parser::var() {
         assign = std::make_unique<Bop>(std::move(has_assign),
                                        std::move(variable), std::move(init));
     } else {
-        std::variant<int, bool, std::string> default_init;
+        std::variant<int, std::string, bool> default_init;
 
         switch(type->type) {
             case token_type::INT:
@@ -207,7 +207,7 @@ std::unique_ptr<Expr> Parser::statement() {
         }
 
         auto expr = expression();
-        std::unique_ptr<Expr> assign = std::make_unique<Bop>(
+        std::unique_ptr<Bop> assign = std::make_unique<Bop>(
                 std::move(eq), std::move(ident), std::move(expr));
 
         match(token_type::SEMICOLON);

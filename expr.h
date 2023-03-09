@@ -98,10 +98,10 @@ public:
  * can not exist as a literal.
  */
 class Literal : public Operand {
-    std::variant<int, bool, std::string> value;
+    std::variant<int, std::string, bool> value;
 
 public:
-    Literal(std::variant<int, bool, std::string> value) : Operand(), value{value} { }
+    Literal(std::variant<int, std::string, bool> value) : Operand(), value{value} { }
 
     Literal(std::unique_ptr<Token> &tok) : Operand(std::move(tok)) {
         switch (token->type) {
@@ -150,7 +150,9 @@ class Bop : public Operand {
 
 
         bool analyse() const override {
-            bool has_error = left->get_type() != right->get_type();
+            bool has_error = left->analyse();
+            has_error |= right->analyse();
+
 
             return has_error;
         }
@@ -192,24 +194,33 @@ class Bop : public Operand {
  * Initialization of a variable.
  */
 class VarInst : public Operand {
-    enum token_type type;
+    int type;
 
     public:
         VarInst(std::unique_ptr<Token> tok, enum token_type type) :
-            Operand(std::move(tok)), type{type} {}
+            Operand(std::move(tok)), type{type - token_type::INT} {}
 
         VarInst(std::unique_ptr<Token> tok, std::unique_ptr<Token> type) :
-            Operand(std::move(tok)), type{type->type} {}
+            Operand(std::move(tok)), type{type->type - token_type::INT} {}
 
         Literal *get_value() override {
             return 0;
         }
 
         int get_type() override {
-            return 0;
+            return symbol_table.get_symbol(token->token)->get_type();
         }
 
-        bool analyse() const override { return false; }
+        bool analyse() const override {
+            std::cout << "Analysing varinst\n";
+            bool succeeded = symbol_table.add_symbol(token->token, type);
+            if(!succeeded) {
+                std::cout << "Error token variable " << token->token
+                    << " already initialized";
+                return false;
+            }
+            return true;
+        }
 
         virtual void interpet() override {}
         virtual void visit(void) const override {
@@ -226,7 +237,14 @@ class Var : public Operand {
         Var(std::unique_ptr<Token> tok) :
             Operand(std::move(tok)) {}
 
-        bool analyse() const override { return false; }
+        bool analyse() const override {
+            if (!symbol_table.exists(token->token)) {
+                std::cout << "Error no variable named " << token->token << "\n";
+                return true;
+            }
+            return false;
+        }
+
         virtual void interpet(void) override {}
         virtual void visit(void) const override  {
             std::cout << token->token << " ";
@@ -364,7 +382,7 @@ class Unary : public Operand {
         }
 
         virtual int get_type() override {
-           return 1;
+           return 2;
         }
 
         virtual void interpet(void) override {
