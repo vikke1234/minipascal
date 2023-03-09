@@ -50,13 +50,6 @@ std::string Lexer::read_file(std::string_view filename) {
     return out;
 }
 
-/**
- * Gets the next token
- *
- * @param consume - whether to consume the returned token or not.
- *
- * @return The next token from the file.
- */
 std::unique_ptr<Token> Lexer::get_token(bool consume) {
     std::size_t start = 0ULL;
 
@@ -102,10 +95,6 @@ std::unique_ptr<Token> Lexer::get_token(bool consume) {
     return t;
 }
 
-/**
- * Skips all whitespace and returns the next token,
- * it does not consume the token.
- */
 std::unique_ptr<Token> Lexer::peek_token() {
     auto token = get_token(false);
     return token;
