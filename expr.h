@@ -24,7 +24,14 @@ public:
     virtual ~Expr() = default;
 
     virtual void interpet(void) = 0;
+    /**
+     * Print the AST prettily
+     */
     virtual void visit(void) const = 0;
+
+    /**
+     * Does analysis on the current statement.
+     */
     virtual bool analyse() const = 0;
 };
 
@@ -33,10 +40,25 @@ class Operand : public Expr {
 
         Operand(std::unique_ptr<Token> t) : Expr(std::move(t)) {}
         Operand() = default;
+        /**
+         * Gets the value of a variable/literal/operation.
+         */
         virtual Literal *get_value() = 0;
+
+        /**
+         * Gets the type of a variable/literal/operation.
+         */
         virtual int get_type() = 0;
 };
 
+/**
+ * The core of the AST, it will have the pointer to the current statement and
+ * to the next.
+ *
+ * Example: X := 1;
+ *     :=
+ *   X    1
+ */
 class StatementList : public Expr {
     std::unique_ptr<Expr> statement;
     std::unique_ptr<StatementList> next;
@@ -71,6 +93,10 @@ public:
     }
 };
 
+/**
+ * A literal, a digit or string, since booleans are not part of the spec, they
+ * can not exist as a literal.
+ */
 class Literal : public Operand {
     std::variant<int, bool, std::string> value;
 
@@ -105,11 +131,20 @@ public:
     }
 };
 
+
+/**
+ * A binary operation, 1 + 1 for example
+ */
 class Bop : public Operand {
     std::unique_ptr<Operand> left;
     std::unique_ptr<Operand> right;
 
     public:
+        /**
+         * @param tok - which type of operation it is.
+         * @param left - left side of the operation.
+         * @param right - the right side of the operation.
+         */
         Bop(std::unique_ptr<Token> tok, std::unique_ptr<Operand> left, std::unique_ptr<Operand> right)
             : Operand(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
 
@@ -153,6 +188,9 @@ class Bop : public Operand {
         }
 };
 
+/**
+ * Initialization of a variable.
+ */
 class VarInst : public Operand {
     enum token_type type;
 
@@ -179,6 +217,9 @@ class VarInst : public Operand {
         }
 };
 
+/**
+ * A reference to a variable.
+ */
 class Var : public Operand {
 
     public:
@@ -200,6 +241,9 @@ class Var : public Operand {
         }
 };
 
+/**
+ * If statement node
+ */
 class If : public Expr {
     std::unique_ptr<Expr> condition;
     std::unique_ptr<Expr> truthy;
@@ -228,6 +272,9 @@ class If : public Expr {
         }
 };
 
+/**
+ * Range node for the AST.
+ */
 class Range : public Expr {
     int start;
     int end;
@@ -239,10 +286,17 @@ class Range : public Expr {
             this->end = std::atoi(end->token.c_str());
         }
 
+        /**
+         * Gets the next number for the range, needs to be manually checked
+         * that it does not go out of range.
+         */
         int get_next() {
             return current++;
         }
 
+        /**
+         * Checks if all numbers from the range is consumed.
+         */
         bool is_done() {
             return start <= end;
         }
@@ -254,6 +308,9 @@ class Range : public Expr {
         }
 };
 
+/**
+ * For loop node in the AST.
+ */
 class For : public Expr {
     std::unique_ptr<VarInst> var;
     std::unique_ptr<Range> range;
@@ -275,16 +332,26 @@ class For : public Expr {
         }
 };
 
+/**
+ * Print node in the AST.
+ */
 class Print : public Expr {
     std::unique_ptr<Operand> op;
     Print(std::unique_ptr<Operand> op) : Expr(), op{std::move(op)} {}
 };
 
+/**
+ * Read node for standard input in the AST.
+ */
 class Read : public Expr {
     std::unique_ptr<Operand> op;
     Read(std::unique_ptr<Operand> op) : Expr(), op{std::move(op)} {}
 };
 
+/**
+ * Unary operation in the AST, needs to be handled differently from a normal
+ * BOP.
+ */
 class Unary : public Operand {
     std::unique_ptr<Operand> op;
 
