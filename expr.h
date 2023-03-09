@@ -212,7 +212,6 @@ class VarInst : public Operand {
         }
 
         bool analyse() const override {
-            std::cout << "Analysing varinst\n";
             bool succeeded = symbol_table.add_symbol(token->token, type);
             if(!succeeded) {
                 std::cout << "Error token variable " << token->token
@@ -342,7 +341,8 @@ class For : public Expr {
         bool analyse() const override { return false; }
         void interpet() override {}
         void visit(void) const override {
-            std::cout << "(FOR " << token->token << " ";
+            std::cout << "(FOR ";
+            var->visit();
             range->visit();
             std::cout << " ( ";
             loop->visit();
