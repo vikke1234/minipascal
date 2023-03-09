@@ -3,6 +3,7 @@
 #include <string>
 #include <unistd.h>
 
+#include "analysis.h"
 #include "lexer.h"
 #include "parser.h"
 
@@ -35,6 +36,7 @@ int main(int argc, char **argv) {
 
     filename = argv[optind];
     Parser parser(filename);
-    parser.parse_file();
+    Analyser analyser(parser);
+    analyser.analyse();
     return EXIT_SUCCESS;
 }
