@@ -9,7 +9,10 @@
 #include <iostream>
 
 #include "token.h"
+#include "symbols.h"
 #include "lexer.h"
+
+class Literal;
 
 
 class Expr {
@@ -22,7 +25,16 @@ public:
 
     virtual void interpet(void) = 0;
     virtual void visit(void) const = 0;
-    virtual void analyse() const = 0;
+    virtual bool analyse() const = 0;
+};
+
+class Operand : public Expr {
+    public:
+
+        Operand(std::unique_ptr<Token> t) : Expr(std::move(t)) {}
+        Operand() = default;
+        virtual Literal *get_value() = 0;
+        virtual int get_type() = 0;
 };
 
 class StatementList : public Expr {
@@ -33,7 +45,7 @@ public:
     StatementList(std::unique_ptr<Expr> stmt)
         : statement{std::move(stmt)} {}
 
-    void analyse() const override {};
+    bool analyse() const override { return false; }
     void interpet(void) override {}
     void visit(void) const override {
         statement->visit();
@@ -50,17 +62,22 @@ public:
         }
     }
 
-    const Expr *get_statement() {
+    const StatementList *get_next() const {
+        return next.get();
+    }
+
+    const Expr *get_statement() const {
         return statement.get();
     }
 };
 
-class Literal : public Expr {
+class Literal : public Operand {
     std::variant<int, bool, std::string> value;
-public:
-    Literal(std::variant<int, bool, std::string> value) : Expr{std::make_unique<Token>("", 0, token_type::UNKNOWN)}, value{value} { }
 
-    Literal(std::unique_ptr<Token> &tok) : Expr(std::move(tok)) {
+public:
+    Literal(std::variant<int, bool, std::string> value) : Operand(), value{value} { }
+
+    Literal(std::unique_ptr<Token> &tok) : Operand(std::move(tok)) {
         switch (token->type) {
             case token_type::DIGIT:
                 value = std::atoi(token->token.c_str());
@@ -75,23 +92,50 @@ public:
         }
     }
 
-    void analyse() const override {}
+    bool analyse() const override { return false; }
     virtual void interpet(void) override {}
     virtual void visit(void) const override  {
         std::visit([](const auto &x) { std::cout << x << " "; }, value);
     }
+    virtual Literal *get_value() override {
+        return this;
+    }
+    virtual int get_type() override {
+        return value.index();
+    }
 };
 
-class Bop : public Expr {
-    std::unique_ptr<Expr> left;
-    std::unique_ptr<Expr> right;
+class Bop : public Operand {
+    std::unique_ptr<Operand> left;
+    std::unique_ptr<Operand> right;
 
     public:
-        Bop(std::unique_ptr<Token> tok, std::unique_ptr<Expr> left, std::unique_ptr<Expr> right)
-            : Expr(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
+        Bop(std::unique_ptr<Token> tok, std::unique_ptr<Operand> left, std::unique_ptr<Operand> right)
+            : Operand(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
 
-        void analyse() const override {
 
+        bool analyse() const override {
+            bool has_error = left->get_type() != right->get_type();
+
+            return has_error;
+        }
+
+        virtual Literal *get_value() override {
+            return nullptr;
+        }
+
+        virtual int get_type() override {
+            int r = right->get_type();
+            int l = left->get_type();
+            if (l != r) {
+                std::cout << "Error: incompatible types line " << token->line << "\n";
+                std::exit(1);
+            } else {
+                if (token->type == token_type::EQ || token->type == token_type::LT){
+                    return 1;
+                }
+            }
+            return l;
         }
 
         virtual void interpet(void) override {}
@@ -102,39 +146,57 @@ class Bop : public Expr {
                 right->visit();
             std::cout << ") ";
         }
+
+    protected:
+        bool is_boolean() {
+            return token->type == token_type::LT || token->type == token_type::EQ;
+        }
 };
 
-class VarInst : public Expr {
+class VarInst : public Operand {
     enum token_type type;
 
     public:
         VarInst(std::unique_ptr<Token> tok, enum token_type type) :
-            Expr(std::move(tok)), type{type} {}
+            Operand(std::move(tok)), type{type} {}
 
         VarInst(std::unique_ptr<Token> tok, std::unique_ptr<Token> type) :
-            Expr(std::move(tok)), type{type->type} {}
+            Operand(std::move(tok)), type{type->type} {}
 
-        void analyse() const override {};
+        Literal *get_value() override {
+            return 0;
+        }
+
+        int get_type() override {
+            return 0;
+        }
+
+        bool analyse() const override { return false; }
+
         virtual void interpet() override {}
         virtual void visit(void) const override {
             std::cout << token->token << " ";
         }
 };
 
-class Var : public Expr {
+class Var : public Operand {
 
     public:
         Var(std::unique_ptr<Token> tok) :
-            Expr(std::move(tok)) {}
+            Operand(std::move(tok)) {}
 
-        void analyse() const override {};
+        bool analyse() const override { return false; }
         virtual void interpet(void) override {}
         virtual void visit(void) const override  {
             std::cout << token->token << " ";
         }
 
-        Literal *get_value() {
-            return nullptr;
+        Literal *get_value() override {
+            return symbol_table.get_symbol(token->token);
+        }
+
+        int get_type() override {
+            return symbol_table.get_symbol(token->token)->get_type();
         }
 };
 
@@ -149,7 +211,7 @@ class If : public Expr {
             Expr(), condition{std::move(condition)}, truthy{std::move(truthy)},
             falsy{std::move(falsy)} {}
 
-        void analyse() const override {};
+        bool analyse() const override { return false; }
         void interpet() override {}
         void visit() const override {
             std::cout << "( IF ";
@@ -185,7 +247,7 @@ class Range : public Expr {
             return start <= end;
         }
 
-        void analyse() const override {};
+        bool analyse() const override { return false; }
         void interpet() override {}
         void visit() const override {
             std::cout << start << ".." << end;
@@ -202,7 +264,7 @@ class For : public Expr {
                 std::unique_ptr<StatementList> statement_list) : Expr(), var{std::make_unique<VarInst>(std::move(variable), token_type::INT)},
                     range{std::move(range)}, loop{std::move(statement_list)} {}
 
-        void analyse() const override {};
+        bool analyse() const override { return false; }
         void interpet() override {}
         void visit(void) const override {
             std::cout << "(FOR " << token->token << " ";

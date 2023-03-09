@@ -8,12 +8,6 @@
 #include <string_view>
 #include <iostream>
 
-struct Ast {
-    std::string symbol;
-    enum token_type type;
-    std::vector<Ast> leaves;
-};
-
 class Parser {
     Lexer lexer;
 public:
@@ -35,7 +29,15 @@ private:
      */
     std::unique_ptr<Expr> var();
 
-    std::unique_ptr<Expr> for_loop() {
+    std::unique_ptr<Expr> print() {
+        return nullptr;
+    }
+
+    std::unique_ptr<Expr> write() {
+        return nullptr;
+    }
+
+    std::unique_ptr<For> for_loop() {
         std::unique_ptr<Token> identifier = match(token_type::IDENTIFIER);
         match(token_type::IN);
 
@@ -51,7 +53,7 @@ private:
         return std::make_unique<For>(std::move(identifier), std::move(range), std::move(body));;
     }
 
-    std::unique_ptr<Expr> if_stmt() {
+    std::unique_ptr<If> if_stmt() {
         std::unique_ptr<Expr> condition = expression();
         match(token_type::DO);
         std::unique_ptr<Expr> list = statement_list(true);
@@ -80,7 +82,7 @@ private:
     /**
      * Fetches a terminal, e.g. digit or identifier
      */
-    std::unique_ptr<Expr> terminal();
+    std::unique_ptr<Operand> terminal();
 
     /**
      * Fetches the tail if it exists, if not it will return the terminal
@@ -88,12 +90,12 @@ private:
      * @param expr - the terminal, the left side operand of the expression that
      *               is being built
      */
-    std::unique_ptr<Expr> term_tail(std::unique_ptr<Expr> expr);
+    std::unique_ptr<Operand> term_tail(std::unique_ptr<Operand> expr);
 
     /**
      * Fetches a digit/identifier, also makes sure parentheses are handled.
      */
-    std::unique_ptr<Expr> factor();
+    std::unique_ptr<Operand> factor();
 
     /**
      * Tries to factor the expression if needed, for example handles
@@ -102,12 +104,12 @@ private:
      * @param ident - left side of the expression (e.g. 1 * 3, the `1` will be
      * passed)
      */
-    std::unique_ptr<Expr> factor_tail(std::unique_ptr<Expr> ident);
+    std::unique_ptr<Operand> factor_tail(std::unique_ptr<Operand> ident);
 
     /**
      * Parses an expression
      */
-    std::unique_ptr<Expr> expression();
+    std::unique_ptr<Operand> expression();
 
     std::unique_ptr<Token> match(token_type expected) {
         auto token = lexer.peek_token();
@@ -116,7 +118,7 @@ private:
         }
         std::cout << "Parse error: expected " << type_to_str(expected) <<
             " got " << type_to_str(token->type) << "(" << token->token << ")\n";
-        return nullptr;
+        std::exit(1);
     }
 };
 #endif
