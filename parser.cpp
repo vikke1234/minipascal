@@ -221,9 +221,18 @@ std::unique_ptr<Expr> Parser::statement() {
             case token_type::IF:
                 lexer.get_token();
                 return if_stmt();
+
             case token_type::FOR:
                 lexer.get_token();
                 return for_loop();
+
+            case token_type::READ:
+                lexer.get_token();
+                return read_statement();
+
+            case token_type::PRINT:
+                lexer.get_token();
+                return print_statement();
             default:
                 return nullptr;
         }

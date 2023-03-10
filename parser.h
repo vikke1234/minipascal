@@ -37,6 +37,21 @@ private:
         return nullptr;
     }
 
+    std::unique_ptr<Read> read_statement() {
+        auto tok = match(token_type::IDENTIFIER);
+
+        std::unique_ptr<Read> r = std::make_unique<Read>(
+                std::make_unique<Var>(std::move(tok)));
+        match(token_type::SEMICOLON);
+        return r;
+    }
+
+    std::unique_ptr<Print> print_statement() {
+        std::unique_ptr<Print> r = std::make_unique<Print>(expression());
+        match(token_type::SEMICOLON);
+        return r;
+    }
+
     std::unique_ptr<For> for_loop() {
         std::unique_ptr<Token> identifier = match(token_type::IDENTIFIER);
         match(token_type::IN);

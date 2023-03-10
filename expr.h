@@ -354,16 +354,36 @@ class For : public Expr {
  * Print node in the AST.
  */
 class Print : public Expr {
-    std::unique_ptr<Operand> op;
-    Print(std::unique_ptr<Operand> op) : Expr(), op{std::move(op)} {}
+    std::unique_ptr<Operand> expr;
+
+public:
+    Print(std::unique_ptr<Operand> expr) : Expr(), expr{std::move(expr)} {}
+
+    void interpet(void) override {}
+    void visit(void) const override {
+        std::cout << "( PRINT ";
+        expr->visit();
+        std::cout << ") ";
+    }
+    bool analyse() const override { return false; }
 };
 
 /**
  * Read node for standard input in the AST.
  */
 class Read : public Expr {
-    std::unique_ptr<Operand> op;
-    Read(std::unique_ptr<Operand> op) : Expr(), op{std::move(op)} {}
+    std::unique_ptr<Var> op;
+public:
+    Read(std::unique_ptr<Var> op) : Expr(), op{std::move(op)} {}
+
+
+    void interpet(void) override {}
+    void visit(void) const override {
+        std::cout << "( READ ";
+        op->visit();
+        std::cout << ") ";
+    }
+    bool analyse() const override { return false; }
 };
 
 /**
