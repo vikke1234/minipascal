@@ -3,6 +3,7 @@
 #include <string_view>
 #include <sstream>
 #include <iostream>
+#include <unordered_map>
 
 #include "lexer.h"
 
@@ -173,6 +174,18 @@ enum Lexer::comment_type Lexer::is_comment(void) {
     return NONE;
 }
 
+char Lexer::interpret_escape(char c) {
+    std::unordered_map<char, char> map = {{'a', 0x07}, {'b', 0x08},
+        {'e', 0x1b}, {'f', 0x0c}, {'n', 0x0a}, {'r', 0x0d},
+        {'t', 0x09}, {'v', 0x0b}, {'\\', 0x5c}, {'\'', 0x27},
+        {'\"', 0x22}, {'?', 0x3f}};
+    if (map.find(c) != map.end()) {
+        return map.at(c);
+    }
+    return -1;
+}
+
+
 std::string Lexer::get_string() {
     std::string str;
     int start = line;
@@ -180,14 +193,20 @@ std::string Lexer::get_string() {
     bool escape = false;
     while(true) {
         char c = get_char();
+        escape = c == '\\';
 
         if (escape) {
             escape = false;
-            str.push_back(c);
+            c = get_char();
+            char escaped = interpret_escape(c);
+            if (escaped != -1) {
+                str.push_back(escaped);
+            } else {
+
+            }
             continue;
         }
 
-        escape = c == '\\';
 
         if (c == '"') {
             break;

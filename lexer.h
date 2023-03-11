@@ -103,6 +103,9 @@ private:
      * Gets a string literal, does not include the qoutes.
      */
     std::string get_string(void);
+    char interpret_escape(char c);
+    std::string parse_octal();
+    std::string parse_hex();
     char get_char(void);
     char peek_char(void);
 
