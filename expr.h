@@ -80,7 +80,14 @@ public:
     StatementList(std::unique_ptr<Expr> stmt)
         : statement{std::move(stmt)} {}
 
-    bool analyse() const override { return false; }
+    bool analyse() const override {
+        bool error = statement->analyse();
+
+        if (next != nullptr) {
+            error |= next->analyse();
+        }
+        return error;
+    }
 
     void interpet(void) override {
         statement->interpet();
@@ -373,9 +380,9 @@ class VarInst : public Var {
             if(!succeeded) {
                 std::cout << "Error token variable " << token->token
                     << " already initialized";
-                return false;
+                return true;
             }
-            return true;
+            return false;
         }
 
         // handled by Bop
@@ -448,7 +455,9 @@ class Bop : public Operand {
             bool has_error = left->analyse();
             has_error |= right->analyse();
 
-
+            if(has_error) {
+                std::cout << "Semantical error in bop\n";
+            }
             return has_error;
         }
 
@@ -583,7 +592,13 @@ class If : public Expr {
             Expr(), condition{std::move(condition)}, truthy{std::move(truthy)},
             falsy{std::move(falsy)} {}
 
-        bool analyse() const override { return false; }
+        bool analyse() const override {
+            bool error = condition->analyse() || truthy->analyse();
+            if (falsy != nullptr) {
+                error |= falsy->analyse();
+            }
+            return error;
+        }
 
         void interpet() override {
             if(condition->truthy()) {
@@ -659,7 +674,10 @@ class For : public Expr {
                 std::unique_ptr<StatementList> statement_list) : Expr(), var{std::make_unique<VarInst>(std::move(variable), token_type::INT)},
                     range{std::move(range)}, loop{std::move(statement_list)} {}
 
-        bool analyse() const override { return false; }
+        bool analyse() const override {
+            return var->analyse() || loop->analyse();
+        }
+
         void interpet() override {}
         void visit(void) const override {
             std::cout << "(FOR ";
@@ -688,7 +706,7 @@ public:
         expr->visit();
         std::cout << ") ";
     }
-    bool analyse() const override { return false; }
+    bool analyse() const override { return expr->analyse(); }
 };
 
 /**
@@ -732,7 +750,10 @@ public:
         var->visit();
         std::cout << ") ";
     }
-    bool analyse() const override { return false; }
+
+    bool analyse() const override {
+        return var->analyse();
+    }
 };
 
 /**
