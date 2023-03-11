@@ -21,6 +21,7 @@ protected:
 public:
     Expr(std::unique_ptr<Token> t) : token{std::move(t)} {}
     Expr() = default;
+    Expr(const Token &t) : token(std::make_unique<Token>(t)) {}
     virtual ~Expr() = default;
 
     virtual void interpet(void) = 0;
@@ -39,16 +40,27 @@ class Operand : public Expr {
     public:
 
         Operand(std::unique_ptr<Token> t) : Expr(std::move(t)) {}
+        Operand(const Token &t) : Expr(t) {}
+        Operand(const Token &&t) : Expr(t) {}
         Operand() = default;
         /**
          * Gets the value of a variable/literal/operation.
          */
         virtual Literal *get_value() = 0;
+        virtual std::unique_ptr<Literal> own_value() { return nullptr; };
 
         /**
          * Gets the type of a variable/literal/operation.
          */
         virtual int get_type() = 0;
+        virtual Literal operator+(Operand &l) = 0;
+        virtual Literal operator-(Operand &l) = 0;
+        virtual Literal operator*(Operand &l) = 0;
+        virtual Literal operator/(Operand &l) = 0;
+        virtual Literal operator&&(Operand &l) = 0;
+        virtual Literal operator==(Operand &l) = 0;
+        virtual Literal operator<(Operand &l)= 0;
+        virtual Literal operator!() = 0;
 };
 
 /**
@@ -84,11 +96,11 @@ public:
         }
     }
 
-    const StatementList *get_next() const {
+    StatementList *get_next() const {
         return next.get();
     }
 
-    const Expr *get_statement() const {
+    Expr *get_statement() const {
         return statement.get();
     }
 };
@@ -98,10 +110,12 @@ public:
  * can not exist as a literal.
  */
 class Literal : public Operand {
-    std::variant<int, std::string, bool> value;
 
 public:
+    std::variant<int, std::string, bool> value;
     Literal(std::variant<int, std::string, bool> value) : Operand(), value{value} { }
+    Literal(const Literal &l)  : Operand(), value{l.value} {}
+    Literal(const Literal &&l) : Operand(), value{l.value} {}
 
     Literal(std::unique_ptr<Token> &tok) : Operand(std::move(tok)) {
         switch (token->type) {
@@ -120,111 +134,111 @@ public:
 
     bool analyse() const override { return false; }
     virtual void interpet(void) override {}
+
     virtual void visit(void) const override  {
         std::visit([](const auto &x) { std::cout << x << " "; }, value);
     }
+
     virtual Literal *get_value() override {
         return this;
     }
+
     virtual int get_type() override {
         return value.index();
     }
-};
 
+    Literal operator+(Operand &l) override {
+        if (std::holds_alternative<int>(this->value) &&
+                std::holds_alternative<int>(l.get_value()->value)) {
+            return Literal{std::get<int>(this->value) + std::get<int>(l.get_value()->value)};
+        } else if (std::holds_alternative<std::string>(this->value) &&
+                std::holds_alternative<std::string>(l.get_value()->value)) {
 
-/**
- * A binary operation, 1 + 1 for example
- */
-class Bop : public Operand {
-    std::unique_ptr<Operand> left;
-    std::unique_ptr<Operand> right;
+            return Literal{std::get<std::string>(this->value) + std::get<std::string>(l.get_value()->value)};
+        }
+        std::cout << "Error invalid types in + operation";
+        std::exit(1);
+    }
 
-    public:
-        /**
-         * @param tok - which type of operation it is.
-         * @param left - left side of the operation.
-         * @param right - the right side of the operation.
-         */
-        Bop(std::unique_ptr<Token> tok, std::unique_ptr<Operand> left, std::unique_ptr<Operand> right)
-            : Operand(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
+    Literal operator=(Literal &l) {
+        if (this->value.index() == l.value.index()) {
+            this->value = l.value;
+            return *this;
+        }
+        std::cout << "Conflicting types in assignment";
+        std::exit(1);
+    }
 
-
-        bool analyse() const override {
-            bool has_error = left->analyse();
-            has_error |= right->analyse();
-
-
-            return has_error;
+    Literal operator-(Operand &l) override {
+        if (std::holds_alternative<int>(this->value) && std::holds_alternative<int>(l.get_value()->value)) {
+            return Literal{std::get<int>(this->value) - std::get<int>(l.get_value()->value)};
         }
 
-        virtual Literal *get_value() override {
-            return nullptr;
+        std::cout << "Error invalid types in - operation";
+        std::exit(1);
+    }
+
+    Literal operator*(Operand &l) override {
+        if (std::holds_alternative<int>(this->value) && std::holds_alternative<int>(l.get_value()->value)) {
+            return Literal{std::get<int>(this->value) * std::get<int>(l.get_value()->value)};
         }
 
-        virtual int get_type() override {
-            int r = right->get_type();
-            int l = left->get_type();
-            if (l != r) {
-                std::cout << "Error: incompatible types line " << token->line << "\n";
-                std::exit(1);
-            } else {
-                if (token->type == token_type::EQ || token->type == token_type::LT){
-                    return 1;
-                }
+        std::cout << "Error invalid types in - operation";
+        std::exit(1);
+    }
+
+    Literal operator/(Operand &l) override {
+        if (std::holds_alternative<int>(this->value) && std::holds_alternative<int>(l.get_value()->value)) {
+            return Literal{std::get<int>(this->value) / std::get<int>(l.get_value()->value)};
+        }
+
+        std::cout << "Error invalid types in / operation";
+        std::exit(1);
+    }
+
+    Literal operator&&(Operand &l) override {
+        if (std::holds_alternative<bool>(this->value) && std::holds_alternative<bool>(l.get_value()->value)) {
+            return Literal{std::get<bool>(this->value) && std::get<bool>(l.get_value()->value)};
+        }
+
+        std::cout << "Error invalid types in & operation";
+        std::exit(1);
+    }
+
+    Literal operator==(Operand &l) override {
+        if (std::holds_alternative<bool>(this->value) && std::holds_alternative<bool>(l.get_value()->value)) {
+            return Literal{std::get<bool>(this->value) == std::get<bool>(l.get_value()->value)};
+        }
+
+        std::cout << "Error invalid types in = operation";
+        std::exit(1);
+    }
+
+    Literal operator<(Operand &l) override {
+        if (this->value.index() == l.get_value()->value.index()) {
+            switch(this->value.index()) {
+                case 0: // int
+                    return Literal{std::get<int>(this->value) < std::get<int>(l.get_value()->value)};
+                case 1: // std::string
+                    return Literal{std::get<std::string>(this->value) < std::get<std::string>(l.get_value()->value)};
+                case 2:
+                    return Literal{std::get<bool>(this->value) < std::get<bool>(l.get_value()->value)};
             }
-            return l;
         }
 
-        virtual void interpet(void) override {}
-        virtual void visit(void) const override  {
-            std::cout << token->token << " ( ";
-            left->visit();
-            if (right)
-                right->visit();
-            std::cout << ") ";
+        std::cout << "Error invalid types in < operation";
+        std::exit(1);
+    }
+
+    Literal operator!() override {
+        if (std::holds_alternative<bool>(this->value)) {
+            return Literal{!std::get<bool>(this->value)};
         }
 
-    protected:
-        bool is_boolean() {
-            return token->type == token_type::LT || token->type == token_type::EQ;
-        }
-};
+        std::cout << "Error invalid types in & operation";
+        std::exit(1);
 
-/**
- * Initialization of a variable.
- */
-class VarInst : public Operand {
-    int type;
-
-    public:
-        VarInst(std::unique_ptr<Token> tok, enum token_type type) :
-            Operand(std::move(tok)), type{type - token_type::INT} {}
-
-        VarInst(std::unique_ptr<Token> tok, std::unique_ptr<Token> type) :
-            Operand(std::move(tok)), type{type->type - token_type::INT} {}
-
-        Literal *get_value() override {
-            return 0;
-        }
-
-        int get_type() override {
-            return symbol_table.get_symbol(token->token)->get_type();
-        }
-
-        bool analyse() const override {
-            bool succeeded = symbol_table.add_symbol(token->token, type);
-            if(!succeeded) {
-                std::cout << "Error token variable " << token->token
-                    << " already initialized";
-                return false;
-            }
-            return true;
-        }
-
-        virtual void interpet() override {}
-        virtual void visit(void) const override {
-            std::cout << token->token << " ";
-        }
+    }
 };
 
 /**
@@ -235,6 +249,8 @@ class Var : public Operand {
     public:
         Var(std::unique_ptr<Token> tok) :
             Operand(std::move(tok)) {}
+        Var(const Var &var) :
+            Operand(*var.token) {}
 
         bool analyse() const override {
             if (!symbol_table.exists(token->token)) {
@@ -256,7 +272,267 @@ class Var : public Operand {
         int get_type() override {
             return symbol_table.get_symbol(token->token)->get_type();
         }
+
+        void set_value(Literal *literal) {
+            symbol_table.set_value(token->token, literal);
+        }
+
+
+        Literal operator+(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr + *l.get_value();
+        }
+
+        Literal operator-(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr - *l.get_value();
+        }
+
+        Literal operator*(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr * *l.get_value();
+        }
+
+        Literal operator/(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr * *l.get_value();
+        }
+
+        Literal operator&&(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr && *l.get_value();
+        }
+
+        Literal operator==(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr == *l.get_value();
+        }
+
+        Literal operator!() override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return !*ptr;
+        }
+
+        Literal operator<(Operand &l) override {
+            Literal * ptr = symbol_table.get_symbol(token->token);
+            return *ptr < *l.get_value();
+        }
 };
+
+/**
+ * Initialization of a variable.
+ */
+class VarInst : public Var {
+    int type;
+
+    public:
+        VarInst(std::unique_ptr<Token> tok, enum token_type type) :
+            Var(std::move(tok)), type{type - token_type::INT} {}
+
+        VarInst(std::unique_ptr<Token> tok, std::unique_ptr<Token> type) :
+            Var(std::move(tok)), type{type->type - token_type::INT} {}
+
+        int get_type() override {
+            return symbol_table.get_symbol(token->token)->get_type();
+        }
+
+        bool analyse() const override {
+            bool succeeded = symbol_table.add_symbol(token->token, type);
+
+            if(!succeeded) {
+                std::cout << "Error token variable " << token->token
+                    << " already initialized";
+                return false;
+            }
+            return true;
+        }
+
+        // handled by Bop
+        virtual void interpet() override {}
+        virtual void visit(void) const override {
+            std::cout << token->token << " ";
+        }
+
+        Literal operator+(Operand &) override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator-(Operand &) override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator*(Operand &) override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator/(Operand &) override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator&&(Operand &) override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator==(Operand &) override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator<(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator!() override {
+            std::cout << "invalid operation\n";
+            std::exit(1);
+        }
+};
+
+
+/**
+ * A binary operation, 1 + 1 for example
+ */
+class Bop : public Operand {
+    std::unique_ptr<Operand> left;
+    std::unique_ptr<Operand> right;
+    std::unique_ptr<Literal> evaluated = nullptr;
+
+    public:
+        /**
+         * @param tok - which type of operation it is.
+         * @param left - left side of the operation.
+         * @param right - the right side of the operation.
+         */
+        Bop(std::unique_ptr<Token> tok, std::unique_ptr<Operand> left, std::unique_ptr<Operand> right)
+            : Operand(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
+
+
+        bool analyse() const override {
+            bool has_error = left->analyse();
+            has_error |= right->analyse();
+
+
+            return has_error;
+        }
+
+        /**
+         * Gets the value of the binary operation, has to be free'd when done.
+         */
+        virtual Literal *get_value() override {
+            switch(token->type) {
+                case token_type::ADDITION:
+                    evaluated = std::make_unique<Literal>(*left + *right->get_value());
+                    break;
+
+                case token_type::SUBTRACTION:
+                    evaluated = std::make_unique<Literal>(*left - *right->get_value());
+                    break;
+
+                case token_type::MULTIPLICATION:
+                    evaluated = std::make_unique<Literal>(*left * *right->get_value());
+                    break;
+
+                case token_type::DIVISION:
+                    evaluated = std::make_unique<Literal>(*left / *right->get_value());
+                    break;
+
+                case token_type::LT:
+                    evaluated = std::make_unique<Literal>(*left < *right->get_value());
+                    break;
+
+                case token_type::EQ:
+                    evaluated = std::make_unique<Literal>(*left == *right->get_value());
+                    break;
+
+                case token_type::AND:
+                    evaluated = std::make_unique<Literal>(*left && *right->get_value());
+                    break;
+
+                case token_type::ASSIGN:
+                    {
+                        auto var = dynamic_cast<Var&>(*left);
+                        var.set_value(right->get_value());
+                    }
+                    break;
+                default:
+                    std::cout << "Invalid operation " << token->token;
+                    break;
+            }
+            return evaluated.get();
+        }
+
+        virtual int get_type() override {
+            int r = right->get_type();
+            int l = left->get_type();
+
+            if (l != r) {
+                std::cout << "Error: incompatible types line " << token->line << "\n";
+                std::exit(1);
+            } else {
+                if (token->type == token_type::EQ || token->type == token_type::LT){
+                    return 1;
+                }
+            }
+            return l;
+        }
+
+        virtual void interpet(void) override {
+            this->get_value();
+        }
+
+        virtual void visit(void) const override  {
+            std::cout << token->token << " ( ";
+            left->visit();
+            if (right)
+                right->visit();
+            std::cout << ") ";
+        }
+
+        virtual Literal operator+(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator-(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator*(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator/(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator&&(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator==(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator<(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+        virtual Literal operator!() override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+    protected:
+        bool is_boolean() {
+            return token->type == token_type::LT || token->type == token_type::EQ;
+        }
+};
+
+
 
 /**
  * If statement node
@@ -359,7 +635,9 @@ class Print : public Expr {
 public:
     Print(std::unique_ptr<Operand> expr) : Expr(), expr{std::move(expr)} {}
 
-    void interpet(void) override {}
+    void interpet(void) override {
+        std::visit([](const auto &x) { std::cout << x << "\n"; }, expr->get_value()->value);
+    }
     void visit(void) const override {
         std::cout << "( PRINT ";
         expr->visit();
@@ -373,6 +651,7 @@ public:
  */
 class Read : public Expr {
     std::unique_ptr<Var> op;
+
 public:
     Read(std::unique_ptr<Var> op) : Expr(), op{std::move(op)} {}
 
@@ -392,7 +671,6 @@ public:
  */
 class Unary : public Operand {
     std::unique_ptr<Operand> op;
-
 
     public:
         Unary(std::unique_ptr<Operand> op) : Operand(), op {std::move(op)} {}
@@ -417,6 +695,45 @@ class Unary : public Operand {
 
         virtual bool analyse() const override {
             return false;
+        }
+
+        Literal operator+(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator-(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator*(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator/(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator&&(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator==(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator<(Operand &) override {
+            std::cout << "Invalid operation\n";
+            std::exit(1);
+        }
+
+        Literal operator!() override {
+            return !*this->op;
         }
 };
 #endif

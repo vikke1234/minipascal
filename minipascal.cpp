@@ -4,6 +4,7 @@
 #include <unistd.h>
 
 #include "analysis.h"
+#include "interpreter.h"
 #include "lexer.h"
 #include "parser.h"
 
@@ -35,8 +36,8 @@ int main(int argc, char **argv) {
     }
 
     filename = argv[optind];
-    Parser parser(filename);
-    Analyser analyser(parser);
-    analyser.analyse();
+    Interpreter interpreter(filename);
+    interpreter.run();
+
     return EXIT_SUCCESS;
 }
