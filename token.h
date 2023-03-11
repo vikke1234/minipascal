@@ -58,6 +58,10 @@ struct Token {
 
     Token(std::string token, std::size_t line, enum token_type type) :
         token{std::move(token)}, line{line}, type{type} {}
+    Token(const Token &tok) :
+        token{tok.token}, line{tok.line}, type{tok.type} {}
+    Token(const Token &&tok) :
+        token{tok.token}, line{tok.line}, type{tok.type} {}
 };
 
 #endif // TOKEN_H
