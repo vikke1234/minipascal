@@ -6,7 +6,6 @@
 std::unique_ptr<StatementList> Parser::parse_file() {
     std::unique_ptr<StatementList> program = statement_list(false);
 
-    program->visit();
     return program;
 }
 
@@ -16,8 +15,15 @@ std::unique_ptr<StatementList> Parser::statement_list(bool is_block) {
     while (true) {
         std::unique_ptr<Token> token = lexer.peek_token();
 
-        if (token->type == token_type::NO_SYMBOLS ||
-                (is_block && (token->type == token_type::END || token->type == token_type::ELSE))) {
+        if (token->type == token_type::NO_SYMBOLS) {
+            if (is_block) {
+                std::cout << "Error could not find 'end'\n";
+                std::exit(1);
+            }
+            break;
+        }
+
+        if(is_block && (token->type == token_type::END || token->type == token_type::ELSE)) {
             break;
         }
 
