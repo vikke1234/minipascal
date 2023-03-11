@@ -2,9 +2,8 @@
 #include "expr.h"
 #include <memory>
 
-bool Analyser::analyse() {
-    std::unique_ptr<StatementList> program = parser.parse_file();
-    const StatementList * next = program.get();
+bool Analyser::analyse(StatementList *ast) {
+    const StatementList * next = ast;
     const Expr *current = nullptr;
     std::cout << "Semantical analysis\n";
 
