@@ -53,6 +53,7 @@ std::unique_ptr<Operand> Parser::term_tail(std::unique_ptr<Operand> expr) {
                 return term_tail(std::move(bop));
             }
 
+        case token_type::RANGE:        // fallthrough
         case token_type::DO:           // fallthrough
         case token_type::SEMICOLON:    // fallthrough
         case token_type::RPARENTHESES: // fallthrough

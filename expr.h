@@ -458,6 +458,8 @@ class Bop : public Operand {
             if(has_error) {
                 std::cout << "Semantical error in bop\n";
             }
+
+
             return has_error;
         }
 
@@ -465,6 +467,11 @@ class Bop : public Operand {
          * Gets the value of the binary operation, has to be free'd when done.
          */
         virtual Literal *get_value() override {
+            if (evaluated) {
+                // use cached value
+                return evaluated.get();
+            }
+
             switch(token->type) {
                 case token_type::ADDITION:
                     evaluated = std::make_unique<Literal>(*left + *right->get_value());
@@ -629,15 +636,13 @@ class If : public Expr {
  * Range node for the AST.
  */
 class Range : public Expr {
-    int start;
-    int end;
+    std::unique_ptr<Operand> start;
+    std::unique_ptr<Operand> end;
     int current;
 
     public:
-        Range(std::unique_ptr<Token> start, std::unique_ptr<Token> end) : Expr() {
-            this->start = std::atoi(start->token.c_str());
-            this->end = std::atoi(end->token.c_str());
-        }
+        Range(std::unique_ptr<Operand> start, std::unique_ptr<Operand> end) :
+            Expr(), start{std::move(start)}, end{std::move(end)}, current{0} {}
 
         /**
          * Gets the next number for the range, needs to be manually checked
@@ -651,13 +656,23 @@ class Range : public Expr {
          * Checks if all numbers from the range is consumed.
          */
         bool is_done() {
-            return start <= end;
+            return !(current <= (std::get<int>(end->get_value()->value)+1));
         }
 
-        bool analyse() const override { return false; }
+        bool analyse() const override {
+           bool error = start->get_type() || end->get_type();
+           if (error) {
+               std::cout << "Error range contains non integers\n";
+               return true;
+           }
+           return false;
+        }
+
         void interpet() override {}
         void visit() const override {
-            std::cout << start << ".." << end;
+            start->visit();
+            std::cout << "..";
+            end->visit();
         }
 };
 
@@ -665,20 +680,26 @@ class Range : public Expr {
  * For loop node in the AST.
  */
 class For : public Expr {
-    std::unique_ptr<VarInst> var;
+    std::unique_ptr<Var> var;
     std::unique_ptr<Range> range;
     std::unique_ptr<StatementList> loop;
 
     public:
         For(std::unique_ptr<Token> variable, std::unique_ptr<Range> range,
-                std::unique_ptr<StatementList> statement_list) : Expr(), var{std::make_unique<VarInst>(std::move(variable), token_type::INT)},
+                std::unique_ptr<StatementList> statement_list) : Expr(), var{std::make_unique<Var>(std::move(variable))},
                     range{std::move(range)}, loop{std::move(statement_list)} {}
 
         bool analyse() const override {
-            return var->analyse() || loop->analyse();
+            return var->analyse() || loop->analyse() || range->analyse();
         }
 
-        void interpet() override {}
+        void interpet() override {
+            while(!range->is_done()) {
+                loop->interpet();
+                var->set_value(range->get_next());
+            }
+        }
+
         void visit(void) const override {
             std::cout << "(FOR ";
             var->visit();

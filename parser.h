@@ -56,9 +56,9 @@ private:
         std::unique_ptr<Token> identifier = match(token_type::IDENTIFIER);
         match(token_type::IN);
 
-        auto start = match(token_type::DIGIT);
+        auto start = expression();
         match(token_type::RANGE);
-        auto end = match(token_type::DIGIT);
+        auto end = expression();
         std::unique_ptr<Range> range =
             std::make_unique<Range>(std::move(start), std::move(end));
 
@@ -69,10 +69,10 @@ private:
     }
 
     std::unique_ptr<If> if_stmt() {
-        std::unique_ptr<Expr> condition = expression();
+        std::unique_ptr<Operand> condition = expression();
         match(token_type::DO);
-        std::unique_ptr<Expr> list = statement_list(true);
-        std::unique_ptr<Expr> else_stmt = nullptr;
+        std::unique_ptr<StatementList> list = statement_list(true);
+        std::unique_ptr<StatementList> else_stmt = nullptr;
 
         auto token = lexer.peek_token();
         switch(token->type) {
