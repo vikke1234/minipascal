@@ -54,6 +54,13 @@ Literal *SymbolTable::get_symbol(std::string_view str) {
 bool SymbolTable::set_value(std::string_view symbol, Literal *literal) {
     if (symbols.find(symbol.data()) != symbols.end()) {
         *symbols[symbol.data()] = *literal;
+        return true;
+    }
+    return false;
+}
+bool SymbolTable::set_value(std::string_view symbol, std::variant<int, std::string, bool> value) {
+    if (symbols.find(symbol.data()) != symbols.end()) {
+        *symbols[symbol.data()] = value;
     }
     return false;
 }

@@ -36,6 +36,7 @@ public:
     bool exists(std::string_view symbol);
 
     bool set_value(std::string_view symbol, Literal *literal);
+    bool set_value(std::string_view symbol, std::variant<int, std::string, bool> value);
 };
 
 extern SymbolTable symbol_table;

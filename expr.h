@@ -169,6 +169,11 @@ public:
         std::exit(1);
     }
 
+    Literal operator=(std::variant<int, std::string, bool> value) {
+        this->value = value;
+        return *this;
+    }
+
     Literal operator-(Operand &l) override {
         if (std::holds_alternative<int>(this->value) && std::holds_alternative<int>(l.get_value()->value)) {
             return Literal{std::get<int>(this->value) - std::get<int>(l.get_value()->value)};
@@ -275,6 +280,10 @@ class Var : public Operand {
 
         void set_value(Literal *literal) {
             symbol_table.set_value(token->token, literal);
+        }
+
+        void set_value(std::variant<int, std::string, bool> value) {
+            symbol_table.set_value(token->token, value);
         }
 
 
@@ -650,16 +659,41 @@ public:
  * Read node for standard input in the AST.
  */
 class Read : public Expr {
-    std::unique_ptr<Var> op;
+    std::unique_ptr<Var> var;
 
 public:
-    Read(std::unique_ptr<Var> op) : Expr(), op{std::move(op)} {}
+    Read(std::unique_ptr<Var> op) : Expr(), var{std::move(op)} {}
 
+    void interpet(void) override {
+        switch(var->get_type()) {
+            case 0:
+                {
+                    int val;
+                    std::cin >> val;
+                    var->set_value(val);
+                }
+                break;
+            case 1:
+                {
+                    std::string str;
+                    std::cin >> str;
+                    var->set_value(str);
+                }
+                break;
 
-    void interpet(void) override {}
+            case 2:
+                {
+                    bool b;
+                    std::cin >> b;
+                    var->set_value(b);
+                }
+                break;
+        }
+    }
+
     void visit(void) const override {
         std::cout << "( READ ";
-        op->visit();
+        var->visit();
         std::cout << ") ";
     }
     bool analyse() const override { return false; }
