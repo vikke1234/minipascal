@@ -48,6 +48,7 @@ class Operand : public Expr {
          */
         virtual Literal *get_value() = 0;
         virtual std::unique_ptr<Literal> own_value() { return nullptr; };
+        virtual bool truthy() = 0;
 
         /**
          * Gets the type of a variable/literal/operation.
@@ -148,6 +149,16 @@ public:
 
     virtual Literal *get_value() override {
         return this;
+    }
+
+    bool truthy() override {
+        if (std::holds_alternative<int>(this->value)) {
+            return !!std::get<int>(this->value);
+        } else if(std::holds_alternative<bool>(this->value)) {
+            return !!std::get<bool>(this->value);
+        } else {
+            return std::get<std::string>(this->value) != "";
+        }
     }
 
     virtual int get_type() override {
@@ -279,6 +290,10 @@ class Var : public Operand {
 
         Literal *get_value() override {
             return symbol_table.get_symbol(token->token);
+        }
+
+        bool truthy() override {
+            return symbol_table.get_symbol(token->token)->truthy();
         }
 
         int get_type() override {
@@ -483,6 +498,10 @@ class Bop : public Operand {
             return evaluated.get();
         }
 
+        bool truthy() override {
+            return get_value()->truthy();
+        }
+
         virtual int get_type() override {
             int r = right->get_type();
             int l = left->get_type();
@@ -554,18 +573,28 @@ class Bop : public Operand {
  * If statement node
  */
 class If : public Expr {
-    std::unique_ptr<Expr> condition;
-    std::unique_ptr<Expr> truthy;
-    std::unique_ptr<Expr> falsy;
+    std::unique_ptr<Operand> condition;
+    std::unique_ptr<StatementList> truthy;
+    std::unique_ptr<StatementList> falsy;
 
     public:
-        If(std::unique_ptr<Expr> condition, std::unique_ptr<Expr> truthy,
-                std::unique_ptr<Expr> falsy) :
+        If(std::unique_ptr<Operand> condition, std::unique_ptr<StatementList> truthy,
+                std::unique_ptr<StatementList> falsy) :
             Expr(), condition{std::move(condition)}, truthy{std::move(truthy)},
             falsy{std::move(falsy)} {}
 
         bool analyse() const override { return false; }
-        void interpet() override {}
+
+        void interpet() override {
+            if(condition->truthy()) {
+                truthy->interpet();
+            } else {
+                if (falsy != nullptr) {
+                    falsy->interpet();
+                }
+            }
+        }
+
         void visit() const override {
             std::cout << "( IF ";
             condition->visit();
@@ -718,6 +747,10 @@ class Unary : public Operand {
 
         virtual Literal *get_value() override {
             return nullptr;
+        }
+
+        bool truthy() override {
+            return false;
         }
 
         virtual int get_type() override {
