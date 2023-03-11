@@ -236,8 +236,15 @@ public:
     }
 
     Literal operator==(Operand &l) override {
-        if (std::holds_alternative<bool>(this->value) && std::holds_alternative<bool>(l.get_value()->value)) {
-            return Literal{std::get<bool>(this->value) == std::get<bool>(l.get_value()->value)};
+        if (this->value.index() == l.get_value()->value.index()) {
+            switch(this->value.index()) {
+                case 0: // int
+                    return Literal{std::get<int>(this->value) == std::get<int>(l.get_value()->value)};
+                case 1: // std::string
+                    return Literal{std::get<std::string>(this->value) == std::get<std::string>(l.get_value()->value)};
+                case 2:
+                    return Literal{std::get<bool>(this->value) == std::get<bool>(l.get_value()->value)};
+            }
         }
 
         std::cout << "Error invalid types in = operation";
