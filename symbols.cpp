@@ -50,3 +50,10 @@ bool SymbolTable::exists(std::string_view symbol) {
 Literal *SymbolTable::get_symbol(std::string_view str) {
     return symbols.at(str.data()).get();
 }
+
+bool SymbolTable::set_value(std::string_view symbol, Literal *literal) {
+    if (symbols.find(symbol.data()) != symbols.end()) {
+        *symbols[symbol.data()] = *literal;
+    }
+    return false;
+}

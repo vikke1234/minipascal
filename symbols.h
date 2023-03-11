@@ -27,12 +27,15 @@ public:
      * @return true succeeding to add to table, false if not.
      */
     bool add_symbol(std::string_view symbol, int type);
+
     Literal *get_symbol(std::string_view symbol);
 
     /**
      * Checks whether a symbol is present in the symbol table.
      */
     bool exists(std::string_view symbol);
+
+    bool set_value(std::string_view symbol, Literal *literal);
 };
 
 extern SymbolTable symbol_table;
