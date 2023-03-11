@@ -1,0 +1,40 @@
+/**
+@mainpage
+
+@section sec0 Building
+The project requires the build system `meson` and `ninja`,  compilation is trivial; if you
+want to specify which compiler to use set the environmental variable `CC`
+before running `meson`.
+
+     meson setup build && cd build && ninja
+
+@section sec1 Running
+`./minipascal foo.mpl`
+
+
+@section sec2 Brief introduction to the minipascal interpreter
+
+The project interpreter is quite small consisting of ~1000 lines, and each
+phase is split into it's respective files, parsing can be found in
+parser.{h,cpp} while the lexer is in lexer.{h,cpp} etc.
+
+The parser has a quite a bit of boilerplate code due to the nature of making
+one in C++. In hindsight choosing a functional language such as ocaml would
+probably have been a beter idea. The different nodes for the AST can be found
+in expr.h, recursive descent is used to build the tree.
+
+
+@section sec3 Lexing
+Lexing is implemented in a naive way, simply a bunch of if statements grouped
+together when encountering a token.
+
+@section sec4 Parsing
+
+
+@section sec5 Semantical analysis
+Currently the only semantical analysis done is initialization of variables and
+type checking. Since minipascal is globally scoped, no scope checking is done.
+
+@section sec6 Hours
+
+*/
