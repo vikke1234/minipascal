@@ -80,7 +80,14 @@ public:
         : statement{std::move(stmt)} {}
 
     bool analyse() const override { return false; }
-    void interpet(void) override {}
+
+    void interpet(void) override {
+        statement->interpet();
+        if (next != nullptr) {
+            next->interpet();
+        }
+    }
+
     void visit(void) const override {
         statement->visit();
         if (next != nullptr) {
