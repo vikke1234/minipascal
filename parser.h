@@ -29,14 +29,6 @@ private:
      */
     std::unique_ptr<Expr> var();
 
-    std::unique_ptr<Expr> print() {
-        return nullptr;
-    }
-
-    std::unique_ptr<Expr> write() {
-        return nullptr;
-    }
-
     std::unique_ptr<Read> read_statement() {
         auto tok = match(token_type::IDENTIFIER);
 
@@ -126,6 +118,12 @@ private:
      */
     std::unique_ptr<Operand> expression();
 
+    /**
+     * Checks ahed, if the token doesn't match the expected token, report and
+     * exit.
+     *
+     * @param expected - Expected lexeme.
+     */
     std::unique_ptr<Token> match(token_type expected) {
         auto token = lexer.peek_token();
         if (token->type == expected) {

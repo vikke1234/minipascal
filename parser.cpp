@@ -60,7 +60,7 @@ std::unique_ptr<Operand> Parser::term_tail(std::unique_ptr<Operand> expr) {
             break;
 
         default:
-            std::cout << "Parse error term_tail " << type_to_str(symbol->type) << " \n";
+            std::cout << "Parse error term_tail " << type_to_str(symbol->type) << " line: " << symbol->line << "\n";
             break;
     }
     return expr;
@@ -161,15 +161,14 @@ std::unique_ptr<Expr> Parser::var() {
     match(token_type::TYPE_DELIM);
     std::unique_ptr<Token> type = lexer.get_token();
     std::unique_ptr<Token> has_assign = lexer.peek_token();
-    std::unique_ptr<VarInst> variable = std::make_unique<VarInst>(std::move(symbol), std::move(type));
+    std::unique_ptr<VarInst> variable;
 
     std::unique_ptr<Bop> assign;
+    std::unique_ptr<Operand> value;
 
     if (has_assign->type == token_type::ASSIGN) {
         lexer.get_token();
-        std::unique_ptr<Operand> init = expression();
-        assign = std::make_unique<Bop>(std::move(has_assign),
-                                       std::move(variable), std::move(init));
+        value = expression();
     } else {
         std::variant<int, std::string, bool> default_init;
 
@@ -189,10 +188,15 @@ std::unique_ptr<Expr> Parser::var() {
                 std::cout << "Invalid type\n";
         }
 
-        auto as_tok = std::make_unique<Token>(":=", 0, token_type::ASSIGN);
-        auto literal = std::make_unique<Literal>(default_init);
-        assign = std::make_unique<Bop>(std::move(as_tok), std::move(variable), std::move(literal));
+        value = std::make_unique<Literal>(default_init);
     }
+
+    // Token to use in case it doesn't have an assign.
+    auto as_tok = std::make_unique<Token>(":=", 0, token_type::ASSIGN);
+
+    variable = std::make_unique<VarInst>(std::move(symbol), std::move(type));
+    assign = std::make_unique<Bop>(std::move(has_assign->type == ASSIGN ? has_assign : as_tok),
+            std::move(variable), std::move(value));
 
     match(token_type::SEMICOLON);
     return assign;
