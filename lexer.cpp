@@ -241,7 +241,8 @@ enum token_type Lexer::get_token_type(std::string current) {
 extern std::string type_to_str(token_type type) {
     static std::unordered_map<token_type, std::string> to_str = {
                 {NOT, "!"},  {ADDITION, "+"}, {SUBTRACTION, "-"},
-                {AND, "&"}, {MULTIPLICATION, "*"}, {LT, "<"}, {EQ, "="},
+                {AND, "&"}, {MULTIPLICATION, "*"}, {DIVISION, "/"},
+                {LT, "<"}, {EQ, "="},
                 {ASSIGN, ":="}, {STRING, "string"}, {LPARENTHESES, "("},
                 {RPARENTHESES, ")"},
                 {SEMICOLON, ";"}, {RANGE, ".."},
