@@ -1,0 +1,67 @@
+\hypertarget{classExpr}{}\doxysection{Expr Class Reference}
+\label{classExpr}\index{Expr@{Expr}}
+Inheritance diagram for Expr\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.440860cm]{classExpr}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adc11d766587c2f16db5745a65ba12d04}\label{classExpr_adc11d766587c2f16db5745a65ba12d04}} 
+{\bfseries Expr} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ t)
+\item 
+\mbox{\Hypertarget{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}\label{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}} 
+{\bfseries Expr} (const \mbox{\hyperlink{structToken}{Token}} \&t)
+\item 
+virtual void \mbox{\hyperlink{classExpr_ab45ccec0c5f9325399b88a258439cd8e}{interpet}} (void)=0
+\item 
+virtual void \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{visit}} (void) const =0
+\item 
+virtual bool \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{analyse}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adee5008276da1dc67a0c831b85fb05c0}\label{classExpr_adee5008276da1dc67a0c831b85fb05c0}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ {\bfseries token}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}\label{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}} 
+\index{Expr@{Expr}!analyse@{analyse}}
+\index{analyse@{analyse}!Expr@{Expr}}
+\doxysubsubsection{\texorpdfstring{analyse()}{analyse()}}
+{\footnotesize\ttfamily virtual bool Expr\+::analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+Does analysis on the current statement. 
+
+Implemented in \mbox{\hyperlink{classStatementList_a2f79218c178c7d27da57d6d75393e64c}{Statement\+List}}, \mbox{\hyperlink{classLiteral_a5e82a71f948be9363f177635bfd6982b}{Literal}}, \mbox{\hyperlink{classVar_ade1c1e34c363f494b2f42fd0a62f48c1}{Var}}, \mbox{\hyperlink{classVarInst_a60b34bbe531910ed5bd1e86adea903b0}{Var\+Inst}}, \mbox{\hyperlink{classBop_ac2504be10088640871bb1091f2b8abdf}{Bop}}, \mbox{\hyperlink{classIf_a055769dab43bfd2f516b4b08ee97575d}{If}}, \mbox{\hyperlink{classRange_a4d7e581038a13d50c74ccb07a9c2aee1}{Range}}, \mbox{\hyperlink{classFor_a3d8cc1283fd82a3fd38f0cf001560d2b}{For}}, \mbox{\hyperlink{classPrint_a9410e69ea37e4991afbb1825be8b1673}{Print}}, \mbox{\hyperlink{classRead_a0e9727f11b3b62e6257356c469da7460}{Read}}, and \mbox{\hyperlink{classUnary_a1f489fdb7f995f3bbbbc69ee8d68b97c}{Unary}}.
+
+\mbox{\Hypertarget{classExpr_ab45ccec0c5f9325399b88a258439cd8e}\label{classExpr_ab45ccec0c5f9325399b88a258439cd8e}} 
+\index{Expr@{Expr}!interpet@{interpet}}
+\index{interpet@{interpet}!Expr@{Expr}}
+\doxysubsubsection{\texorpdfstring{interpet()}{interpet()}}
+{\footnotesize\ttfamily virtual void Expr\+::interpet (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{classRange_a102920685f9fce3de95aa539d763702d}{Range}}.
+
+\mbox{\Hypertarget{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}\label{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}} 
+\index{Expr@{Expr}!visit@{visit}}
+\index{visit@{visit}!Expr@{Expr}}
+\doxysubsubsection{\texorpdfstring{visit()}{visit()}}
+{\footnotesize\ttfamily virtual void Expr\+::visit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+\mbox{\hyperlink{classPrint}{Print}} the AST prettily 
+
+Implemented in \mbox{\hyperlink{classIf_a1440af01a2ab6c6d0321e6ec76887704}{If}}, \mbox{\hyperlink{classRange_a8c426ef5b0d3b9825f1077c2f6f85db9}{Range}}, \mbox{\hyperlink{classStatementList_a2091392fcd9ff091762d1f84c8bbe337}{Statement\+List}}, \mbox{\hyperlink{classLiteral_a4012ee8c0c72237c420b41098602ce0a}{Literal}}, \mbox{\hyperlink{classVar_af5efec21096f049d33bdf9e096ea0329}{Var}}, \mbox{\hyperlink{classVarInst_a547fa0548c052df6a1d3281a5f0d3761}{Var\+Inst}}, \mbox{\hyperlink{classBop_a7b681ba1a899fb6fe717aa302304d29a}{Bop}}, \mbox{\hyperlink{classFor_a2f1c4cbca016e55ee1063138a5f746e4}{For}}, \mbox{\hyperlink{classPrint_a009b71e6bb9813706aa9aa01b157cb0c}{Print}}, \mbox{\hyperlink{classRead_a6376f03c44d89b572cf72f9cd6ad060b}{Read}}, and \mbox{\hyperlink{classUnary_ae2c452fc180e1eb9d17f3704f930e95d}{Unary}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+expr.\+h\end{DoxyCompactItemize}

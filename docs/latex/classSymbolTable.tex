@@ -1,0 +1,57 @@
+\hypertarget{classSymbolTable}{}\doxysection{Symbol\+Table Class Reference}
+\label{classSymbolTable}\index{SymbolTable@{SymbolTable}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classSymbolTable_a4f95379ba298c1990f598df3d598320f}{add\+\_\+symbol}} (std\+::string\+\_\+view symbol, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classLiteral}{Literal}} $>$ value)
+\item 
+bool \mbox{\hyperlink{classSymbolTable_a3a6a10ef919f6956b42c8c1889c14099}{add\+\_\+symbol}} (std\+::string\+\_\+view symbol, int type)
+\item 
+\mbox{\Hypertarget{classSymbolTable_a61015d31f6722ee820452a8e955c5b2d}\label{classSymbolTable_a61015d31f6722ee820452a8e955c5b2d}} 
+\mbox{\hyperlink{classLiteral}{Literal}} $\ast$ {\bfseries get\+\_\+symbol} (std\+::string\+\_\+view symbol)
+\item 
+bool \mbox{\hyperlink{classSymbolTable_ae7845b3b228471912ed39b1eb3df92b5}{exists}} (std\+::string\+\_\+view symbol)
+\item 
+\mbox{\Hypertarget{classSymbolTable_affa70ea5f8839a11c56d0be0a1cd56b3}\label{classSymbolTable_affa70ea5f8839a11c56d0be0a1cd56b3}} 
+bool {\bfseries set\+\_\+value} (std\+::string\+\_\+view symbol, \mbox{\hyperlink{classLiteral}{Literal}} $\ast$literal)
+\item 
+\mbox{\Hypertarget{classSymbolTable_a9f874155853b85ac450d0ca8cb355f38}\label{classSymbolTable_a9f874155853b85ac450d0ca8cb355f38}} 
+bool {\bfseries set\+\_\+value} (std\+::string\+\_\+view symbol, std\+::variant$<$ int, std\+::string, bool $>$ value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classSymbolTable_a3a6a10ef919f6956b42c8c1889c14099}\label{classSymbolTable_a3a6a10ef919f6956b42c8c1889c14099}} 
+\index{SymbolTable@{SymbolTable}!add\_symbol@{add\_symbol}}
+\index{add\_symbol@{add\_symbol}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{add\_symbol()}{add\_symbol()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily bool Symbol\+Table\+::add\+\_\+symbol (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{symbol,  }\item[{int}]{type }\end{DoxyParamCaption})}
+
+Adds a symbol to the symbol table.
+
+\begin{DoxyReturn}{Returns}
+true succeeding to add to table, false if not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSymbolTable_a4f95379ba298c1990f598df3d598320f}\label{classSymbolTable_a4f95379ba298c1990f598df3d598320f}} 
+\index{SymbolTable@{SymbolTable}!add\_symbol@{add\_symbol}}
+\index{add\_symbol@{add\_symbol}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{add\_symbol()}{add\_symbol()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily bool Symbol\+Table\+::add\+\_\+symbol (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{symbol,  }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classLiteral}{Literal}} $>$}]{value }\end{DoxyParamCaption})}
+
+Adds a symbol to the symbol table.
+
+\begin{DoxyReturn}{Returns}
+true succeeding to add to table, false if not. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classSymbolTable_ae7845b3b228471912ed39b1eb3df92b5}\label{classSymbolTable_ae7845b3b228471912ed39b1eb3df92b5}} 
+\index{SymbolTable@{SymbolTable}!exists@{exists}}
+\index{exists@{exists}!SymbolTable@{SymbolTable}}
+\doxysubsubsection{\texorpdfstring{exists()}{exists()}}
+{\footnotesize\ttfamily bool Symbol\+Table\+::exists (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{symbol }\end{DoxyParamCaption})}
+
+Checks whether a symbol is present in the symbol table. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+symbols.\+h\item 
+symbols.\+cpp\end{DoxyCompactItemize}

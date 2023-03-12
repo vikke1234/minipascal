@@ -1,0 +1,87 @@
+\hypertarget{classPrint}{}\doxysection{Print Class Reference}
+\label{classPrint}\index{Print@{Print}}
+
+
+{\ttfamily \#include $<$expr.\+h$>$}
+
+Inheritance diagram for Print\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classPrint}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPrint_a2e1589fdc8230ba260804c849c496367}\label{classPrint_a2e1589fdc8230ba260804c849c496367}} 
+{\bfseries Print} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classOperand}{Operand}} $>$ expr)
+\item 
+void \mbox{\hyperlink{classPrint_acd09c153f0762bd4ad5656627e73230e}{interpet}} (void) override
+\item 
+void \mbox{\hyperlink{classPrint_a009b71e6bb9813706aa9aa01b157cb0c}{visit}} (void) const override
+\item 
+bool \mbox{\hyperlink{classPrint_a9410e69ea37e4991afbb1825be8b1673}{analyse}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adc11d766587c2f16db5745a65ba12d04}\label{classExpr_adc11d766587c2f16db5745a65ba12d04}} 
+{\bfseries Expr} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ t)
+\item 
+\mbox{\Hypertarget{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}\label{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}} 
+{\bfseries Expr} (const \mbox{\hyperlink{structToken}{Token}} \&t)
+\item 
+virtual void \mbox{\hyperlink{classExpr_ab45ccec0c5f9325399b88a258439cd8e}{interpet}} (void)=0
+\item 
+virtual void \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{visit}} (void) const =0
+\item 
+virtual bool \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{analyse}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adee5008276da1dc67a0c831b85fb05c0}\label{classExpr_adee5008276da1dc67a0c831b85fb05c0}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ {\bfseries token}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classPrint}{Print}} node in the AST. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classPrint_a9410e69ea37e4991afbb1825be8b1673}\label{classPrint_a9410e69ea37e4991afbb1825be8b1673}} 
+\index{Print@{Print}!analyse@{analyse}}
+\index{analyse@{analyse}!Print@{Print}}
+\doxysubsubsection{\texorpdfstring{analyse()}{analyse()}}
+{\footnotesize\ttfamily bool Print\+::analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does analysis on the current statement. 
+
+Implements \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{Expr}}.
+
+\mbox{\Hypertarget{classPrint_acd09c153f0762bd4ad5656627e73230e}\label{classPrint_acd09c153f0762bd4ad5656627e73230e}} 
+\index{Print@{Print}!interpet@{interpet}}
+\index{interpet@{interpet}!Print@{Print}}
+\doxysubsubsection{\texorpdfstring{interpet()}{interpet()}}
+{\footnotesize\ttfamily void Print\+::interpet (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classExpr}{Expr}}.
+
+\mbox{\Hypertarget{classPrint_a009b71e6bb9813706aa9aa01b157cb0c}\label{classPrint_a009b71e6bb9813706aa9aa01b157cb0c}} 
+\index{Print@{Print}!visit@{visit}}
+\index{visit@{visit}!Print@{Print}}
+\doxysubsubsection{\texorpdfstring{visit()}{visit()}}
+{\footnotesize\ttfamily void Print\+::visit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\hyperlink{classPrint}{Print}} the AST prettily 
+
+Implements \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{Expr}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+expr.\+h\end{DoxyCompactItemize}

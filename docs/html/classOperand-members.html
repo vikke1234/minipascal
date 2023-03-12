@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -79,18 +79,30 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="classExpr.html#a06ca8d56bc1a53dd4733fa0d107ccff6">analyse</a>() const =0</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Expr</b>(std::unique_ptr&lt; Token &gt; t) (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Expr</b>()=default (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classOperand.html#a0a44f9d03315d35b563dcbc5550be9f6">get_type</a>()=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#a68172bd15b3bf3069de31224b090e4d0">get_value</a>()=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>interpet</b>(void)=0 (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Operand</b>(std::unique_ptr&lt; Token &gt; t) (defined in <a class="el" href="classOperand.html">Operand</a>)</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Operand</b>()=default (defined in <a class="el" href="classOperand.html">Operand</a>)</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>token</b> (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Expr</b>(const Token &amp;t) (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#a0a44f9d03315d35b563dcbc5550be9f6">get_type</a>()=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classOperand.html#a68172bd15b3bf3069de31224b090e4d0">get_value</a>()=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>interpet</b>(void)=0 (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Operand</b>(std::unique_ptr&lt; Token &gt; t) (defined in <a class="el" href="classOperand.html">Operand</a>)</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Operand</b>(const Token &amp;t) (defined in <a class="el" href="classOperand.html">Operand</a>)</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Operand</b>(const Token &amp;&amp;t) (defined in <a class="el" href="classOperand.html">Operand</a>)</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Operand</b>()=default (defined in <a class="el" href="classOperand.html">Operand</a>)</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classOperand.html#ae6c792499b1ad0d6a1ad66b6690879ef">operator!</a>()=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#aca8b39aaa1f1f366f9d84cb6fe3ac1ad">operator&amp;&amp;</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classOperand.html#a2159af3a354d4731aab12d52c6632472">operator*</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#a8e0c616e29deb3d9fda143bbb3cea43d">operator+</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classOperand.html#a2b48fded1d61363749c7ed1fbcb9731d">operator-</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#a98f30ae4f73e2aa7249ff84db07866a8">operator/</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classOperand.html#af48346cf2f0e5c36a6cff9ff5d4f1174">operator&lt;</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#a25362c49d4d5c2140f9ca6cb8c2da9ba">operator==</a>(Operand &amp;l)=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>token</b> (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classOperand.html#ac330a3f9169fd96e034fd887ccdd6b0e">truthy</a>()=0</td><td class="entry"><a class="el" href="classOperand.html">Operand</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">visit</a>(void) const =0</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Expr</b>()=default (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:46 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

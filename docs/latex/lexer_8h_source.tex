@@ -1,0 +1,95 @@
+\hypertarget{lexer_8h_source}{}\doxysection{lexer.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ LEXER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ LEXER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string\_view>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}token.h"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classLexer}{Lexer}}\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ std::string\ content;}
+\DoxyCodeLine{00016\ \ \ \ \ std::size\_t\ length;}
+\DoxyCodeLine{00017\ \ \ \ \ std::size\_t\ index;}
+\DoxyCodeLine{00018\ \ \ \ \ std::size\_t\ line;}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{char}\ current\_char;}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{structToken}{Token}}\ previous;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ enum\ token\_type>\ reserved;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{enum}\ comment\_type\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ NONE,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ CPP\_COMMENT,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ C\_COMMENT,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ C\_COMMENT\_END}
+\DoxyCodeLine{00033\ \ \ \ \ \};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classLexer}{Lexer}}(std::string\_view\ filename)\ :}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ content(read\_file(filename)),\ length(content.length()),\ index(0ULL),}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ line(1ULL),\ current\_char(EOF),\ previous\{\textcolor{stringliteral}{"{}"{}},\ 0,\ NO\_SYMBOLS\},\ reserved\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}!"{}},\ NOT\},\ \ \{\textcolor{stringliteral}{"{}+"{}},\ ADDITION\},\ \{\textcolor{stringliteral}{"{}-\/"{}},\ SUBTRACTION\},}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}\&"{}},\ AND\},\ \{\textcolor{stringliteral}{"{}*"{}},\ MULTIPLICATION\},\ \{\textcolor{stringliteral}{"{}/"{}},\ DIVISION\},\ \{\textcolor{stringliteral}{"{}<"{}},\ LT\},\ \{\textcolor{stringliteral}{"{}="{}},\ EQ\},}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}:="{}},\ ASSIGN\},\ \{\textcolor{stringliteral}{"{}\(\backslash\)"{}"{}},\ STRING\},\ \{\textcolor{stringliteral}{"{}("{}},\ LPARENTHESES\},}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{})"{}},\ RPARENTHESES\},}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{};"{}},\ SEMICOLON\},\ \{\textcolor{stringliteral}{"{}.."{}},\ RANGE\},}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}var"{}},\ VAR\},}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}for"{}},\ FOR\},}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}end"{}},\ END\},}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}in"{}},\ IN\},}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}do"{}},\ DO\},}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}read"{}},\ READ\},}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}print"{}},\ PRINT\},}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}int"{}},\ INT\},}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}string"{}},\ STRING\_TYPE\},}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}bool"{}},\ BOOL\},}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}assert"{}},\ ASSERT\},}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}if"{}},\ IF\},}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\textcolor{stringliteral}{"{}else"{}},\ ELSE\}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \{\}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00068\ \ \ \ \ std::unique\_ptr<Token>\ \mbox{\hyperlink{classLexer_aa8e54938853863a4508b621a12dadee2}{get\_token}}(\textcolor{keywordtype}{bool}\ consume\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ \ \ \ \ std::unique\_ptr<Token>\ \mbox{\hyperlink{classLexer_a953001fc0603ba345e9a59fd4b48b478}{peek\_token}}(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classLexer_a0c988d746fff9c8e5ab86985d7b60996}{is\_reserved}}(std::string\_view\ lexeme)\ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ reserved.find(lexeme.data())\ !=\ reserved.end();}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{using\ }identifier\ =\ int\ (*)(int);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00097\ \ \ \ \ std::string\ read\_file(std::string\_view\ filename);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00108\ \ \ \ \ std::string\ parse(identifier\ f);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \ \ \ \ Lexer::comment\_type\ is\_comment(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ skip\_comment(Lexer::comment\_type);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ skip\_wspace(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00128\ \ \ \ \ std::string\ get\_string(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{char}\ interpret\_escape(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00136\ \ \ \ \ std::string\ parse\_octal();}
+\DoxyCodeLine{00137\ \ \ \ \ std::string\ parse\_hex();}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{char}\ get\_char(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{char}\ peek\_char(\textcolor{keywordtype}{void});}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{enum}\ token\_type\ get\_token\_type(std::string\ current);}
+\DoxyCodeLine{00157\ \};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ LEXER\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

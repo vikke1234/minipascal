@@ -1,0 +1,17 @@
+\hypertarget{interpreter_8h_source}{}\doxysection{interpreter.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ INTERPRETER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ INTERPRETER\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}parser.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classInterpreter}{Interpreter}}\ \{}
+\DoxyCodeLine{00006\ \ \ \ \ \mbox{\hyperlink{classParser}{Parser}}\ parser;}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{classInterpreter}{Interpreter}}(std::string\_view\ filename)\ :\ parser\{\mbox{\hyperlink{classParser}{Parser}}(filename)\}\ \{\}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{void}\ run();}
+\DoxyCodeLine{00011\ \};}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ INTERPRETER\_H}}
+
+\end{DoxyCode}

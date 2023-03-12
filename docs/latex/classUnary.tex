@@ -1,0 +1,293 @@
+\hypertarget{classUnary}{}\doxysection{Unary Class Reference}
+\label{classUnary}\index{Unary@{Unary}}
+
+
+{\ttfamily \#include $<$expr.\+h$>$}
+
+Inheritance diagram for Unary\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classUnary}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classUnary_ab34033962f01c49130f9a0cd4157db17}\label{classUnary_ab34033962f01c49130f9a0cd4157db17}} 
+{\bfseries Unary} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classOperand}{Operand}} $>$ op)
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} $\ast$ \mbox{\hyperlink{classUnary_af67dd3a8c1b31647294224b8d1e1641f}{get\+\_\+value}} () override
+\item 
+bool \mbox{\hyperlink{classUnary_acc442bc64f9d8d8763e03979a51a06ec}{truthy}} () override
+\item 
+virtual int \mbox{\hyperlink{classUnary_ab15a59faff1ddccb7158887893b81d34}{get\+\_\+type}} () override
+\item 
+virtual void \mbox{\hyperlink{classUnary_aba6346bc15936c7b6bdabcd9f1e7d714}{interpet}} (void) override
+\item 
+virtual void \mbox{\hyperlink{classUnary_ae2c452fc180e1eb9d17f3704f930e95d}{visit}} (void) const override
+\item 
+virtual bool \mbox{\hyperlink{classUnary_a1f489fdb7f995f3bbbbc69ee8d68b97c}{analyse}} () const override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_a2d6ccf52e88f6d8cce9676e4a9d296ea}{operator+}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_a41b63291f9eeea3854d1897c8079fee5}{operator-\/}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_ae9daf4e57b28c67c06f28068742857fe}{operator$\ast$}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_ac49d7b6b8a1875dcd89c0f2ecdf1ad90}{operator/}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_a44282f7e04c61e1af3e1745ea2b307c4}{operator\&\&}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_a2638db4c0efc54e12845d53db761e200}{operator==}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_a726e14a154abc3a2620ad4236619d0b0}{operator$<$}} (\mbox{\hyperlink{classOperand}{Operand}} \&) override
+\item 
+\mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classUnary_a24feea5bb3a51d2c520c12a4b76d9fdd}{operator!}} () override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classOperand}{Operand}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classOperand_a5cf098b2cd2743be84982f77345dd3b6}\label{classOperand_a5cf098b2cd2743be84982f77345dd3b6}} 
+{\bfseries Operand} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ t)
+\item 
+\mbox{\Hypertarget{classOperand_aad3214925db7a5105980caf89a56bec8}\label{classOperand_aad3214925db7a5105980caf89a56bec8}} 
+{\bfseries Operand} (const \mbox{\hyperlink{structToken}{Token}} \&t)
+\item 
+\mbox{\Hypertarget{classOperand_a36a258c32bebe538356baa9639ef345d}\label{classOperand_a36a258c32bebe538356baa9639ef345d}} 
+{\bfseries Operand} (const \mbox{\hyperlink{structToken}{Token}} \&\&t)
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} $\ast$ \mbox{\hyperlink{classOperand_a68172bd15b3bf3069de31224b090e4d0}{get\+\_\+value}} ()=0
+\item 
+virtual bool \mbox{\hyperlink{classOperand_ac330a3f9169fd96e034fd887ccdd6b0e}{truthy}} ()=0
+\item 
+virtual int \mbox{\hyperlink{classOperand_a0a44f9d03315d35b563dcbc5550be9f6}{get\+\_\+type}} ()=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_a8e0c616e29deb3d9fda143bbb3cea43d}{operator+}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_a2b48fded1d61363749c7ed1fbcb9731d}{operator-\/}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_a2159af3a354d4731aab12d52c6632472}{operator$\ast$}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_a98f30ae4f73e2aa7249ff84db07866a8}{operator/}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_aca8b39aaa1f1f366f9d84cb6fe3ac1ad}{operator\&\&}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_a25362c49d4d5c2140f9ca6cb8c2da9ba}{operator==}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_af48346cf2f0e5c36a6cff9ff5d4f1174}{operator$<$}} (\mbox{\hyperlink{classOperand}{Operand}} \&l)=0
+\item 
+virtual \mbox{\hyperlink{classLiteral}{Literal}} \mbox{\hyperlink{classOperand_ae6c792499b1ad0d6a1ad66b6690879ef}{operator!}} ()=0
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adc11d766587c2f16db5745a65ba12d04}\label{classExpr_adc11d766587c2f16db5745a65ba12d04}} 
+{\bfseries Expr} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ t)
+\item 
+\mbox{\Hypertarget{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}\label{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}} 
+{\bfseries Expr} (const \mbox{\hyperlink{structToken}{Token}} \&t)
+\item 
+virtual void \mbox{\hyperlink{classExpr_ab45ccec0c5f9325399b88a258439cd8e}{interpet}} (void)=0
+\item 
+virtual void \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{visit}} (void) const =0
+\item 
+virtual bool \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{analyse}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adee5008276da1dc67a0c831b85fb05c0}\label{classExpr_adee5008276da1dc67a0c831b85fb05c0}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ {\bfseries token}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classUnary}{Unary}} operation in the AST, needs to be handled differently from a normal BOP. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classUnary_a1f489fdb7f995f3bbbbc69ee8d68b97c}\label{classUnary_a1f489fdb7f995f3bbbbc69ee8d68b97c}} 
+\index{Unary@{Unary}!analyse@{analyse}}
+\index{analyse@{analyse}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{analyse()}{analyse()}}
+{\footnotesize\ttfamily virtual bool Unary\+::analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does analysis on the current statement. 
+
+Implements \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{Expr}}.
+
+\mbox{\Hypertarget{classUnary_ab15a59faff1ddccb7158887893b81d34}\label{classUnary_ab15a59faff1ddccb7158887893b81d34}} 
+\index{Unary@{Unary}!get\_type@{get\_type}}
+\index{get\_type@{get\_type}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
+{\footnotesize\ttfamily virtual int Unary\+::get\+\_\+type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Gets the type of a variable/literal/operation. 
+
+Implements \mbox{\hyperlink{classOperand_a0a44f9d03315d35b563dcbc5550be9f6}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_af67dd3a8c1b31647294224b8d1e1641f}\label{classUnary_af67dd3a8c1b31647294224b8d1e1641f}} 
+\index{Unary@{Unary}!get\_value@{get\_value}}
+\index{get\_value@{get\_value}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{get\_value()}{get\_value()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{classLiteral}{Literal}} $\ast$ Unary\+::get\+\_\+value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Gets the value of a variable/literal/operation. 
+
+Implements \mbox{\hyperlink{classOperand_a68172bd15b3bf3069de31224b090e4d0}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_aba6346bc15936c7b6bdabcd9f1e7d714}\label{classUnary_aba6346bc15936c7b6bdabcd9f1e7d714}} 
+\index{Unary@{Unary}!interpet@{interpet}}
+\index{interpet@{interpet}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{interpet()}{interpet()}}
+{\footnotesize\ttfamily virtual void Unary\+::interpet (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classExpr}{Expr}}.
+
+\mbox{\Hypertarget{classUnary_a24feea5bb3a51d2c520c12a4b76d9fdd}\label{classUnary_a24feea5bb3a51d2c520c12a4b76d9fdd}} 
+\index{Unary@{Unary}!operator"!@{operator"!}}
+\index{operator"!@{operator"!}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator"!()}{operator!()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator! (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does unary on a literal, extended from the mini\+PL spec to be defined for both integers and booleans.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_ae6c792499b1ad0d6a1ad66b6690879ef}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_a44282f7e04c61e1af3e1745ea2b307c4}\label{classUnary_a44282f7e04c61e1af3e1745ea2b307c4}} 
+\index{Unary@{Unary}!operator\&\&@{operator\&\&}}
+\index{operator\&\&@{operator\&\&}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator\&\&()}{operator\&\&()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator\&\& (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does logical AND on a literal, only defined for booleans.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_aca8b39aaa1f1f366f9d84cb6fe3ac1ad}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_ae9daf4e57b28c67c06f28068742857fe}\label{classUnary_ae9daf4e57b28c67c06f28068742857fe}} 
+\index{Unary@{Unary}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator$\ast$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does multiplication on a literal, only defined for integers.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_a2159af3a354d4731aab12d52c6632472}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_a2d6ccf52e88f6d8cce9676e4a9d296ea}\label{classUnary_a2d6ccf52e88f6d8cce9676e4a9d296ea}} 
+\index{Unary@{Unary}!operator+@{operator+}}
+\index{operator+@{operator+}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator+ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does addition on a literal, defined for integers and strings.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_a8e0c616e29deb3d9fda143bbb3cea43d}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_a41b63291f9eeea3854d1897c8079fee5}\label{classUnary_a41b63291f9eeea3854d1897c8079fee5}} 
+\index{Unary@{Unary}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator-\/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does subtraction on an \mbox{\hyperlink{classOperand}{Operand}}, only defined for integers.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_a2b48fded1d61363749c7ed1fbcb9731d}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_ac49d7b6b8a1875dcd89c0f2ecdf1ad90}\label{classUnary_ac49d7b6b8a1875dcd89c0f2ecdf1ad90}} 
+\index{Unary@{Unary}!operator/@{operator/}}
+\index{operator/@{operator/}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator/ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does division on a literal, only defined for integers.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_a98f30ae4f73e2aa7249ff84db07866a8}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_a726e14a154abc3a2620ad4236619d0b0}\label{classUnary_a726e14a154abc3a2620ad4236619d0b0}} 
+\index{Unary@{Unary}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator$<$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does logical LESS THAN on a literal, defined for any any type.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_af48346cf2f0e5c36a6cff9ff5d4f1174}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_a2638db4c0efc54e12845d53db761e200}\label{classUnary_a2638db4c0efc54e12845d53db761e200}} 
+\index{Unary@{Unary}!operator==@{operator==}}
+\index{operator==@{operator==}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classLiteral}{Literal}} Unary\+::operator== (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classOperand}{Operand}} \&}]{l }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does logical EQUALS on a literal.
+
+\begin{DoxyReturn}{Returns}
+The result placed into a \mbox{\hyperlink{classLiteral}{Literal}} 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classOperand_a25362c49d4d5c2140f9ca6cb8c2da9ba}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_acc442bc64f9d8d8763e03979a51a06ec}\label{classUnary_acc442bc64f9d8d8763e03979a51a06ec}} 
+\index{Unary@{Unary}!truthy@{truthy}}
+\index{truthy@{truthy}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{truthy()}{truthy()}}
+{\footnotesize\ttfamily bool Unary\+::truthy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Evaluates the expression and checks if it\textquotesingle{}s truthy, all non-\/zero values and non-\/empty strings are considered truthy. 
+
+Implements \mbox{\hyperlink{classOperand_ac330a3f9169fd96e034fd887ccdd6b0e}{Operand}}.
+
+\mbox{\Hypertarget{classUnary_ae2c452fc180e1eb9d17f3704f930e95d}\label{classUnary_ae2c452fc180e1eb9d17f3704f930e95d}} 
+\index{Unary@{Unary}!visit@{visit}}
+\index{visit@{visit}!Unary@{Unary}}
+\doxysubsubsection{\texorpdfstring{visit()}{visit()}}
+{\footnotesize\ttfamily virtual void Unary\+::visit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\hyperlink{classPrint}{Print}} the AST prettily 
+
+Implements \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{Expr}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+expr.\+h\end{DoxyCompactItemize}

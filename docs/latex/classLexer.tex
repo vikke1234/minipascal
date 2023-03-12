@@ -1,0 +1,63 @@
+\hypertarget{classLexer}{}\doxysection{Lexer Class Reference}
+\label{classLexer}\index{Lexer@{Lexer}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classLexer_a993244afb30583a98556862168e7782a}\label{classLexer_a993244afb30583a98556862168e7782a}} 
+{\bfseries Lexer} (std\+::string\+\_\+view filename)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ \mbox{\hyperlink{classLexer_aa8e54938853863a4508b621a12dadee2}{get\+\_\+token}} (bool consume=true)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ \mbox{\hyperlink{classLexer_a953001fc0603ba345e9a59fd4b48b478}{peek\+\_\+token}} (void)
+\item 
+bool \mbox{\hyperlink{classLexer_a0c988d746fff9c8e5ab86985d7b60996}{is\+\_\+reserved}} (std\+::string\+\_\+view lexeme)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classLexer_aa8e54938853863a4508b621a12dadee2}\label{classLexer_aa8e54938853863a4508b621a12dadee2}} 
+\index{Lexer@{Lexer}!get\_token@{get\_token}}
+\index{get\_token@{get\_token}!Lexer@{Lexer}}
+\doxysubsubsection{\texorpdfstring{get\_token()}{get\_token()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ Lexer\+::get\+\_\+token (\begin{DoxyParamCaption}\item[{bool}]{consume = {\ttfamily true} }\end{DoxyParamCaption})}
+
+Gets the next token
+
+
+\begin{DoxyParams}{Parameters}
+{\em consume} & -\/ whether to consume the returned token or not.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next token from the file. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classLexer_a0c988d746fff9c8e5ab86985d7b60996}\label{classLexer_a0c988d746fff9c8e5ab86985d7b60996}} 
+\index{Lexer@{Lexer}!is\_reserved@{is\_reserved}}
+\index{is\_reserved@{is\_reserved}!Lexer@{Lexer}}
+\doxysubsubsection{\texorpdfstring{is\_reserved()}{is\_reserved()}}
+{\footnotesize\ttfamily bool Lexer\+::is\+\_\+reserved (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{lexeme }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks whether a lexeme is reserved.
+
+
+\begin{DoxyParams}{Parameters}
+{\em lexeme} & -\/ Lexeme to validate. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classLexer_a953001fc0603ba345e9a59fd4b48b478}\label{classLexer_a953001fc0603ba345e9a59fd4b48b478}} 
+\index{Lexer@{Lexer}!peek\_token@{peek\_token}}
+\index{peek\_token@{peek\_token}!Lexer@{Lexer}}
+\doxysubsubsection{\texorpdfstring{peek\_token()}{peek\_token()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ Lexer\+::peek\+\_\+token (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Skips all whitespace and returns the next token, it does not consume the token.
+
+\begin{DoxyReturn}{Returns}
+The next token from the file. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+lexer.\+h\item 
+lexer.\+cpp\end{DoxyCompactItemize}

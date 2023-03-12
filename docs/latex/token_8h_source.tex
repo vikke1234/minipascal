@@ -1,0 +1,72 @@
+\hypertarget{token_8h_source}{}\doxysection{token.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ TOKEN\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ TOKEN\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{enum}\ token\_type\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ IDENTIFIER,}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{comment}{//\ operators}}
+\DoxyCodeLine{00011\ \ \ \ \ ADDITION,}
+\DoxyCodeLine{00012\ \ \ \ \ SUBTRACTION,}
+\DoxyCodeLine{00013\ \ \ \ \ MULTIPLICATION,}
+\DoxyCodeLine{00014\ \ \ \ \ DIVISION,}
+\DoxyCodeLine{00015\ \ \ \ \ LT,}
+\DoxyCodeLine{00016\ \ \ \ \ NOT,}
+\DoxyCodeLine{00017\ \ \ \ \ EQ,}
+\DoxyCodeLine{00018\ \ \ \ \ AND,}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ symbols}}
+\DoxyCodeLine{00021\ \ \ \ \ LPARENTHESES,}
+\DoxyCodeLine{00022\ \ \ \ \ RPARENTHESES,}
+\DoxyCodeLine{00023\ \ \ \ \ TYPE\_DELIM,}
+\DoxyCodeLine{00024\ \ \ \ \ SEMICOLON,}
+\DoxyCodeLine{00025\ \ \ \ \ ASSIGN,}
+\DoxyCodeLine{00026\ \ \ \ \ RANGE,}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ literals}}
+\DoxyCodeLine{00029\ \ \ \ \ DIGIT,}
+\DoxyCodeLine{00030\ \ \ \ \ STRING,}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ Keywords}}
+\DoxyCodeLine{00033\ \ \ \ \ VAR,}
+\DoxyCodeLine{00034\ \ \ \ \ FOR,}
+\DoxyCodeLine{00035\ \ \ \ \ END,}
+\DoxyCodeLine{00036\ \ \ \ \ IN,}
+\DoxyCodeLine{00037\ \ \ \ \ DO,}
+\DoxyCodeLine{00038\ \ \ \ \ READ,}
+\DoxyCodeLine{00039\ \ \ \ \ PRINT,}
+\DoxyCodeLine{00040\ \ \ \ \ INT,}
+\DoxyCodeLine{00041\ \ \ \ \ STRING\_TYPE,}
+\DoxyCodeLine{00042\ \ \ \ \ BOOL,}
+\DoxyCodeLine{00043\ \ \ \ \ ASSERT,}
+\DoxyCodeLine{00044\ \ \ \ \ IF,}
+\DoxyCodeLine{00045\ \ \ \ \ ELSE,}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ errors\ (essientially)}}
+\DoxyCodeLine{00048\ \ \ \ \ UNKNOWN,}
+\DoxyCodeLine{00049\ \ \ \ \ NO\_SYMBOLS}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{extern}\ std::string\ type\_to\_str(token\_type\ type);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structToken}{Token}}\ \{}
+\DoxyCodeLine{00055\ \ \ \ \ std::string\ token;}
+\DoxyCodeLine{00056\ \ \ \ \ std::size\_t\ line;}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{enum}\ token\_type\ type;}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{structToken}{Token}}(std::string\ token,\ std::size\_t\ line,\ \textcolor{keyword}{enum}\ token\_type\ type)\ :}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ token\{std::move(token)\},\ line\{line\},\ type\{type\}\ \{\}}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{structToken}{Token}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structToken}{Token}}\ \&tok)\ :}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ token\{tok.token\},\ line\{tok.line\},\ type\{tok.type\}\ \{\}}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{structToken}{Token}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structToken}{Token}}\ \&\&tok)\ :}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ token\{tok.token\},\ line\{tok.line\},\ type\{tok.type\}\ \{\}}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ TOKEN\_H}}
+
+\end{DoxyCode}

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -79,13 +79,102 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4f95379ba298c1990f598df3d598320f"><td class="memItemLeft" align="right" valign="top"><a id="a4f95379ba298c1990f598df3d598320f" name="a4f95379ba298c1990f598df3d598320f"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>add_symbol</b> (std::string_view symbol, std::unique_ptr&lt; <a class="el" href="classLiteral.html">Literal</a> &gt; value)</td></tr>
+<tr class="memitem:a4f95379ba298c1990f598df3d598320f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSymbolTable.html#a4f95379ba298c1990f598df3d598320f">add_symbol</a> (std::string_view symbol, std::unique_ptr&lt; <a class="el" href="classLiteral.html">Literal</a> &gt; value)</td></tr>
 <tr class="separator:a4f95379ba298c1990f598df3d598320f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3a6a10ef919f6956b42c8c1889c14099"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSymbolTable.html#a3a6a10ef919f6956b42c8c1889c14099">add_symbol</a> (std::string_view symbol, int type)</td></tr>
+<tr class="separator:a3a6a10ef919f6956b42c8c1889c14099"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a61015d31f6722ee820452a8e955c5b2d"><td class="memItemLeft" align="right" valign="top"><a id="a61015d31f6722ee820452a8e955c5b2d" name="a61015d31f6722ee820452a8e955c5b2d"></a>
 <a class="el" href="classLiteral.html">Literal</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_symbol</b> (std::string_view symbol)</td></tr>
 <tr class="separator:a61015d31f6722ee820452a8e955c5b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7845b3b228471912ed39b1eb3df92b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSymbolTable.html#ae7845b3b228471912ed39b1eb3df92b5">exists</a> (std::string_view symbol)</td></tr>
+<tr class="separator:ae7845b3b228471912ed39b1eb3df92b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affa70ea5f8839a11c56d0be0a1cd56b3"><td class="memItemLeft" align="right" valign="top"><a id="affa70ea5f8839a11c56d0be0a1cd56b3" name="affa70ea5f8839a11c56d0be0a1cd56b3"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>set_value</b> (std::string_view symbol, <a class="el" href="classLiteral.html">Literal</a> *literal)</td></tr>
+<tr class="separator:affa70ea5f8839a11c56d0be0a1cd56b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f874155853b85ac450d0ca8cb355f38"><td class="memItemLeft" align="right" valign="top"><a id="a9f874155853b85ac450d0ca8cb355f38" name="a9f874155853b85ac450d0ca8cb355f38"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>set_value</b> (std::string_view symbol, std::variant&lt; int, std::string, bool &gt; value)</td></tr>
+<tr class="separator:a9f874155853b85ac450d0ca8cb355f38"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3a6a10ef919f6956b42c8c1889c14099" name="a3a6a10ef919f6956b42c8c1889c14099"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a6a10ef919f6956b42c8c1889c14099">&#9670;&#160;</a></span>add_symbol() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SymbolTable::add_symbol </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>symbol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a symbol to the symbol table.</p>
+<dl class="section return"><dt>Returns</dt><dd>true succeeding to add to table, false if not. </dd></dl>
+
+</div>
+</div>
+<a id="a4f95379ba298c1990f598df3d598320f" name="a4f95379ba298c1990f598df3d598320f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f95379ba298c1990f598df3d598320f">&#9670;&#160;</a></span>add_symbol() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SymbolTable::add_symbol </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>symbol</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classLiteral.html">Literal</a> &gt;&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Adds a symbol to the symbol table.</p>
+<dl class="section return"><dt>Returns</dt><dd>true succeeding to add to table, false if not. </dd></dl>
+
+</div>
+</div>
+<a id="ae7845b3b228471912ed39b1eb3df92b5" name="ae7845b3b228471912ed39b1eb3df92b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7845b3b228471912ed39b1eb3df92b5">&#9670;&#160;</a></span>exists()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SymbolTable::exists </td>
+          <td>(</td>
+          <td class="paramtype">std::string_view&#160;</td>
+          <td class="paramname"><em>symbol</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks whether a symbol is present in the symbol table. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="symbols_8h_source.html">symbols.h</a></li>
 <li>symbols.cpp</li>
@@ -93,7 +182,7 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>add_symbol</b> (std::
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:46 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -88,19 +88,30 @@ $(function() {
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_class" href="classSymbolTable.html">SymbolTable</a>() : symbols{} {}</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keywordtype">bool</span> add_symbol(std::string_view symbol, std::unique_ptr&lt;Literal&gt; value);</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <a class="code hl_class" href="classLiteral.html">Literal</a> *get_symbol(std::string_view symbol);</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>};</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">extern</span> <a class="code hl_class" href="classSymbolTable.html">SymbolTable</a> symbol_table;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="preprocessor">#endif </span><span class="comment">/* SYMBOLS_H */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="aclassLiteral_html"><div class="ttname"><a href="classLiteral.html">Literal</a></div><div class="ttdef"><b>Definition:</b> expr.h:100</div></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSymbolTable.html#a4f95379ba298c1990f598df3d598320f">add_symbol</a>(std::string_view symbol, std::unique_ptr&lt;Literal&gt; value);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSymbolTable.html#a4f95379ba298c1990f598df3d598320f">add_symbol</a>(std::string_view symbol, <span class="keywordtype">int</span> type);</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <a class="code hl_class" href="classLiteral.html">Literal</a> *get_symbol(std::string_view symbol);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classSymbolTable.html#ae7845b3b228471912ed39b1eb3df92b5">exists</a>(std::string_view symbol);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> set_value(std::string_view symbol, <a class="code hl_class" href="classLiteral.html">Literal</a> *literal);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">bool</span> set_value(std::string_view symbol, std::variant&lt;int, std::string, bool&gt; value);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>};</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">extern</span> <a class="code hl_class" href="classSymbolTable.html">SymbolTable</a> symbol_table;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="preprocessor">#endif </span><span class="comment">/* SYMBOLS_H */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="aclassLiteral_html"><div class="ttname"><a href="classLiteral.html">Literal</a></div><div class="ttdef"><b>Definition:</b> expr.h:187</div></div>
 <div class="ttc" id="aclassSymbolTable_html"><div class="ttname"><a href="classSymbolTable.html">SymbolTable</a></div><div class="ttdef"><b>Definition:</b> symbols.h:11</div></div>
+<div class="ttc" id="aclassSymbolTable_html_a4f95379ba298c1990f598df3d598320f"><div class="ttname"><a href="classSymbolTable.html#a4f95379ba298c1990f598df3d598320f">SymbolTable::add_symbol</a></div><div class="ttdeci">bool add_symbol(std::string_view symbol, std::unique_ptr&lt; Literal &gt; value)</div><div class="ttdef"><b>Definition:</b> symbols.cpp:12</div></div>
+<div class="ttc" id="aclassSymbolTable_html_ae7845b3b228471912ed39b1eb3df92b5"><div class="ttname"><a href="classSymbolTable.html#ae7845b3b228471912ed39b1eb3df92b5">SymbolTable::exists</a></div><div class="ttdeci">bool exists(std::string_view symbol)</div><div class="ttdef"><b>Definition:</b> symbols.cpp:46</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:44 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

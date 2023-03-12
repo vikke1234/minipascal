@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -90,11 +90,11 @@ Inheritance diagram for Expr:</div>
 <area href="classRange.html" alt="Range" shape="rect" coords="380,56,465,80"/>
 <area href="classRead.html" alt="Read" shape="rect" coords="475,56,560,80"/>
 <area href="classStatementList.html" alt="StatementList" shape="rect" coords="570,56,655,80"/>
-<area href="classBop.html" alt="Bop" shape="rect" coords="0,112,85,136"/>
-<area href="classLiteral.html" alt="Literal" shape="rect" coords="95,112,180,136"/>
-<area href="classUnary.html" alt="Unary" shape="rect" coords="190,112,275,136"/>
-<area href="classVar.html" alt="Var" shape="rect" coords="285,112,370,136"/>
-<area href="classVarInst.html" alt="VarInst" shape="rect" coords="380,112,465,136"/>
+<area href="classBop.html" alt="Bop" shape="rect" coords="47,112,132,136"/>
+<area href="classLiteral.html" alt="Literal" shape="rect" coords="142,112,227,136"/>
+<area href="classUnary.html" alt="Unary" shape="rect" coords="237,112,322,136"/>
+<area href="classVar.html" alt="Var" shape="rect" coords="332,112,417,136"/>
+<area href="classVarInst.html" alt="VarInst" shape="rect" coords="332,168,417,192"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -103,8 +103,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adc11d766587c2f16db5745a65ba12d04"><td class="memItemLeft" align="right" valign="top"><a id="adc11d766587c2f16db5745a65ba12d04" name="adc11d766587c2f16db5745a65ba12d04"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Expr</b> (std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt; t)</td></tr>
 <tr class="separator:adc11d766587c2f16db5745a65ba12d04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab45ccec0c5f9325399b88a258439cd8e"><td class="memItemLeft" align="right" valign="top"><a id="ab45ccec0c5f9325399b88a258439cd8e" name="ab45ccec0c5f9325399b88a258439cd8e"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>interpet</b> (void)=0</td></tr>
+<tr class="memitem:aad8863aee5a0a40639c73f4f9459f1b6"><td class="memItemLeft" align="right" valign="top"><a id="aad8863aee5a0a40639c73f4f9459f1b6" name="aad8863aee5a0a40639c73f4f9459f1b6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Expr</b> (const <a class="el" href="structToken.html">Token</a> &amp;t)</td></tr>
+<tr class="separator:aad8863aee5a0a40639c73f4f9459f1b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45ccec0c5f9325399b88a258439cd8e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#ab45ccec0c5f9325399b88a258439cd8e">interpet</a> (void)=0</td></tr>
 <tr class="separator:ab45ccec0c5f9325399b88a258439cd8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3edae65ed90b0e8fb073232c84b3bc3b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">visit</a> (void) const =0</td></tr>
 <tr class="separator:a3edae65ed90b0e8fb073232c84b3bc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -142,7 +144,35 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 </div><div class="memdoc">
 <p>Does analysis on the current statement. </p>
 
-<p>Implemented in <a class="el" href="classStatementList.html#a2f79218c178c7d27da57d6d75393e64c">StatementList</a>, <a class="el" href="classLiteral.html#a5e82a71f948be9363f177635bfd6982b">Literal</a>, <a class="el" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">Bop</a>, <a class="el" href="classVarInst.html#a60b34bbe531910ed5bd1e86adea903b0">VarInst</a>, <a class="el" href="classVar.html#ade1c1e34c363f494b2f42fd0a62f48c1">Var</a>, <a class="el" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">If</a>, <a class="el" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">Range</a>, <a class="el" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">For</a>, and <a class="el" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">Unary</a>.</p>
+<p>Implemented in <a class="el" href="classStatementList.html#a2f79218c178c7d27da57d6d75393e64c">StatementList</a>, <a class="el" href="classLiteral.html#a5e82a71f948be9363f177635bfd6982b">Literal</a>, <a class="el" href="classVar.html#ade1c1e34c363f494b2f42fd0a62f48c1">Var</a>, <a class="el" href="classVarInst.html#a60b34bbe531910ed5bd1e86adea903b0">VarInst</a>, <a class="el" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">Bop</a>, <a class="el" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">If</a>, <a class="el" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">Range</a>, <a class="el" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">For</a>, <a class="el" href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">Print</a>, <a class="el" href="classRead.html#a0e9727f11b3b62e6257356c469da7460">Read</a>, and <a class="el" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">Unary</a>.</p>
+
+</div>
+</div>
+<a id="ab45ccec0c5f9325399b88a258439cd8e" name="ab45ccec0c5f9325399b88a258439cd8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab45ccec0c5f9325399b88a258439cd8e">&#9670;&#160;</a></span>interpet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void Expr::interpet </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implemented in <a class="el" href="classRange.html#a102920685f9fce3de95aa539d763702d">Range</a>.</p>
 
 </div>
 </div>
@@ -171,7 +201,7 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 </div><div class="memdoc">
 <p><a class="el" href="classPrint.html">Print</a> the AST prettily </p>
 
-<p>Implemented in <a class="el" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">If</a>, <a class="el" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">Range</a>, <a class="el" href="classStatementList.html#a2091392fcd9ff091762d1f84c8bbe337">StatementList</a>, <a class="el" href="classLiteral.html#a4012ee8c0c72237c420b41098602ce0a">Literal</a>, <a class="el" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">Bop</a>, <a class="el" href="classVarInst.html#a547fa0548c052df6a1d3281a5f0d3761">VarInst</a>, <a class="el" href="classVar.html#af5efec21096f049d33bdf9e096ea0329">Var</a>, <a class="el" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">For</a>, and <a class="el" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">Unary</a>.</p>
+<p>Implemented in <a class="el" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">If</a>, <a class="el" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">Range</a>, <a class="el" href="classStatementList.html#a2091392fcd9ff091762d1f84c8bbe337">StatementList</a>, <a class="el" href="classLiteral.html#a4012ee8c0c72237c420b41098602ce0a">Literal</a>, <a class="el" href="classVar.html#af5efec21096f049d33bdf9e096ea0329">Var</a>, <a class="el" href="classVarInst.html#a547fa0548c052df6a1d3281a5f0d3761">VarInst</a>, <a class="el" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">Bop</a>, <a class="el" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">For</a>, <a class="el" href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">Print</a>, <a class="el" href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">Read</a>, and <a class="el" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">Unary</a>.</p>
 
 </div>
 </div>
@@ -181,7 +211,7 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:45 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

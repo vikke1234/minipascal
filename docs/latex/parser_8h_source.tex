@@ -1,0 +1,115 @@
+\hypertarget{parser_8h_source}{}\doxysection{parser.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PARSER\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PARSER\_H}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}token.h"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ "{}lexer.h"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}expr.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}symbols.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string\_view>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classParser}{Parser}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{classLexer}{Lexer}}\ lexer;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{classParser}{Parser}}(std::string\_view\ filename)\ :\ lexer(filename)\ \{\}}
+\DoxyCodeLine{00015\ \ \ \ \ std::unique\_ptr<StatementList>\ parse\_file();}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ grammar\ translators}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ *\ Parses\ a\ statement}}
+\DoxyCodeLine{00022\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00023\ \ \ \ \ std::unique\_ptr<Expr>\ statement();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ std::unique\_ptr<StatementList>\ statement\_list(\textcolor{keywordtype}{bool}\ is\_block);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ std::unique\_ptr<Expr>\ var();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ std::unique\_ptr<Read>\ read\_statement()\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ tok\ =\ match(token\_type::IDENTIFIER);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ std::unique\_ptr<Read>\ r\ =\ std::make\_unique<Read>(}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::make\_unique<Var>(std::move(tok)));}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ match(token\_type::SEMICOLON);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ std::unique\_ptr<Print>\ print\_statement()\ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::unique\_ptr<Print>\ r\ =\ std::make\_unique<Print>(expression());}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ match(token\_type::SEMICOLON);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ r;}
+\DoxyCodeLine{00045\ \ \ \ \ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ std::unique\_ptr<For>\ for\_loop()\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::unique\_ptr<Token>\ identifier\ =\ match(token\_type::IDENTIFIER);}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ match(token\_type::IN);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ start\ =\ expression();}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ match(token\_type::RANGE);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ end\ =\ expression();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::unique\_ptr<Range>\ range\ =}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ std::make\_unique<Range>(std::move(start),\ std::move(end));}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ match(token\_type::DO);}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ body\ =\ statement\_list(\textcolor{keyword}{true});}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ match(token\_type::END);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ match(token\_type::FOR);}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ match(token\_type::SEMICOLON);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_unique<For>(std::move(identifier),\ std::move(range),\ std::move(body));;}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ std::unique\_ptr<If>\ if\_stmt()\ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::unique\_ptr<Operand>\ condition\ =\ expression();}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ match(token\_type::DO);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ list\ =\ statement\_list(\textcolor{keyword}{true});}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ else\_stmt\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ token\ =\ lexer.\mbox{\hyperlink{classLexer_a953001fc0603ba345e9a59fd4b48b478}{peek\_token}}();}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(token-\/>type)\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::ELSE:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lexer.\mbox{\hyperlink{classLexer_aa8e54938853863a4508b621a12dadee2}{get\_token}}();}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ else\_stmt\ =\ statement\_list(\textcolor{keyword}{true});}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ fallthrough}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::END:}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match(token\_type::END);\ \textcolor{comment}{//\ expect\ an\ end\ if\ coming\ from\ else}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match(token\_type::IF);}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ match(token\_type::SEMICOLON);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ if\_\ =\ std::make\_unique<If>(std::move(condition),}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::move(list),\ std::move(else\_stmt));}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ if\_;}
+\DoxyCodeLine{00091\ \ \ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00096\ \ \ \ \ std::unique\_ptr<Operand>\ terminal();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00104\ \ \ \ \ std::unique\_ptr<Operand>\ term\_tail(std::unique\_ptr<Operand>\ expr);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \ \ \ \ std::unique\_ptr<Operand>\ factor();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00118\ \ \ \ \ std::unique\_ptr<Operand>\ factor\_tail(std::unique\_ptr<Operand>\ ident);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ std::unique\_ptr<Operand>\ expression();}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00131\ \ \ \ \ std::unique\_ptr<Token>\ match(token\_type\ expected)\ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ token\ =\ lexer.\mbox{\hyperlink{classLexer_a953001fc0603ba345e9a59fd4b48b478}{peek\_token}}();}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (token-\/>type\ ==\ expected)\ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lexer.\mbox{\hyperlink{classLexer_aa8e54938853863a4508b621a12dadee2}{get\_token}}();}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Parse\ error:\ expected\ "{}}\ <<\ type\_to\_str(expected)\ <<}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ got\ "{}}\ <<\ type\_to\_str(token-\/>type)\ <<\ \textcolor{stringliteral}{"{}("{}}\ <<\ token-\/>token\ <<\ \textcolor{stringliteral}{"{})\(\backslash\)n"{}};}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ \};}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -81,23 +81,82 @@ Running</h1>
 <p><code>./minipascal foo.mpl</code></p>
 <h1><a class="anchor" id="sec2"></a>
 Brief introduction to the minipascal interpreter</h1>
-<p>The project interpreter is quite small consisting of ~1000 lines, and each phase is split into it's respective files, parsing can be found in parser.{h,cpp} while the lexer is in lexer.{h,cpp} etc.</p>
+<p>The project interpreter is quite small consisting of ~2000 lines, and each phase is split into it's respective files, parsing can be found in parser.{h,cpp} while the lexer is in lexer.{h,cpp} etc.</p>
 <p>The parser has a quite a bit of boilerplate code due to the nature of making one in C++. In hindsight choosing a functional language such as ocaml would probably have been a beter idea. The different nodes for the AST can be found in <a class="el" href="expr_8h_source.html">expr.h</a>, recursive descent is used to build the tree.</p>
 <h1><a class="anchor" id="sec3"></a>
 Lexing</h1>
-<p>Lexing is implemented in a naive way, simply a bunch of if statements grouped together when encountering a token.</p>
+<p>Lexing is implemented in a naive way, simply a bunch of if statements grouped together when encountering a token. Supports most control characters; octal, hexadecimal and unicode code points are not currently supported.</p>
 <h1><a class="anchor" id="sec4"></a>
 Parsing</h1>
+<p>Parsing consists of a top-down parser (LL1 where convenient, peek ahed a bit), it does not create a parse tree, instead creates an AST directly. You may view the structure of the AST in UML diagrams in relevant chapters below. </p><dl class="section see"><dt>See also</dt><dd><a class="el" href="classExpr.html">Expr</a></dd></dl>
 <h1><a class="anchor" id="sec5"></a>
 Semantical analysis</h1>
 <p>Currently the only semantical analysis done is initialization of variables and type checking. Since minipascal is globally scoped, no scope checking is done.</p>
-<h1><a class="anchor" id="sec6"></a>
+<h1><a class="anchor" id="errors"></a>
+Error handling</h1>
+<p>Error handling is implemented to make it exit if it encounters a fatal error like missing tokens such as do or end. I did not have enough time to implement proper error handling. Future work would consist of adding an error type which has ways to handle such errors. For example skipping tokens until a valid one is encountered and getting a new statement from there.</p>
+<h1><a class="anchor" id="testing"></a>
+Testing</h1>
+<p>I was not proficient in automatic testing from earlier and I did not have time to learn how to set everything up so all testing has been done manually. Future work would consist of likely adding this next.</p>
+<p>I've used a file which contained all the different constructs of the language. It can be found below: </p><pre class="fragment">var x: int := 10/5;
+var y: int;
+
+print y;
+y := 123;
+print y;
+var mybool: bool := !0;
+print "foo" + " bar";
+print x;
+print mybool;
+
+if !(0) do // foo bar
+    print "!(0 is true)";
+    if x do
+        print "truthy!\n";
+    end
+end
+
+for x in x..(1 + 20 / 4) do
+    print x;
+end
+</pre> <h1><a class="anchor" id="hours"></a>
 Hours</h1>
+<h1><a class="anchor" id="sec9"></a>
+Required info</h1>
+<p>1.</p>
+<p>2. <code>e</code> is considered as epsilon in this context. </p><pre class="fragment">program     -&gt; stmt_list $$
+stmt_list   -&gt; stmt stmt_list | e
+stmt        -&gt; var id : type := expr;
+            | id := expr;
+            | print expr
+            | read id
+            | for id in expr..expr do stmt_list end for
+            | if expr do stmt_list do stmt_list if_tail
+
+if_tail     -&gt; else stmt_list | end
+
+type        -&gt; int | string | bool
+
+expr        -&gt; term term_tail
+term_tail   -&gt; add_op term term_tail | e
+term        -&gt; factor factor_tail
+factor_tail -&gt; mult_op factor factor_tail | e
+factor      -&gt; ( expr ) | id | digit
+add_op      -&gt; + | -
+mult_op     -&gt;
+</pre><p> 3. See children of <a class="el" href="classExpr.html">Expr</a>, TL;DR, tree looks like this: </p><div class="fragment"><div class="line">    <a class="code hl_class" href="classStatementList.html">StatementList</a></div>
+<div class="line"><a class="code hl_class" href="classExpr.html">Expr</a>        <a class="code hl_class" href="classStatementList.html">StatementList</a></div>
+<div class="line">        <a class="code hl_class" href="classExpr.html">Expr</a>        <a class="code hl_class" href="classStatementList.html">StatementList</a></div>
+<div class="ttc" id="aclassExpr_html"><div class="ttname"><a href="classExpr.html">Expr</a></div><div class="ttdef"><b>Definition:</b> expr.h:18</div></div>
+<div class="ttc" id="aclassStatementList_html"><div class="ttname"><a href="classStatementList.html">StatementList</a></div><div class="ttdef"><b>Definition:</b> expr.h:133</div></div>
+</div><!-- fragment --><p> <code><a class="el" href="classExpr.html">Expr</a></code> can be any statement (a little confusing naming convention, it was named such at first and now it's a bit too much work to rename it), a binary operation, print etc. <a class="el" href="classStatementList.html">StatementList</a> is just a tree structure to contain all of the different statements.</p>
+<p>4. See <a class="el" href="index.html#errors">Error handling</a></p>
+<p>5. See <a class="el" href="index.html#hours">Hours</a> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:47 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -90,9 +90,8 @@ Inheritance diagram for If:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0ee36f583c051e21f356ce428a03ec4c"><td class="memItemLeft" align="right" valign="top"><a id="a0ee36f583c051e21f356ce428a03ec4c" name="a0ee36f583c051e21f356ce428a03ec4c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>If</b> (std::unique_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; condition, std::unique_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; truthy, std::unique_ptr&lt; <a class="el" href="classExpr.html">Expr</a> &gt; falsy)</td></tr>
-<tr class="separator:a0ee36f583c051e21f356ce428a03ec4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab30a523e8480d20d34a65656f5dc0b67"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">If</a> (std::unique_ptr&lt; <a class="el" href="classOperand.html">Operand</a> &gt; condition, std::unique_ptr&lt; <a class="el" href="classStatementList.html">StatementList</a> &gt; truthy, std::unique_ptr&lt; <a class="el" href="classStatementList.html">StatementList</a> &gt; falsy)</td></tr>
+<tr class="separator:ab30a523e8480d20d34a65656f5dc0b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a055769dab43bfd2f516b4b08ee97575d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">analyse</a> () const override</td></tr>
 <tr class="separator:a055769dab43bfd2f516b4b08ee97575d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95143b4c9460b3b15ff0152a6c07715a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classIf.html#a95143b4c9460b3b15ff0152a6c07715a">interpet</a> () override</td></tr>
@@ -103,8 +102,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adc11d766587c2f16db5745a65ba12d04 inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="adc11d766587c2f16db5745a65ba12d04" name="adc11d766587c2f16db5745a65ba12d04"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Expr</b> (std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt; t)</td></tr>
 <tr class="separator:adc11d766587c2f16db5745a65ba12d04 inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab45ccec0c5f9325399b88a258439cd8e inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="ab45ccec0c5f9325399b88a258439cd8e" name="ab45ccec0c5f9325399b88a258439cd8e"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>interpet</b> (void)=0</td></tr>
+<tr class="memitem:aad8863aee5a0a40639c73f4f9459f1b6 inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="aad8863aee5a0a40639c73f4f9459f1b6" name="aad8863aee5a0a40639c73f4f9459f1b6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Expr</b> (const <a class="el" href="structToken.html">Token</a> &amp;t)</td></tr>
+<tr class="separator:aad8863aee5a0a40639c73f4f9459f1b6 inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45ccec0c5f9325399b88a258439cd8e inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#ab45ccec0c5f9325399b88a258439cd8e">interpet</a> (void)=0</td></tr>
 <tr class="separator:ab45ccec0c5f9325399b88a258439cd8e inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3edae65ed90b0e8fb073232c84b3bc3b inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">visit</a> (void) const =0</td></tr>
 <tr class="separator:a3edae65ed90b0e8fb073232c84b3bc3b inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,7 +121,58 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classIf.html">If</a> statement node </p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ab30a523e8480d20d34a65656f5dc0b67" name="ab30a523e8480d20d34a65656f5dc0b67"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab30a523e8480d20d34a65656f5dc0b67">&#9670;&#160;</a></span>If()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">If::If </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classOperand.html">Operand</a> &gt;&#160;</td>
+          <td class="paramname"><em>condition</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classStatementList.html">StatementList</a> &gt;&#160;</td>
+          <td class="paramname"><em>truthy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classStatementList.html">StatementList</a> &gt;&#160;</td>
+          <td class="paramname"><em>falsy</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>- Expression to be checked if truthy, if true it will execute the <code>truthy</code> tree, else the <code>falsy</code>. </td></tr>
+    <tr><td class="paramname">truthy</td><td>- tree to evaluate if the condition is true. </td></tr>
+    <tr><td class="paramname">falsy</td><td>- tree to evaluate if the condition is false, if any. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a055769dab43bfd2f516b4b08ee97575d" name="a055769dab43bfd2f516b4b08ee97575d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a055769dab43bfd2f516b4b08ee97575d">&#9670;&#160;</a></span>analyse()</h2>
 
@@ -211,7 +263,7 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:45 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

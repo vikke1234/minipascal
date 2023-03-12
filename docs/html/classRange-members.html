@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -79,17 +79,18 @@ $(function() {
   <tr class="even"><td class="entry"><a class="el" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">analyse</a>() const override</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
   <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Expr</b>(std::unique_ptr&lt; Token &gt; t) (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
   <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Expr</b>()=default (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">get_next</a>()</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>interpet</b>() override (defined in <a class="el" href="classRange.html">Range</a>)</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">is_done</a>()</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Range</b>(std::unique_ptr&lt; Token &gt; start, std::unique_ptr&lt; Token &gt; end) (defined in <a class="el" href="classRange.html">Range</a>)</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>token</b> (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">visit</a>() const override</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>~Expr</b>()=default (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Expr</b>(const Token &amp;t) (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">get_next</a>()</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classRange.html#a102920685f9fce3de95aa539d763702d">interpet</a>() override</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">is_done</a>()</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Range</b>(std::unique_ptr&lt; Operand &gt; start, std::unique_ptr&lt; Operand &gt; end) (defined in <a class="el" href="classRange.html">Range</a>)</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>token</b> (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">protected</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">visit</a>() const override</td><td class="entry"><a class="el" href="classRange.html">Range</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">virtual</span></td></tr>
+  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>~Expr</b>()=default (defined in <a class="el" href="classExpr.html">Expr</a>)</td><td class="entry"><a class="el" href="classExpr.html">Expr</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:46 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

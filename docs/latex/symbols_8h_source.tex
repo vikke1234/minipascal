@@ -1,0 +1,36 @@
+\hypertarget{symbols_8h_source}{}\doxysection{symbols.\+h}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ SYMBOLS\_H}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ SYMBOLS\_H}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <variant>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classLiteral}{Literal}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classSymbolTable}{SymbolTable}}\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ std::unordered\_map<std::string,\ std::unique\_ptr<Literal>>\ symbols;}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{classSymbolTable}{SymbolTable}}()\ :\ symbols\{\}\ \{\}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSymbolTable_a4f95379ba298c1990f598df3d598320f}{add\_symbol}}(std::string\_view\ symbol,\ std::unique\_ptr<Literal>\ value);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSymbolTable_a4f95379ba298c1990f598df3d598320f}{add\_symbol}}(std::string\_view\ symbol,\ \textcolor{keywordtype}{int}\ type);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ *get\_symbol(std::string\_view\ symbol);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classSymbolTable_ae7845b3b228471912ed39b1eb3df92b5}{exists}}(std::string\_view\ symbol);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ set\_value(std::string\_view\ symbol,\ \mbox{\hyperlink{classLiteral}{Literal}}\ *literal);}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ set\_value(std::string\_view\ symbol,\ std::variant<int,\ std::string,\ bool>\ value);}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{extern}\ \mbox{\hyperlink{classSymbolTable}{SymbolTable}}\ symbol\_table;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{/*\ SYMBOLS\_H\ */}\textcolor{preprocessor}{}}
+
+\end{DoxyCode}

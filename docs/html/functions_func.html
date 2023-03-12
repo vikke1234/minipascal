@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -73,7 +73,8 @@ $(function() {
 &#160;
 
 <h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
-<li>analyse()&#160;:&#160;<a class="el" href="classAnalyser.html#acc969501af1e55d790a92da5e3a86e16">Analyser</a>, <a class="el" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">Bop</a>, <a class="el" href="classExpr.html#a06ca8d56bc1a53dd4733fa0d107ccff6">Expr</a>, <a class="el" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">For</a>, <a class="el" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">If</a>, <a class="el" href="classLiteral.html#a5e82a71f948be9363f177635bfd6982b">Literal</a>, <a class="el" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">Range</a>, <a class="el" href="classStatementList.html#a2f79218c178c7d27da57d6d75393e64c">StatementList</a>, <a class="el" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">Unary</a>, <a class="el" href="classVar.html#ade1c1e34c363f494b2f42fd0a62f48c1">Var</a>, <a class="el" href="classVarInst.html#a60b34bbe531910ed5bd1e86adea903b0">VarInst</a></li>
+<li>add_symbol()&#160;:&#160;<a class="el" href="classSymbolTable.html#a4f95379ba298c1990f598df3d598320f">SymbolTable</a></li>
+<li>analyse()&#160;:&#160;<a class="el" href="classAnalyser.html#acf61ff2c6635a587935b59763f8c909e">Analyser</a>, <a class="el" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">Bop</a>, <a class="el" href="classExpr.html#a06ca8d56bc1a53dd4733fa0d107ccff6">Expr</a>, <a class="el" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">For</a>, <a class="el" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">If</a>, <a class="el" href="classLiteral.html#a5e82a71f948be9363f177635bfd6982b">Literal</a>, <a class="el" href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">Print</a>, <a class="el" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">Range</a>, <a class="el" href="classRead.html#a0e9727f11b3b62e6257356c469da7460">Read</a>, <a class="el" href="classStatementList.html#a2f79218c178c7d27da57d6d75393e64c">StatementList</a>, <a class="el" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">Unary</a>, <a class="el" href="classVar.html#ade1c1e34c363f494b2f42fd0a62f48c1">Var</a>, <a class="el" href="classVarInst.html#a60b34bbe531910ed5bd1e86adea903b0">VarInst</a></li>
 </ul>
 
 
@@ -82,16 +83,36 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>exists()&#160;:&#160;<a class="el" href="classSymbolTable.html#ae7845b3b228471912ed39b1eb3df92b5">SymbolTable</a></li>
+</ul>
+
+
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
 <li>get_next()&#160;:&#160;<a class="el" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">Range</a></li>
 <li>get_token()&#160;:&#160;<a class="el" href="classLexer.html#aa8e54938853863a4508b621a12dadee2">Lexer</a></li>
 <li>get_type()&#160;:&#160;<a class="el" href="classBop.html#a7ba76a51676d066a2a183a1594a96111">Bop</a>, <a class="el" href="classLiteral.html#a510ac8f088dfdad1bd21b9e690853890">Literal</a>, <a class="el" href="classOperand.html#a0a44f9d03315d35b563dcbc5550be9f6">Operand</a>, <a class="el" href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">Unary</a>, <a class="el" href="classVar.html#a881ed33079caaa94510bbde0211fa9b8">Var</a>, <a class="el" href="classVarInst.html#a1d361d43e9b17034b45a167e9a25c07a">VarInst</a></li>
-<li>get_value()&#160;:&#160;<a class="el" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">Bop</a>, <a class="el" href="classLiteral.html#a4657c3ddd270e5ba3e63551b659d746d">Literal</a>, <a class="el" href="classOperand.html#a68172bd15b3bf3069de31224b090e4d0">Operand</a>, <a class="el" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">Unary</a>, <a class="el" href="classVar.html#a95c5482bf419fceb8ac86e46dae10c2f">Var</a>, <a class="el" href="classVarInst.html#a5286aba43e5497f4558af1fbfcd313e0">VarInst</a></li>
+<li>get_value()&#160;:&#160;<a class="el" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">Bop</a>, <a class="el" href="classLiteral.html#a4657c3ddd270e5ba3e63551b659d746d">Literal</a>, <a class="el" href="classOperand.html#a68172bd15b3bf3069de31224b090e4d0">Operand</a>, <a class="el" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">Unary</a>, <a class="el" href="classVar.html#a95c5482bf419fceb8ac86e46dae10c2f">Var</a></li>
 </ul>
 
 
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
+<li>If()&#160;:&#160;<a class="el" href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">If</a></li>
+<li>interpet()&#160;:&#160;<a class="el" href="classRange.html#a102920685f9fce3de95aa539d763702d">Range</a></li>
 <li>is_done()&#160;:&#160;<a class="el" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">Range</a></li>
+<li>is_reserved()&#160;:&#160;<a class="el" href="classLexer.html#a0c988d746fff9c8e5ab86985d7b60996">Lexer</a></li>
+</ul>
+
+
+<h3><a id="index_o" name="index_o"></a>- o -</h3><ul>
+<li>operator!()&#160;:&#160;<a class="el" href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">Bop</a>, <a class="el" href="classLiteral.html#a9961471ebbde328b4fc01ad362493d36">Literal</a>, <a class="el" href="classOperand.html#ae6c792499b1ad0d6a1ad66b6690879ef">Operand</a>, <a class="el" href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">Unary</a>, <a class="el" href="classVar.html#a6f938332d77001c4dc29f61e96062c43">Var</a>, <a class="el" href="classVarInst.html#a03783e3f3a4dcceb26733feb5c3a7cc4">VarInst</a></li>
+<li>operator&amp;&amp;()&#160;:&#160;<a class="el" href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">Bop</a>, <a class="el" href="classLiteral.html#a10ee7f4bf33f6d78bb113b05f442cb49">Literal</a>, <a class="el" href="classOperand.html#aca8b39aaa1f1f366f9d84cb6fe3ac1ad">Operand</a>, <a class="el" href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">Unary</a>, <a class="el" href="classVar.html#a64cbdfb7553776b34e74026eabd04794">Var</a>, <a class="el" href="classVarInst.html#a37f8eca6fed3dc1bdc5313e8e165582b">VarInst</a></li>
+<li>operator*()&#160;:&#160;<a class="el" href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">Bop</a>, <a class="el" href="classLiteral.html#a0a3a60fa3e75b2a1a6eee4c8e4b173f3">Literal</a>, <a class="el" href="classOperand.html#a2159af3a354d4731aab12d52c6632472">Operand</a>, <a class="el" href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">Unary</a>, <a class="el" href="classVar.html#a5a0e05a2748fe34f89e250de9e542d9c">Var</a>, <a class="el" href="classVarInst.html#a2b9039ae7d4390816997a10e6e7ac9ca">VarInst</a></li>
+<li>operator+()&#160;:&#160;<a class="el" href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">Bop</a>, <a class="el" href="classLiteral.html#a8205967cb7e86360d2b9f44fa7a900f0">Literal</a>, <a class="el" href="classOperand.html#a8e0c616e29deb3d9fda143bbb3cea43d">Operand</a>, <a class="el" href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">Unary</a>, <a class="el" href="classVar.html#abd44a28859d5cb7501b59ebbb00bb2d7">Var</a>, <a class="el" href="classVarInst.html#a820343f581428974e1406bf429882b31">VarInst</a></li>
+<li>operator-()&#160;:&#160;<a class="el" href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">Bop</a>, <a class="el" href="classLiteral.html#abf03f6e6e06f45922a51c46535009bc3">Literal</a>, <a class="el" href="classOperand.html#a2b48fded1d61363749c7ed1fbcb9731d">Operand</a>, <a class="el" href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">Unary</a>, <a class="el" href="classVar.html#a1ba079dbb41a6105e94841be6014cbae">Var</a>, <a class="el" href="classVarInst.html#a3c5a89758d002880dc7ebd39e3ce0057">VarInst</a></li>
+<li>operator/()&#160;:&#160;<a class="el" href="classBop.html#ace84769a052a00b372f5479b2b812645">Bop</a>, <a class="el" href="classLiteral.html#a29248cd88ee17853dd58e93fd32926c2">Literal</a>, <a class="el" href="classOperand.html#a98f30ae4f73e2aa7249ff84db07866a8">Operand</a>, <a class="el" href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">Unary</a>, <a class="el" href="classVar.html#a18aadef37217933bdfc7469f430b6276">Var</a>, <a class="el" href="classVarInst.html#a8f22cd90e0b800cd21ddfc5056cc93eb">VarInst</a></li>
+<li>operator&lt;()&#160;:&#160;<a class="el" href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">Bop</a>, <a class="el" href="classLiteral.html#afc74a371cd46bdb6f008cfff2b99a50f">Literal</a>, <a class="el" href="classOperand.html#af48346cf2f0e5c36a6cff9ff5d4f1174">Operand</a>, <a class="el" href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">Unary</a>, <a class="el" href="classVar.html#a577c012db023e813d0430865411e660c">Var</a>, <a class="el" href="classVarInst.html#a85844cfa5576353f0d2f0d2a8bea62f8">VarInst</a></li>
+<li>operator==()&#160;:&#160;<a class="el" href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">Bop</a>, <a class="el" href="classLiteral.html#a977dbeb89c6e01878a2c239ca9e017dc">Literal</a>, <a class="el" href="classOperand.html#a25362c49d4d5c2140f9ca6cb8c2da9ba">Operand</a>, <a class="el" href="classUnary.html#a2638db4c0efc54e12845d53db761e200">Unary</a>, <a class="el" href="classVar.html#abed52c314424f6c331ea83109c3539e6">Var</a>, <a class="el" href="classVarInst.html#a4b6f495b3ebe0fcf05f315a1bc593be7">VarInst</a></li>
 </ul>
 
 
@@ -100,13 +121,18 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>truthy()&#160;:&#160;<a class="el" href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">Bop</a>, <a class="el" href="classLiteral.html#a8c2620183928974b79f0a77c51360e56">Literal</a>, <a class="el" href="classOperand.html#ac330a3f9169fd96e034fd887ccdd6b0e">Operand</a>, <a class="el" href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">Unary</a>, <a class="el" href="classVar.html#a1f664285a1c26f8441105f3f8ac78630">Var</a></li>
+</ul>
+
+
 <h3><a id="index_v" name="index_v"></a>- v -</h3><ul>
-<li>visit()&#160;:&#160;<a class="el" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">Bop</a>, <a class="el" href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">Expr</a>, <a class="el" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">For</a>, <a class="el" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">If</a>, <a class="el" href="classLiteral.html#a4012ee8c0c72237c420b41098602ce0a">Literal</a>, <a class="el" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">Range</a>, <a class="el" href="classStatementList.html#a2091392fcd9ff091762d1f84c8bbe337">StatementList</a>, <a class="el" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">Unary</a>, <a class="el" href="classVar.html#af5efec21096f049d33bdf9e096ea0329">Var</a>, <a class="el" href="classVarInst.html#a547fa0548c052df6a1d3281a5f0d3761">VarInst</a></li>
+<li>visit()&#160;:&#160;<a class="el" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">Bop</a>, <a class="el" href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">Expr</a>, <a class="el" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">For</a>, <a class="el" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">If</a>, <a class="el" href="classLiteral.html#a4012ee8c0c72237c420b41098602ce0a">Literal</a>, <a class="el" href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">Print</a>, <a class="el" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">Range</a>, <a class="el" href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">Read</a>, <a class="el" href="classStatementList.html#a2091392fcd9ff091762d1f84c8bbe337">StatementList</a>, <a class="el" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">Unary</a>, <a class="el" href="classVar.html#af5efec21096f049d33bdf9e096ea0329">Var</a>, <a class="el" href="classVarInst.html#a547fa0548c052df6a1d3281a5f0d3761">VarInst</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:47 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

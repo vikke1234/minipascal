@@ -1,0 +1,103 @@
+\hypertarget{classRange}{}\doxysection{Range Class Reference}
+\label{classRange}\index{Range@{Range}}
+
+
+{\ttfamily \#include $<$expr.\+h$>$}
+
+Inheritance diagram for Range\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classRange}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classRange_a58e38a093e180a58fd51f4c07ffb4790}\label{classRange_a58e38a093e180a58fd51f4c07ffb4790}} 
+{\bfseries Range} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classOperand}{Operand}} $>$ start, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classOperand}{Operand}} $>$ end)
+\item 
+int \mbox{\hyperlink{classRange_a40da89d7d2c3f92ca379a80cd54f8ed5}{get\+\_\+next}} ()
+\item 
+bool \mbox{\hyperlink{classRange_a5e34e2b7a1deccff96d2d57950d137e4}{is\+\_\+done}} ()
+\item 
+bool \mbox{\hyperlink{classRange_a4d7e581038a13d50c74ccb07a9c2aee1}{analyse}} () const override
+\item 
+void \mbox{\hyperlink{classRange_a102920685f9fce3de95aa539d763702d}{interpet}} () override
+\item 
+void \mbox{\hyperlink{classRange_a8c426ef5b0d3b9825f1077c2f6f85db9}{visit}} () const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adc11d766587c2f16db5745a65ba12d04}\label{classExpr_adc11d766587c2f16db5745a65ba12d04}} 
+{\bfseries Expr} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ t)
+\item 
+\mbox{\Hypertarget{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}\label{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}} 
+{\bfseries Expr} (const \mbox{\hyperlink{structToken}{Token}} \&t)
+\item 
+virtual void \mbox{\hyperlink{classExpr_ab45ccec0c5f9325399b88a258439cd8e}{interpet}} (void)=0
+\item 
+virtual void \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{visit}} (void) const =0
+\item 
+virtual bool \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{analyse}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adee5008276da1dc67a0c831b85fb05c0}\label{classExpr_adee5008276da1dc67a0c831b85fb05c0}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ {\bfseries token}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classRange}{Range}} node for the AST. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classRange_a4d7e581038a13d50c74ccb07a9c2aee1}\label{classRange_a4d7e581038a13d50c74ccb07a9c2aee1}} 
+\index{Range@{Range}!analyse@{analyse}}
+\index{analyse@{analyse}!Range@{Range}}
+\doxysubsubsection{\texorpdfstring{analyse()}{analyse()}}
+{\footnotesize\ttfamily bool Range\+::analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does analysis on the current statement. 
+
+Implements \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{Expr}}.
+
+\mbox{\Hypertarget{classRange_a40da89d7d2c3f92ca379a80cd54f8ed5}\label{classRange_a40da89d7d2c3f92ca379a80cd54f8ed5}} 
+\index{Range@{Range}!get\_next@{get\_next}}
+\index{get\_next@{get\_next}!Range@{Range}}
+\doxysubsubsection{\texorpdfstring{get\_next()}{get\_next()}}
+{\footnotesize\ttfamily int Range\+::get\+\_\+next (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Gets the next number for the range, needs to be manually checked that it does not go out of range. \mbox{\Hypertarget{classRange_a102920685f9fce3de95aa539d763702d}\label{classRange_a102920685f9fce3de95aa539d763702d}} 
+\index{Range@{Range}!interpet@{interpet}}
+\index{interpet@{interpet}!Range@{Range}}
+\doxysubsubsection{\texorpdfstring{interpet()}{interpet()}}
+{\footnotesize\ttfamily void Range\+::interpet (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Must be called before loop is executed, initializes val for the loop, cannot be done in analyse, since it\textquotesingle{}s a constant function and in the constructor the symbol table is not initialized yet. 
+
+Implements \mbox{\hyperlink{classExpr}{Expr}}.
+
+\mbox{\Hypertarget{classRange_a5e34e2b7a1deccff96d2d57950d137e4}\label{classRange_a5e34e2b7a1deccff96d2d57950d137e4}} 
+\index{Range@{Range}!is\_done@{is\_done}}
+\index{is\_done@{is\_done}!Range@{Range}}
+\doxysubsubsection{\texorpdfstring{is\_done()}{is\_done()}}
+{\footnotesize\ttfamily bool Range\+::is\+\_\+done (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Checks if all numbers from the range is consumed. \mbox{\Hypertarget{classRange_a8c426ef5b0d3b9825f1077c2f6f85db9}\label{classRange_a8c426ef5b0d3b9825f1077c2f6f85db9}} 
+\index{Range@{Range}!visit@{visit}}
+\index{visit@{visit}!Range@{Range}}
+\doxysubsubsection{\texorpdfstring{visit()}{visit()}}
+{\footnotesize\ttfamily void Range\+::visit (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\hyperlink{classPrint}{Print}} the AST prettily 
+
+Implements \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{Expr}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+expr.\+h\end{DoxyCompactItemize}

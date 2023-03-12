@@ -21,7 +21,7 @@
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">Minipascal
+   <div id="projectname">Minipascal<span id="projectnumber">&#160;0.1</span>
    </div>
    <div id="projectbrief">An interpreter for the minipascal language</div>
   </td>
@@ -96,6 +96,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab34033962f01c49130f9a0cd4157db17"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af67dd3a8c1b31647294224b8d1e1641f"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">get_value</a> () override</td></tr>
 <tr class="separator:af67dd3a8c1b31647294224b8d1e1641f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc442bc64f9d8d8763e03979a51a06ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">truthy</a> () override</td></tr>
+<tr class="separator:acc442bc64f9d8d8763e03979a51a06ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab15a59faff1ddccb7158887893b81d34"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">get_type</a> () override</td></tr>
 <tr class="separator:ab15a59faff1ddccb7158887893b81d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba6346bc15936c7b6bdabcd9f1e7d714"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#aba6346bc15936c7b6bdabcd9f1e7d714">interpet</a> (void) override</td></tr>
@@ -104,20 +106,62 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ae2c452fc180e1eb9d17f3704f930e95d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f489fdb7f995f3bbbbc69ee8d68b97c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">analyse</a> () const override</td></tr>
 <tr class="separator:a1f489fdb7f995f3bbbbc69ee8d68b97c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d6ccf52e88f6d8cce9676e4a9d296ea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">operator+</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:a2d6ccf52e88f6d8cce9676e4a9d296ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a41b63291f9eeea3854d1897c8079fee5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">operator-</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:a41b63291f9eeea3854d1897c8079fee5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9daf4e57b28c67c06f28068742857fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">operator*</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:ae9daf4e57b28c67c06f28068742857fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac49d7b6b8a1875dcd89c0f2ecdf1ad90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">operator/</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:ac49d7b6b8a1875dcd89c0f2ecdf1ad90"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44282f7e04c61e1af3e1745ea2b307c4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">operator&amp;&amp;</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:a44282f7e04c61e1af3e1745ea2b307c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2638db4c0efc54e12845d53db761e200"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a2638db4c0efc54e12845d53db761e200">operator==</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:a2638db4c0efc54e12845d53db761e200"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a726e14a154abc3a2620ad4236619d0b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">operator&lt;</a> (<a class="el" href="classOperand.html">Operand</a> &amp;) override</td></tr>
+<tr class="separator:a726e14a154abc3a2620ad4236619d0b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24feea5bb3a51d2c520c12a4b76d9fdd"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">operator!</a> () override</td></tr>
+<tr class="separator:a24feea5bb3a51d2c520c12a4b76d9fdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classOperand"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classOperand')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classOperand.html">Operand</a></td></tr>
 <tr class="memitem:a5cf098b2cd2743be84982f77345dd3b6 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top"><a id="a5cf098b2cd2743be84982f77345dd3b6" name="a5cf098b2cd2743be84982f77345dd3b6"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Operand</b> (std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt; t)</td></tr>
 <tr class="separator:a5cf098b2cd2743be84982f77345dd3b6 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad3214925db7a5105980caf89a56bec8 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top"><a id="aad3214925db7a5105980caf89a56bec8" name="aad3214925db7a5105980caf89a56bec8"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Operand</b> (const <a class="el" href="structToken.html">Token</a> &amp;t)</td></tr>
+<tr class="separator:aad3214925db7a5105980caf89a56bec8 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36a258c32bebe538356baa9639ef345d inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top"><a id="a36a258c32bebe538356baa9639ef345d" name="a36a258c32bebe538356baa9639ef345d"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Operand</b> (const <a class="el" href="structToken.html">Token</a> &amp;&amp;t)</td></tr>
+<tr class="separator:a36a258c32bebe538356baa9639ef345d inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68172bd15b3bf3069de31224b090e4d0 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a68172bd15b3bf3069de31224b090e4d0">get_value</a> ()=0</td></tr>
 <tr class="separator:a68172bd15b3bf3069de31224b090e4d0 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac330a3f9169fd96e034fd887ccdd6b0e inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#ac330a3f9169fd96e034fd887ccdd6b0e">truthy</a> ()=0</td></tr>
+<tr class="separator:ac330a3f9169fd96e034fd887ccdd6b0e inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0a44f9d03315d35b563dcbc5550be9f6 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a0a44f9d03315d35b563dcbc5550be9f6">get_type</a> ()=0</td></tr>
 <tr class="separator:a0a44f9d03315d35b563dcbc5550be9f6 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e0c616e29deb3d9fda143bbb3cea43d inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a8e0c616e29deb3d9fda143bbb3cea43d">operator+</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:a8e0c616e29deb3d9fda143bbb3cea43d inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b48fded1d61363749c7ed1fbcb9731d inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a2b48fded1d61363749c7ed1fbcb9731d">operator-</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:a2b48fded1d61363749c7ed1fbcb9731d inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2159af3a354d4731aab12d52c6632472 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a2159af3a354d4731aab12d52c6632472">operator*</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:a2159af3a354d4731aab12d52c6632472 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f30ae4f73e2aa7249ff84db07866a8 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a98f30ae4f73e2aa7249ff84db07866a8">operator/</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:a98f30ae4f73e2aa7249ff84db07866a8 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca8b39aaa1f1f366f9d84cb6fe3ac1ad inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#aca8b39aaa1f1f366f9d84cb6fe3ac1ad">operator&amp;&amp;</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:aca8b39aaa1f1f366f9d84cb6fe3ac1ad inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a25362c49d4d5c2140f9ca6cb8c2da9ba inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#a25362c49d4d5c2140f9ca6cb8c2da9ba">operator==</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:a25362c49d4d5c2140f9ca6cb8c2da9ba inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af48346cf2f0e5c36a6cff9ff5d4f1174 inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#af48346cf2f0e5c36a6cff9ff5d4f1174">operator&lt;</a> (<a class="el" href="classOperand.html">Operand</a> &amp;l)=0</td></tr>
+<tr class="separator:af48346cf2f0e5c36a6cff9ff5d4f1174 inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6c792499b1ad0d6a1ad66b6690879ef inherit pub_methods_classOperand"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classLiteral.html">Literal</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classOperand.html#ae6c792499b1ad0d6a1ad66b6690879ef">operator!</a> ()=0</td></tr>
+<tr class="separator:ae6c792499b1ad0d6a1ad66b6690879ef inherit pub_methods_classOperand"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classExpr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classExpr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classExpr.html">Expr</a></td></tr>
 <tr class="memitem:adc11d766587c2f16db5745a65ba12d04 inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="adc11d766587c2f16db5745a65ba12d04" name="adc11d766587c2f16db5745a65ba12d04"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Expr</b> (std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt; t)</td></tr>
 <tr class="separator:adc11d766587c2f16db5745a65ba12d04 inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab45ccec0c5f9325399b88a258439cd8e inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="ab45ccec0c5f9325399b88a258439cd8e" name="ab45ccec0c5f9325399b88a258439cd8e"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>interpet</b> (void)=0</td></tr>
+<tr class="memitem:aad8863aee5a0a40639c73f4f9459f1b6 inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top"><a id="aad8863aee5a0a40639c73f4f9459f1b6" name="aad8863aee5a0a40639c73f4f9459f1b6"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Expr</b> (const <a class="el" href="structToken.html">Token</a> &amp;t)</td></tr>
+<tr class="separator:aad8863aee5a0a40639c73f4f9459f1b6 inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab45ccec0c5f9325399b88a258439cd8e inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#ab45ccec0c5f9325399b88a258439cd8e">interpet</a> (void)=0</td></tr>
 <tr class="separator:ab45ccec0c5f9325399b88a258439cd8e inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3edae65ed90b0e8fb073232c84b3bc3b inherit pub_methods_classExpr"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">visit</a> (void) const =0</td></tr>
 <tr class="separator:a3edae65ed90b0e8fb073232c84b3bc3b inherit pub_methods_classExpr"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -246,6 +290,273 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 
 </div>
 </div>
+<a id="a24feea5bb3a51d2c520c12a4b76d9fdd" name="a24feea5bb3a51d2c520c12a4b76d9fdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24feea5bb3a51d2c520c12a4b76d9fdd">&#9670;&#160;</a></span>operator!()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator! </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does unary on a literal, extended from the miniPL spec to be defined for both integers and booleans.</p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#ae6c792499b1ad0d6a1ad66b6690879ef">Operand</a>.</p>
+
+</div>
+</div>
+<a id="a44282f7e04c61e1af3e1745ea2b307c4" name="a44282f7e04c61e1af3e1745ea2b307c4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44282f7e04c61e1af3e1745ea2b307c4">&#9670;&#160;</a></span>operator&amp;&amp;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator&amp;&amp; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does logical AND on a literal, only defined for booleans.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#aca8b39aaa1f1f366f9d84cb6fe3ac1ad">Operand</a>.</p>
+
+</div>
+</div>
+<a id="ae9daf4e57b28c67c06f28068742857fe" name="ae9daf4e57b28c67c06f28068742857fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9daf4e57b28c67c06f28068742857fe">&#9670;&#160;</a></span>operator*()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator* </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does multiplication on a literal, only defined for integers.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#a2159af3a354d4731aab12d52c6632472">Operand</a>.</p>
+
+</div>
+</div>
+<a id="a2d6ccf52e88f6d8cce9676e4a9d296ea" name="a2d6ccf52e88f6d8cce9676e4a9d296ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d6ccf52e88f6d8cce9676e4a9d296ea">&#9670;&#160;</a></span>operator+()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator+ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does addition on a literal, defined for integers and strings.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#a8e0c616e29deb3d9fda143bbb3cea43d">Operand</a>.</p>
+
+</div>
+</div>
+<a id="a41b63291f9eeea3854d1897c8079fee5" name="a41b63291f9eeea3854d1897c8079fee5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a41b63291f9eeea3854d1897c8079fee5">&#9670;&#160;</a></span>operator-()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator- </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does subtraction on an <a class="el" href="classOperand.html">Operand</a>, only defined for integers.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#a2b48fded1d61363749c7ed1fbcb9731d">Operand</a>.</p>
+
+</div>
+</div>
+<a id="ac49d7b6b8a1875dcd89c0f2ecdf1ad90" name="ac49d7b6b8a1875dcd89c0f2ecdf1ad90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">&#9670;&#160;</a></span>operator/()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator/ </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does division on a literal, only defined for integers.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#a98f30ae4f73e2aa7249ff84db07866a8">Operand</a>.</p>
+
+</div>
+</div>
+<a id="a726e14a154abc3a2620ad4236619d0b0" name="a726e14a154abc3a2620ad4236619d0b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a726e14a154abc3a2620ad4236619d0b0">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does logical LESS THAN on a literal, defined for any any type.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#af48346cf2f0e5c36a6cff9ff5d4f1174">Operand</a>.</p>
+
+</div>
+</div>
+<a id="a2638db4c0efc54e12845d53db761e200" name="a2638db4c0efc54e12845d53db761e200"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2638db4c0efc54e12845d53db761e200">&#9670;&#160;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classLiteral.html">Literal</a> Unary::operator== </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classOperand.html">Operand</a> &amp;&#160;</td>
+          <td class="paramname"><em>l</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Does logical EQUALS on a literal.</p>
+<dl class="section return"><dt>Returns</dt><dd>The result placed into a <a class="el" href="classLiteral.html">Literal</a> </dd></dl>
+
+<p>Implements <a class="el" href="classOperand.html#a25362c49d4d5c2140f9ca6cb8c2da9ba">Operand</a>.</p>
+
+</div>
+</div>
+<a id="acc442bc64f9d8d8763e03979a51a06ec" name="acc442bc64f9d8d8763e03979a51a06ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc442bc64f9d8d8763e03979a51a06ec">&#9670;&#160;</a></span>truthy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Unary::truthy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Evaluates the expression and checks if it's truthy, all non-zero values and non-empty strings are considered truthy. </p>
+
+<p>Implements <a class="el" href="classOperand.html#ac330a3f9169fd96e034fd887ccdd6b0e">Operand</a>.</p>
+
+</div>
+</div>
 <a id="ae2c452fc180e1eb9d17f3704f930e95d" name="ae2c452fc180e1eb9d17f3704f930e95d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2c452fc180e1eb9d17f3704f930e95d">&#9670;&#160;</a></span>visit()</h2>
 
@@ -281,7 +592,7 @@ std::unique_ptr&lt; <a class="el" href="structToken.html">Token</a> &gt;&#160;</
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Sun Mar 12 2023 22:37:47 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

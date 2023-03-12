@@ -1,0 +1,87 @@
+\hypertarget{classFor}{}\doxysection{For Class Reference}
+\label{classFor}\index{For@{For}}
+
+
+{\ttfamily \#include $<$expr.\+h$>$}
+
+Inheritance diagram for For\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classFor}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classFor_a52424018b16e26f8c13a3ab0bfa78ffe}\label{classFor_a52424018b16e26f8c13a3ab0bfa78ffe}} 
+{\bfseries For} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ variable, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classRange}{Range}} $>$ range, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classStatementList}{Statement\+List}} $>$ statement\+\_\+list)
+\item 
+bool \mbox{\hyperlink{classFor_a3d8cc1283fd82a3fd38f0cf001560d2b}{analyse}} () const override
+\item 
+void \mbox{\hyperlink{classFor_a97576d280f1bce247c4e4bca557d57fc}{interpet}} () override
+\item 
+void \mbox{\hyperlink{classFor_a2f1c4cbca016e55ee1063138a5f746e4}{visit}} (void) const override
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adc11d766587c2f16db5745a65ba12d04}\label{classExpr_adc11d766587c2f16db5745a65ba12d04}} 
+{\bfseries Expr} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ t)
+\item 
+\mbox{\Hypertarget{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}\label{classExpr_aad8863aee5a0a40639c73f4f9459f1b6}} 
+{\bfseries Expr} (const \mbox{\hyperlink{structToken}{Token}} \&t)
+\item 
+virtual void \mbox{\hyperlink{classExpr_ab45ccec0c5f9325399b88a258439cd8e}{interpet}} (void)=0
+\item 
+virtual void \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{visit}} (void) const =0
+\item 
+virtual bool \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{analyse}} () const =0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{classExpr}{Expr}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classExpr_adee5008276da1dc67a0c831b85fb05c0}\label{classExpr_adee5008276da1dc67a0c831b85fb05c0}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structToken}{Token}} $>$ {\bfseries token}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\mbox{\hyperlink{classFor}{For}} loop node in the AST. 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFor_a3d8cc1283fd82a3fd38f0cf001560d2b}\label{classFor_a3d8cc1283fd82a3fd38f0cf001560d2b}} 
+\index{For@{For}!analyse@{analyse}}
+\index{analyse@{analyse}!For@{For}}
+\doxysubsubsection{\texorpdfstring{analyse()}{analyse()}}
+{\footnotesize\ttfamily bool For\+::analyse (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+Does analysis on the current statement. 
+
+Implements \mbox{\hyperlink{classExpr_a06ca8d56bc1a53dd4733fa0d107ccff6}{Expr}}.
+
+\mbox{\Hypertarget{classFor_a97576d280f1bce247c4e4bca557d57fc}\label{classFor_a97576d280f1bce247c4e4bca557d57fc}} 
+\index{For@{For}!interpet@{interpet}}
+\index{interpet@{interpet}!For@{For}}
+\doxysubsubsection{\texorpdfstring{interpet()}{interpet()}}
+{\footnotesize\ttfamily void For\+::interpet (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classExpr}{Expr}}.
+
+\mbox{\Hypertarget{classFor_a2f1c4cbca016e55ee1063138a5f746e4}\label{classFor_a2f1c4cbca016e55ee1063138a5f746e4}} 
+\index{For@{For}!visit@{visit}}
+\index{visit@{visit}!For@{For}}
+\doxysubsubsection{\texorpdfstring{visit()}{visit()}}
+{\footnotesize\ttfamily void For\+::visit (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+\mbox{\hyperlink{classPrint}{Print}} the AST prettily 
+
+Implements \mbox{\hyperlink{classExpr_a3edae65ed90b0e8fb073232c84b3bc3b}{Expr}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+expr.\+h\end{DoxyCompactItemize}
