@@ -14,7 +14,7 @@ before running `meson`.
 
 @section sec2 Brief introduction to the minipascal interpreter
 
-The project interpreter is quite small consisting of ~1000 lines, and each
+The project interpreter is quite small consisting of ~2000 lines, and each
 phase is split into it's respective files, parsing can be found in
 parser.{h,cpp} while the lexer is in lexer.{h,cpp} etc.
 
@@ -26,15 +26,109 @@ in expr.h, recursive descent is used to build the tree.
 
 @section sec3 Lexing
 Lexing is implemented in a naive way, simply a bunch of if statements grouped
-together when encountering a token.
+together when encountering a token. Supports most control characters; octal,
+hexadecimal and unicode code points are not currently supported.
 
 @section sec4 Parsing
-
+Parsing consists of a top-down parser (LL1 where convenient, peek ahed a bit),
+it does not create a parse tree, instead creates an AST directly. You may view
+the structure of the AST in UML diagrams in relevant chapters below. @see Expr
 
 @section sec5 Semantical analysis
 Currently the only semantical analysis done is initialization of variables and
 type checking. Since minipascal is globally scoped, no scope checking is done.
 
-@section sec6 Hours
+@section errors Error handling
+Error handling is implemented to make it exit if it encounters a fatal error
+like missing tokens such as do or end. I did not have enough time to implement
+proper error handling. Future work would consist of adding an error type which
+has ways to handle such errors. %For example skipping tokens until a valid one
+is encountered and getting a new statement from there.
+
+@section testing Testing
+I was not proficient in automatic testing from earlier and I did not have time
+to learn how to set everything up so all testing has been done manually. Future
+work would consist of likely adding this next.
+
+I've used a file which contained all the different constructs of the language.
+It can be found below:
+
+    var x: int := 10/5;
+    var y: int;
+
+    print y;
+    y := 123;
+    print y;
+    var mybool: bool := !0;
+    print "foo" + " bar";
+    print x;
+    print mybool;
+
+    if !(0) do // foo bar
+        print "!(0 is true)";
+        if x do
+            print "truthy!\n";
+        end
+    end
+
+    for x in x..(1 + 20 / 4) do
+        print x;
+    end
+
+@section hours Hours
+
+@section sec9 Required info
+1.
+A dot is considered any character in this context. An unescaped '*' is zero or
+more, an unescaped '+' is one or more, a pipe '|' is or.
+
+    token = [A-z]+[A-z0-9]*
+    digit = [0-9]+
+    string = ".*"
+    symbols = [!\+-\*/<=&] | :=
+    language_tokens = (token | digit | symbols | string)
+
+2.
+`e` is considered as epsilon in this context.
+
+    program     -> stmt_list $$
+    stmt_list   -> stmt stmt_list | e
+    stmt        -> var id : type := expr;
+                | id := expr;
+                | print expr
+                | read id
+                | for id in expr..expr do stmt_list end for
+                | if expr do stmt_list do stmt_list if_tail
+
+    if_tail     -> else stmt_list | end
+
+    type        -> int | string | bool
+
+    expr        -> term term_tail
+    term_tail   -> add_op term term_tail | e
+    term        -> factor factor_tail
+    factor_tail -> mult_op factor factor_tail | e
+    factor      -> ( expr ) | id | digit
+    add_op      -> + | -
+    mult_op     -> * | /
+3.
+See children of Expr, TL;DR, tree looks like this:
+\code{}
+        StatementList
+    Expr        StatementList
+            Expr        StatementList
+
+\endcode
+`Expr` can be any statement (a little confusing naming convention, it was named
+such at first and now it's a bit too much work to rename it), a binary
+operation, print etc. StatementList is just a tree structure to contain all of
+the different statements.
+
+4.
+See \ref errors
+
+5.
+See \ref hours
+
 
 */
