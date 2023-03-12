@@ -723,7 +723,7 @@ class Range : public Expr {
 
     public:
         Range(std::unique_ptr<Operand> start, std::unique_ptr<Operand> end) :
-            Expr(), start{std::move(start)}, end{std::move(end)}, current{0} {}
+            Expr(), start{std::move(start)}, end{std::move(end)}, current{0} { }
 
         /**
          * Gets the next number for the range, needs to be manually checked
@@ -737,7 +737,7 @@ class Range : public Expr {
          * Checks if all numbers from the range is consumed.
          */
         bool is_done() {
-            return !(current <= (std::get<int>(end->get_value()->value)+1));
+            return !(current <= (std::get<int>(end->get_value()->value)));
         }
 
         bool analyse() const override {
@@ -749,7 +749,17 @@ class Range : public Expr {
            return false;
         }
 
-        void interpet() override {}
+        /**
+         * Must be called before loop is executed, initializes val for the
+         * loop, cannot be done in analyse, since it's a constant function and
+         * in the constructor the symbol table is not initialized yet.
+         */
+        void interpet() override {
+            auto val = std::get_if<int>(&this->start->get_value()->value);
+            if (val) {
+                current = *val;
+            }
+        }
         void visit() const override {
             start->visit();
             std::cout << "..";
@@ -775,9 +785,10 @@ class For : public Expr {
         }
 
         void interpet() override {
+            range->interpet();
             while(!range->is_done()) {
-                loop->interpet();
                 var->set_value(range->get_next());
+                loop->interpet();
             }
         }
 
