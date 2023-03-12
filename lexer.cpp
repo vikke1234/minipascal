@@ -116,7 +116,7 @@ char Lexer::get_char(void) {
 
         comment_type = is_comment();
 
-        if (comment_type) {
+        if (comment_type == CPP_COMMENT || comment_type == C_COMMENT) {
             skip_comment(comment_type);
             comment_type = NONE;
         }
@@ -142,6 +142,7 @@ void Lexer::skip_comment(Lexer::comment_type type) {
         }
 
         if (is_comment() == C_COMMENT_END && type == C_COMMENT) {
+            index += 2;
             return;
         }
         get_char();
@@ -160,11 +161,11 @@ void Lexer::skip_wspace(void) {
 enum Lexer::comment_type Lexer::is_comment(void) {
     char next_char = peek_char();
     if(current_char == '/' && next_char == '*') {
-        return CPP_COMMENT;
+        return C_COMMENT;
     }
 
     if (current_char == '/' && next_char == '/') {
-        return C_COMMENT;
+        return CPP_COMMENT;
     }
 
     if (current_char == '*' && next_char == '/') {
@@ -228,7 +229,7 @@ enum token_type Lexer::get_token_type(std::string current) {
     } else if (current == ".") {
         type = peek_char() == '.' ? RANGE : UNKNOWN;
     } else {
-        if (reserved.find(current) == reserved.end()) {
+        if (!is_reserved(current)) {
             return IDENTIFIER;
         } else {
             type = reserved.at(current);
