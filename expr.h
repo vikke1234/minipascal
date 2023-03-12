@@ -771,6 +771,10 @@ public:
                 }
                 break;
         }
+        if (!std::cin) {
+            std::cout << "Error: input was of the wrong type, exitting...\n";
+            std::exit(1);
+        }
     }
 
     void visit(void) const override {
