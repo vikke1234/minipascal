@@ -48,6 +48,7 @@ std::unique_ptr<Operand> Parser::term_tail(std::unique_ptr<Operand> expr) {
         case token_type::SUBTRACTION:
             {
                 lexer.get_token();
+                std::cout << "token on line " << symbol->line;
                 std::unique_ptr<Bop> bop = std::make_unique<Bop>(std::move(symbol), std::move(expr), terminal());
 
                 return term_tail(std::move(bop));
@@ -88,6 +89,7 @@ std::unique_ptr<Operand> Parser::factor() {
 
         default:
             std::cout << "Parse error in factoring\n";
+            std::exit(1);
             break;
     }
     return nullptr;
@@ -150,6 +152,7 @@ std::unique_ptr<Operand> Parser::terminal() {
             }
 
         default:
+            std::cout << "Parse error getting terminal";
             break;
     }
     return nullptr;

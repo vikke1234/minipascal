@@ -520,7 +520,12 @@ class Bop : public Operand {
          * @param right - the right side of the operation.
          */
         Bop(std::unique_ptr<Token> tok, std::unique_ptr<Operand> left, std::unique_ptr<Operand> right)
-            : Operand(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}
+            : Operand(std::move(tok)), left{std::move(left)}, right{std::move(right)} {
+                if (left == nullptr || right == nullptr) {
+                    std::cout << "Missing operand " << token->line;
+                    std::exit(1);
+                }
+            }
 
 
         bool analyse() const override {
