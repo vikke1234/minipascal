@@ -195,8 +195,12 @@ public:
     }
 
     Literal operator=(std::variant<int, std::string, bool> value) {
-        this->value = value;
-        return *this;
+        if (this->value.index() == value.index()) {
+            this->value = value;
+            return *this;
+        }
+        std::cout << "Conflicting types in assignment";
+        std::exit(1);
     }
 
     Literal operator-(Operand &l) override {
