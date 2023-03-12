@@ -58,6 +58,8 @@ std::unique_ptr<Token> Lexer::get_token(bool consume) {
     enum token_type type;
 
     char c = get_char();
+    // This is done here because if done within get_char it does not know the
+    // context which becomes an issue
     if (std::isspace(c)) {
         skip_wspace();
         c = get_char();
@@ -109,6 +111,7 @@ char Lexer::get_char(void) {
         if(current_char == '\n') {
             line++;
         }
+
 
         comment_type = is_comment();
 

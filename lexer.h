@@ -35,7 +35,7 @@ class Lexer {
 public:
     Lexer(std::string_view filename) :
         content(read_file(filename)), length(content.length()), index(0ULL),
-        line(1ULL), current_char(EOF), previous{"", 0, NO_SYMBOLS}, reserved{
+        line(0ULL), current_char(EOF), previous{"", 0, NO_SYMBOLS}, reserved{
                 {"!", NOT},  {"+", ADDITION}, {"-", SUBTRACTION},
                 {"&", AND}, {"*", MULTIPLICATION}, {"/", DIVISION}, {"<", LT}, {"=", EQ},
                 {":=", ASSIGN}, {"\"", STRING}, {"(", LPARENTHESES},
