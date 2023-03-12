@@ -21,6 +21,11 @@ std::string Lexer::parse(identifier f) {
         char c = peek_char();
 
         if (!f(c) || c == EOF) {
+            if(!is_reserved(std::string(1, c)) && (c != ':' && c != ' ' && c != '\n' && c != '.')) {
+                std::cout << "Error unexpected token '" << c << "' on line " << line << "\n";
+                std::exit(1);
+            }
+
             break;
         }
         word.push_back(get_char());
@@ -184,7 +189,6 @@ char Lexer::interpret_escape(char c) {
     }
     return -1;
 }
-
 
 std::string Lexer::get_string() {
     std::string str;
