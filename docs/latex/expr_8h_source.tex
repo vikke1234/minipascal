@@ -432,394 +432,399 @@
 \DoxyCodeLine{00515\ }
 \DoxyCodeLine{00516\ \ \ \ \ \textcolor{keyword}{public}:}
 \DoxyCodeLine{00522\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classBop_a9b5803caf0398a42bb46e59416009408}{Bop}}(std::unique\_ptr<Token>\ tok,\ std::unique\_ptr<Operand>\ left,\ std::unique\_ptr<Operand>\ right)}
-\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classOperand}{Operand}}(std::move(tok)),\ left\{std::move(left)\},\ right\{std::move(right)\}\ \{\}}
-\DoxyCodeLine{00524\ }
-\DoxyCodeLine{00525\ }
-\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBop_ac2504be10088640871bb1091f2b8abdf}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_error\ =\ left-\/>analyse();}
-\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ has\_error\ |=\ right-\/>analyse();}
+\DoxyCodeLine{00523\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classOperand}{Operand}}(std::move(tok)),\ left\{std::move(left)\},\ right\{std::move(right)\}\ \{}
+\DoxyCodeLine{00524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left\ ==\ \textcolor{keyword}{nullptr}\ ||\ right\ ==\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Missing\ operand\ "{}}\ <<\ token-\/>line;}
+\DoxyCodeLine{00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00528\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00529\ }
-\DoxyCodeLine{00530\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(has\_error)\ \{}
-\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Semantical\ error\ in\ bop\(\backslash\)n"{}};}
-\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00533\ }
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00531\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBop_ac2504be10088640871bb1091f2b8abdf}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00532\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ has\_error\ =\ left-\/>analyse();}
+\DoxyCodeLine{00533\ \ \ \ \ \ \ \ \ \ \ \ \ has\_error\ |=\ right-\/>analyse();}
 \DoxyCodeLine{00534\ }
-\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ has\_error;}
-\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00537\ }
-\DoxyCodeLine{00542\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ *\mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00543\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (evaluated)\ \{}
-\DoxyCodeLine{00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ cached\ value}}
-\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ evaluated.get();}
-\DoxyCodeLine{00546\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00547\ }
-\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(token-\/>type)\ \{}
-\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::ADDITION:}
-\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ +\ *right-\/>get\_value());}
-\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00535\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(has\_error)\ \{}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Semantical\ error\ in\ bop\(\backslash\)n"{}};}
+\DoxyCodeLine{00537\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00538\ }
+\DoxyCodeLine{00539\ }
+\DoxyCodeLine{00540\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ has\_error;}
+\DoxyCodeLine{00541\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00542\ }
+\DoxyCodeLine{00547\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ *\mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00548\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (evaluated)\ \{}
+\DoxyCodeLine{00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ use\ cached\ value}}
+\DoxyCodeLine{00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ evaluated.get();}
+\DoxyCodeLine{00551\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00552\ }
-\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::SUBTRACTION:}
-\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ -\/\ *right-\/>get\_value());}
-\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00556\ }
-\DoxyCodeLine{00557\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::MULTIPLICATION:}
-\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ *\ *right-\/>get\_value());}
-\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00560\ }
-\DoxyCodeLine{00561\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::DIVISION:}
-\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ /\ *right-\/>get\_value());}
-\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00564\ }
-\DoxyCodeLine{00565\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::LT:}
-\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ <\ *right-\/>\mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}());}
-\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00568\ }
-\DoxyCodeLine{00569\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::EQ:}
-\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ ==\ *right-\/>get\_value());}
-\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00572\ }
-\DoxyCodeLine{00573\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::AND:}
-\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ \&\&\ *right-\/>get\_value());}
-\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00576\ }
-\DoxyCodeLine{00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::ASSIGN:}
-\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ var\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classVar}{Var}}\&\textcolor{keyword}{>}(*left);}
-\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var.set\_value(right-\/>get\_value());}
-\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\ ("{}}\ <<\ token-\/>token\ <<\ \textcolor{stringliteral}{"{})"{}};}
-\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ evaluated.get();}
-\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00589\ }
-\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBop_a2203d7ec450d1eeaa391371cc300785e}{truthy}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}()-\/>\mbox{\hyperlink{classLiteral_a8c2620183928974b79f0a77c51360e56}{truthy}}();}
-\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00593\ }
-\DoxyCodeLine{00594\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classBop_a7ba76a51676d066a2a183a1594a96111}{get\_type}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ r\ =\ right-\/>get\_type();}
-\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ l\ =\ left-\/>\mbox{\hyperlink{classLiteral_a510ac8f088dfdad1bd21b9e690853890}{get\_type}}();}
-\DoxyCodeLine{00597\ }
-\DoxyCodeLine{00598\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (l\ !=\ r)\ \{}
-\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error:\ incompatible\ types\ line\ "{}}\ <<\ token-\/>line\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
-\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00602\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (token-\/>type\ ==\ token\_type::EQ\ ||\ token-\/>type\ ==\ token\_type::LT)\{}
-\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
-\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ l;}
-\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00608\ }
-\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}();}
-\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00612\ }
-\DoxyCodeLine{00613\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBop_a7b681ba1a899fb6fe717aa302304d29a}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ \ }\{}
-\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ token-\/>token\ <<\ \textcolor{stringliteral}{"{}\ (\ "{}};}
-\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ left-\/>visit();}
-\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right)}
-\DoxyCodeLine{00617\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ right-\/>visit();}
-\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
-\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00620\ }
-\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_af27eb426e70f7fc6220b5edb46b66ead}{operator+}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00553\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(token-\/>type)\ \{}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::ADDITION:}
+\DoxyCodeLine{00555\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ +\ *right-\/>get\_value());}
+\DoxyCodeLine{00556\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00557\ }
+\DoxyCodeLine{00558\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::SUBTRACTION:}
+\DoxyCodeLine{00559\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ -\/\ *right-\/>get\_value());}
+\DoxyCodeLine{00560\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00561\ }
+\DoxyCodeLine{00562\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::MULTIPLICATION:}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ *\ *right-\/>get\_value());}
+\DoxyCodeLine{00564\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00566\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::DIVISION:}
+\DoxyCodeLine{00567\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ /\ *right-\/>get\_value());}
+\DoxyCodeLine{00568\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00569\ }
+\DoxyCodeLine{00570\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::LT:}
+\DoxyCodeLine{00571\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ <\ *right-\/>\mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}());}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00574\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::EQ:}
+\DoxyCodeLine{00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ ==\ *right-\/>get\_value());}
+\DoxyCodeLine{00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00577\ }
+\DoxyCodeLine{00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::AND:}
+\DoxyCodeLine{00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(*left\ \&\&\ *right-\/>get\_value());}
+\DoxyCodeLine{00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00581\ }
+\DoxyCodeLine{00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ token\_type::ASSIGN:}
+\DoxyCodeLine{00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00584\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ var\ =\ \textcolor{keyword}{dynamic\_cast<}\mbox{\hyperlink{classVar}{Var}}\&\textcolor{keyword}{>}(*left);}
+\DoxyCodeLine{00585\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var.set\_value(right-\/>get\_value());}
+\DoxyCodeLine{00586\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00587\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00588\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00589\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\ ("{}}\ <<\ token-\/>token\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00591\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00592\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ evaluated.get();}
+\DoxyCodeLine{00593\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00594\ }
+\DoxyCodeLine{00595\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classBop_a2203d7ec450d1eeaa391371cc300785e}{truthy}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00596\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}()-\/>\mbox{\hyperlink{classLiteral_a8c2620183928974b79f0a77c51360e56}{truthy}}();}
+\DoxyCodeLine{00597\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00598\ }
+\DoxyCodeLine{00599\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classBop_a7ba76a51676d066a2a183a1594a96111}{get\_type}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00600\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ r\ =\ right-\/>get\_type();}
+\DoxyCodeLine{00601\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ l\ =\ left-\/>\mbox{\hyperlink{classLiteral_a510ac8f088dfdad1bd21b9e690853890}{get\_type}}();}
+\DoxyCodeLine{00602\ }
+\DoxyCodeLine{00603\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (l\ !=\ r)\ \{}
+\DoxyCodeLine{00604\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error:\ incompatible\ types\ line\ "{}}\ <<\ token-\/>line\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00605\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00606\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00607\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (token-\/>type\ ==\ token\_type::EQ\ ||\ token-\/>type\ ==\ token\_type::LT)\{}
+\DoxyCodeLine{00608\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 1;}
+\DoxyCodeLine{00609\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00610\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00611\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ l;}
+\DoxyCodeLine{00612\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00613\ }
+\DoxyCodeLine{00614\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00615\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>\mbox{\hyperlink{classBop_a1e8d0a672370bfbb6e58a49fdd4e0ed8}{get\_value}}();}
+\DoxyCodeLine{00616\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00617\ }
+\DoxyCodeLine{00618\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classBop_a7b681ba1a899fb6fe717aa302304d29a}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ \ }\{}
+\DoxyCodeLine{00619\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ token-\/>token\ <<\ \textcolor{stringliteral}{"{}\ (\ "{}};}
+\DoxyCodeLine{00620\ \ \ \ \ \ \ \ \ \ \ \ \ left-\/>visit();}
+\DoxyCodeLine{00621\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right)}
+\DoxyCodeLine{00622\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ right-\/>visit();}
+\DoxyCodeLine{00623\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
 \DoxyCodeLine{00624\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00625\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a2cfcb8455e5e23de2bc7f0bd4d692f04}{operator-\/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a142f1a98669dd6ad6bfe47c78bbb48b7}{operator*}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_ace84769a052a00b372f5479b2b812645}{operator/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a8e43570b50f38fa9cfaf16de496d2efa}{operator\&\&}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_ae5eb981175bd47348ecc4b243a7e77bd}{operator==}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a69191d6fd12dc684c51f06ae66d41a60}{operator<}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a4bbb7a9c3ea494d31bcbe9ba3b60c423}{operator!}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00653\ \ \ \ \ \textcolor{keyword}{protected}:}
-\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_boolean()\ \{}
-\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ token-\/>type\ ==\ token\_type::LT\ ||\ token-\/>type\ ==\ token\_type::EQ;}
-\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00657\ \};}
-\DoxyCodeLine{00658\ }
-\DoxyCodeLine{00659\ }
-\DoxyCodeLine{00660\ }
-\DoxyCodeLine{00664\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIf}{If}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
-\DoxyCodeLine{00665\ \ \ \ \ std::unique\_ptr<Operand>\ condition;}
-\DoxyCodeLine{00666\ \ \ \ \ std::unique\_ptr<StatementList>\ truthy;}
-\DoxyCodeLine{00667\ \ \ \ \ std::unique\_ptr<StatementList>\ falsy;}
-\DoxyCodeLine{00668\ }
-\DoxyCodeLine{00669\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00678\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIf_ab30a523e8480d20d34a65656f5dc0b67}{If}}(std::unique\_ptr<Operand>\ condition,\ std::unique\_ptr<StatementList>\ truthy,}
-\DoxyCodeLine{00679\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ falsy)\ :}
-\DoxyCodeLine{00680\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classExpr}{Expr}}(),\ condition\{std::move(condition)\},\ truthy\{std::move(truthy)\},}
-\DoxyCodeLine{00681\ \ \ \ \ \ \ \ \ \ \ \ \ falsy\{std::move(falsy)\}\ \{\}}
-\DoxyCodeLine{00682\ }
-\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classIf_a055769dab43bfd2f516b4b08ee97575d}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ error\ =\ condition-\/>analyse()\ ||\ truthy-\/>analyse();}
-\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (falsy\ !=\ \textcolor{keyword}{nullptr})\ \{}
-\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\ |=\ falsy-\/>analyse();}
-\DoxyCodeLine{00687\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ error;}
-\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00690\ }
-\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ interpet()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(condition-\/>truthy())\ \{}
-\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ truthy-\/>interpet();}
-\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
-\DoxyCodeLine{00695\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (falsy\ !=\ \textcolor{keyword}{nullptr})\ \{}
-\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ falsy-\/>interpet();}
-\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00700\ }
-\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIf_a1440af01a2ab6c6d0321e6ec76887704}{visit}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ IF\ "{}};}
-\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ condition-\/>visit();}
-\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}("{}};}
-\DoxyCodeLine{00705\ \ \ \ \ \ \ \ \ \ \ \ \ truthy-\/>visit();}
-\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
-\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (falsy)\ \{}
-\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ ELSE\ ("{}};}
-\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ falsy-\/>visit();}
-\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
-\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
-\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00714\ \};}
-\DoxyCodeLine{00715\ }
-\DoxyCodeLine{00719\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRange}{Range}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
-\DoxyCodeLine{00720\ \ \ \ \ std::unique\_ptr<Operand>\ start;}
-\DoxyCodeLine{00721\ \ \ \ \ std::unique\_ptr<Operand>\ end;}
-\DoxyCodeLine{00722\ \ \ \ \ \textcolor{keywordtype}{int}\ current;}
-\DoxyCodeLine{00723\ }
-\DoxyCodeLine{00724\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00725\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRange}{Range}}(std::unique\_ptr<Operand>\ start,\ std::unique\_ptr<Operand>\ end)\ :}
-\DoxyCodeLine{00726\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classExpr}{Expr}}(),\ start\{std::move(start)\},\ end\{std::move(end)\},\ current\{0\}\ \{\ \}}
-\DoxyCodeLine{00727\ }
-\DoxyCodeLine{00732\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRange_a40da89d7d2c3f92ca379a80cd54f8ed5}{get\_next}}()\ \{}
-\DoxyCodeLine{00733\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current++;}
-\DoxyCodeLine{00734\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00735\ }
-\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRange_a5e34e2b7a1deccff96d2d57950d137e4}{is\_done}}()\ \{}
-\DoxyCodeLine{00740\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !(current\ <=\ (std::get<int>(end-\/>get\_value()-\/>value)));}
-\DoxyCodeLine{00741\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00742\ }
-\DoxyCodeLine{00743\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRange_a4d7e581038a13d50c74ccb07a9c2aee1}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ error\ =\ start-\/>get\_type()\ ||\ end-\/>get\_type();}
-\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)\ \{}
-\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error\ range\ contains\ non\ integers\(\backslash\)n"{}};}
-\DoxyCodeLine{00747\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00751\ }
-\DoxyCodeLine{00757\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRange_a102920685f9fce3de95aa539d763702d}{interpet}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00758\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ val\ =\ std::get\_if<int>(\&this-\/>start-\/>get\_value()-\/>value);}
-\DoxyCodeLine{00759\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (val)\ \{}
-\DoxyCodeLine{00760\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ *val;}
-\DoxyCodeLine{00761\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00763\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRange_a8c426ef5b0d3b9825f1077c2f6f85db9}{visit}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ start-\/>visit();}
-\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}.."{}};}
-\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ end-\/>visit();}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00626\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_af27eb426e70f7fc6220b5edb46b66ead}{operator+}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00627\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00628\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00629\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00630\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a2cfcb8455e5e23de2bc7f0bd4d692f04}{operator-\/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00631\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00632\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00633\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00634\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a142f1a98669dd6ad6bfe47c78bbb48b7}{operator*}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00635\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00636\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00637\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00638\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_ace84769a052a00b372f5479b2b812645}{operator/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00639\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00640\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00641\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00642\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a8e43570b50f38fa9cfaf16de496d2efa}{operator\&\&}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00643\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00644\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00645\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00646\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_ae5eb981175bd47348ecc4b243a7e77bd}{operator==}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00647\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00648\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00649\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00650\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a69191d6fd12dc684c51f06ae66d41a60}{operator<}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00651\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00652\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00653\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00654\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classBop_a4bbb7a9c3ea494d31bcbe9ba3b60c423}{operator!}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00655\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00656\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00657\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00658\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00659\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ is\_boolean()\ \{}
+\DoxyCodeLine{00660\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ token-\/>type\ ==\ token\_type::LT\ ||\ token-\/>type\ ==\ token\_type::EQ;}
+\DoxyCodeLine{00661\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00662\ \};}
+\DoxyCodeLine{00663\ }
+\DoxyCodeLine{00664\ }
+\DoxyCodeLine{00665\ }
+\DoxyCodeLine{00669\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classIf}{If}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
+\DoxyCodeLine{00670\ \ \ \ \ std::unique\_ptr<Operand>\ condition;}
+\DoxyCodeLine{00671\ \ \ \ \ std::unique\_ptr<StatementList>\ truthy;}
+\DoxyCodeLine{00672\ \ \ \ \ std::unique\_ptr<StatementList>\ falsy;}
+\DoxyCodeLine{00673\ }
+\DoxyCodeLine{00674\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00683\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classIf_ab30a523e8480d20d34a65656f5dc0b67}{If}}(std::unique\_ptr<Operand>\ condition,\ std::unique\_ptr<StatementList>\ truthy,}
+\DoxyCodeLine{00684\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ falsy)\ :}
+\DoxyCodeLine{00685\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classExpr}{Expr}}(),\ condition\{std::move(condition)\},\ truthy\{std::move(truthy)\},}
+\DoxyCodeLine{00686\ \ \ \ \ \ \ \ \ \ \ \ \ falsy\{std::move(falsy)\}\ \{\}}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00688\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classIf_a055769dab43bfd2f516b4b08ee97575d}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00689\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ error\ =\ condition-\/>analyse()\ ||\ truthy-\/>analyse();}
+\DoxyCodeLine{00690\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (falsy\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00691\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ error\ |=\ falsy-\/>analyse();}
+\DoxyCodeLine{00692\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00693\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ error;}
+\DoxyCodeLine{00694\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00695\ }
+\DoxyCodeLine{00696\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ interpet()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00697\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(condition-\/>truthy())\ \{}
+\DoxyCodeLine{00698\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ truthy-\/>interpet();}
+\DoxyCodeLine{00699\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{else}\ \{}
+\DoxyCodeLine{00700\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (falsy\ !=\ \textcolor{keyword}{nullptr})\ \{}
+\DoxyCodeLine{00701\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ falsy-\/>interpet();}
+\DoxyCodeLine{00702\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00703\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00704\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00705\ }
+\DoxyCodeLine{00706\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classIf_a1440af01a2ab6c6d0321e6ec76887704}{visit}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00707\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ IF\ "{}};}
+\DoxyCodeLine{00708\ \ \ \ \ \ \ \ \ \ \ \ \ condition-\/>visit();}
+\DoxyCodeLine{00709\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}("{}};}
+\DoxyCodeLine{00710\ \ \ \ \ \ \ \ \ \ \ \ \ truthy-\/>visit();}
+\DoxyCodeLine{00711\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00712\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (falsy)\ \{}
+\DoxyCodeLine{00713\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ ELSE\ ("{}};}
+\DoxyCodeLine{00714\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ falsy-\/>visit();}
+\DoxyCodeLine{00715\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00716\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00717\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00718\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00719\ \};}
+\DoxyCodeLine{00720\ }
+\DoxyCodeLine{00724\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRange}{Range}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
+\DoxyCodeLine{00725\ \ \ \ \ std::unique\_ptr<Operand>\ start;}
+\DoxyCodeLine{00726\ \ \ \ \ std::unique\_ptr<Operand>\ end;}
+\DoxyCodeLine{00727\ \ \ \ \ \textcolor{keywordtype}{int}\ current;}
+\DoxyCodeLine{00728\ }
+\DoxyCodeLine{00729\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00730\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classRange}{Range}}(std::unique\_ptr<Operand>\ start,\ std::unique\_ptr<Operand>\ end)\ :}
+\DoxyCodeLine{00731\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classExpr}{Expr}}(),\ start\{std::move(start)\},\ end\{std::move(end)\},\ current\{0\}\ \{\ \}}
+\DoxyCodeLine{00732\ }
+\DoxyCodeLine{00737\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classRange_a40da89d7d2c3f92ca379a80cd54f8ed5}{get\_next}}()\ \{}
+\DoxyCodeLine{00738\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ current++;}
+\DoxyCodeLine{00739\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00740\ }
+\DoxyCodeLine{00744\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRange_a5e34e2b7a1deccff96d2d57950d137e4}{is\_done}}()\ \{}
+\DoxyCodeLine{00745\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !(current\ <=\ (std::get<int>(end-\/>get\_value()-\/>value)));}
+\DoxyCodeLine{00746\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00747\ }
+\DoxyCodeLine{00748\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRange_a4d7e581038a13d50c74ccb07a9c2aee1}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00749\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ error\ =\ start-\/>get\_type()\ ||\ end-\/>get\_type();}
+\DoxyCodeLine{00750\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (error)\ \{}
+\DoxyCodeLine{00751\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error\ range\ contains\ non\ integers\(\backslash\)n"{}};}
+\DoxyCodeLine{00752\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00753\ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00754\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00755\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00762\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRange_a102920685f9fce3de95aa539d763702d}{interpet}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00763\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ val\ =\ std::get\_if<int>(\&this-\/>start-\/>get\_value()-\/>value);}
+\DoxyCodeLine{00764\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (val)\ \{}
+\DoxyCodeLine{00765\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ current\ =\ *val;}
+\DoxyCodeLine{00766\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00767\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00768\ \};}
-\DoxyCodeLine{00769\ }
-\DoxyCodeLine{00773\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFor}{For}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
-\DoxyCodeLine{00774\ \ \ \ \ std::unique\_ptr<Var>\ var;}
-\DoxyCodeLine{00775\ \ \ \ \ std::unique\_ptr<Range>\ range;}
-\DoxyCodeLine{00776\ \ \ \ \ std::unique\_ptr<StatementList>\ loop;}
-\DoxyCodeLine{00777\ }
-\DoxyCodeLine{00778\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00779\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classFor}{For}}(std::unique\_ptr<Token>\ variable,\ std::unique\_ptr<Range>\ range,}
-\DoxyCodeLine{00780\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ statement\_list)\ :\ \mbox{\hyperlink{classExpr}{Expr}}(),\ var\{std::make\_unique<Var>(std::move(variable))\},}
-\DoxyCodeLine{00781\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ range\{std::move(range)\},\ loop\{std::move(statement\_list)\}\ \{\}}
+\DoxyCodeLine{00768\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRange_a8c426ef5b0d3b9825f1077c2f6f85db9}{visit}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00769\ \ \ \ \ \ \ \ \ \ \ \ \ start-\/>visit();}
+\DoxyCodeLine{00770\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}.."{}};}
+\DoxyCodeLine{00771\ \ \ \ \ \ \ \ \ \ \ \ \ end-\/>visit();}
+\DoxyCodeLine{00772\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00773\ \};}
+\DoxyCodeLine{00774\ }
+\DoxyCodeLine{00778\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFor}{For}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
+\DoxyCodeLine{00779\ \ \ \ \ std::unique\_ptr<Var>\ var;}
+\DoxyCodeLine{00780\ \ \ \ \ std::unique\_ptr<Range>\ range;}
+\DoxyCodeLine{00781\ \ \ \ \ std::unique\_ptr<StatementList>\ loop;}
 \DoxyCodeLine{00782\ }
-\DoxyCodeLine{00783\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFor_a3d8cc1283fd82a3fd38f0cf001560d2b}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ var-\/>analyse()\ ||\ loop-\/>analyse()\ ||\ range-\/>analyse();}
-\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00786\ }
-\DoxyCodeLine{00787\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ interpet()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \ \ \ \ range-\/>interpet();}
-\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(!range-\/>is\_done())\ \{}
-\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(range-\/>get\_next());}
-\DoxyCodeLine{00791\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loop-\/>interpet();}
-\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00794\ }
-\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFor_a2f1c4cbca016e55ee1063138a5f746e4}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(FOR\ "{}};}
-\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>visit();}
-\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \ \ \ \ range-\/>visit();}
-\DoxyCodeLine{00799\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (\ "{}};}
-\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \ \ \ \ loop-\/>visit();}
-\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
-\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00803\ \};}
-\DoxyCodeLine{00804\ }
-\DoxyCodeLine{00808\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPrint}{Print}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
-\DoxyCodeLine{00809\ \ \ \ \ std::unique\_ptr<Operand>\ expr;}
-\DoxyCodeLine{00810\ }
-\DoxyCodeLine{00811\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00812\ \ \ \ \ \mbox{\hyperlink{classPrint}{Print}}(std::unique\_ptr<Operand>\ expr)\ :\ \mbox{\hyperlink{classExpr}{Expr}}(),\ expr\{std::move(expr)\}\ \{\}}
-\DoxyCodeLine{00813\ }
-\DoxyCodeLine{00814\ \ \ \ \ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00815\ \ \ \ \ \ \ \ \ std::visit([](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&x)\ \{\ std::cout\ <<\ x\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};\ \},\ expr-\/>get\_value()-\/>value);}
-\DoxyCodeLine{00816\ \ \ \ \ \}}
-\DoxyCodeLine{00817\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrint_a009b71e6bb9813706aa9aa01b157cb0c}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00818\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ PRINT\ "{}};}
-\DoxyCodeLine{00819\ \ \ \ \ \ \ \ \ expr-\/>visit();}
-\DoxyCodeLine{00820\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00783\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00784\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classFor}{For}}(std::unique\_ptr<Token>\ variable,\ std::unique\_ptr<Range>\ range,}
+\DoxyCodeLine{00785\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<StatementList>\ statement\_list)\ :\ \mbox{\hyperlink{classExpr}{Expr}}(),\ var\{std::make\_unique<Var>(std::move(variable))\},}
+\DoxyCodeLine{00786\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ range\{std::move(range)\},\ loop\{std::move(statement\_list)\}\ \{\}}
+\DoxyCodeLine{00787\ }
+\DoxyCodeLine{00788\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classFor_a3d8cc1283fd82a3fd38f0cf001560d2b}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00789\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ var-\/>analyse()\ ||\ loop-\/>analyse()\ ||\ range-\/>analyse();}
+\DoxyCodeLine{00790\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00792\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ interpet()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00793\ \ \ \ \ \ \ \ \ \ \ \ \ range-\/>interpet();}
+\DoxyCodeLine{00794\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}(!range-\/>is\_done())\ \{}
+\DoxyCodeLine{00795\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(range-\/>get\_next());}
+\DoxyCodeLine{00796\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ loop-\/>interpet();}
+\DoxyCodeLine{00797\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00798\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00799\ }
+\DoxyCodeLine{00800\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classFor_a2f1c4cbca016e55ee1063138a5f746e4}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00801\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(FOR\ "{}};}
+\DoxyCodeLine{00802\ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>visit();}
+\DoxyCodeLine{00803\ \ \ \ \ \ \ \ \ \ \ \ \ range-\/>visit();}
+\DoxyCodeLine{00804\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ (\ "{}};}
+\DoxyCodeLine{00805\ \ \ \ \ \ \ \ \ \ \ \ \ loop-\/>visit();}
+\DoxyCodeLine{00806\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})"{}};}
+\DoxyCodeLine{00807\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00808\ \};}
+\DoxyCodeLine{00809\ }
+\DoxyCodeLine{00813\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classPrint}{Print}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
+\DoxyCodeLine{00814\ \ \ \ \ std::unique\_ptr<Operand>\ expr;}
+\DoxyCodeLine{00815\ }
+\DoxyCodeLine{00816\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00817\ \ \ \ \ \mbox{\hyperlink{classPrint}{Print}}(std::unique\_ptr<Operand>\ expr)\ :\ \mbox{\hyperlink{classExpr}{Expr}}(),\ expr\{std::move(expr)\}\ \{\}}
+\DoxyCodeLine{00818\ }
+\DoxyCodeLine{00819\ \ \ \ \ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00820\ \ \ \ \ \ \ \ \ std::visit([](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \&x)\ \{\ std::cout\ <<\ x\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};\ \},\ expr-\/>get\_value()-\/>value);}
 \DoxyCodeLine{00821\ \ \ \ \ \}}
-\DoxyCodeLine{00822\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPrint_a9410e69ea37e4991afbb1825be8b1673}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ expr-\/>analyse();\ \}}
-\DoxyCodeLine{00823\ \};}
-\DoxyCodeLine{00824\ }
-\DoxyCodeLine{00828\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRead}{Read}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
-\DoxyCodeLine{00829\ \ \ \ \ std::unique\_ptr<Var>\ var;}
-\DoxyCodeLine{00830\ }
-\DoxyCodeLine{00831\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00832\ \ \ \ \ \mbox{\hyperlink{classRead}{Read}}(std::unique\_ptr<Var>\ op)\ :\ \mbox{\hyperlink{classExpr}{Expr}}(),\ var\{std::move(op)\}\ \{\}}
-\DoxyCodeLine{00833\ }
-\DoxyCodeLine{00834\ \ \ \ \ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00835\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(var-\/>get\_type())\ \{}
-\DoxyCodeLine{00836\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
-\DoxyCodeLine{00837\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00838\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ val;}
-\DoxyCodeLine{00839\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cin\ >>\ val;}
-\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(val);}
-\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
-\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ str;}
-\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cin\ >>\ str;}
-\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(str);}
-\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00850\ }
-\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
-\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ b;}
-\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cin\ >>\ b;}
-\DoxyCodeLine{00855\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(b);}
-\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!std::cin)\ \{}
-\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error:\ input\ was\ of\ the\ wrong\ type,\ exitting...\(\backslash\)n"{}};}
-\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
-\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00863\ \ \ \ \ \}}
-\DoxyCodeLine{00864\ }
-\DoxyCodeLine{00865\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRead_a6376f03c44d89b572cf72f9cd6ad060b}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ READ\ "{}};}
-\DoxyCodeLine{00867\ \ \ \ \ \ \ \ \ var-\/>visit();}
-\DoxyCodeLine{00868\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
-\DoxyCodeLine{00869\ \ \ \ \ \}}
-\DoxyCodeLine{00870\ }
-\DoxyCodeLine{00871\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRead_a0e9727f11b3b62e6257356c469da7460}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00872\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ var-\/>analyse();}
-\DoxyCodeLine{00873\ \ \ \ \ \}}
-\DoxyCodeLine{00874\ \};}
+\DoxyCodeLine{00822\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classPrint_a009b71e6bb9813706aa9aa01b157cb0c}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00823\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ PRINT\ "{}};}
+\DoxyCodeLine{00824\ \ \ \ \ \ \ \ \ expr-\/>visit();}
+\DoxyCodeLine{00825\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00826\ \ \ \ \ \}}
+\DoxyCodeLine{00827\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classPrint_a9410e69ea37e4991afbb1825be8b1673}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ expr-\/>analyse();\ \}}
+\DoxyCodeLine{00828\ \};}
+\DoxyCodeLine{00829\ }
+\DoxyCodeLine{00833\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRead}{Read}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classExpr}{Expr}}\ \{}
+\DoxyCodeLine{00834\ \ \ \ \ std::unique\_ptr<Var>\ var;}
+\DoxyCodeLine{00835\ }
+\DoxyCodeLine{00836\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00837\ \ \ \ \ \mbox{\hyperlink{classRead}{Read}}(std::unique\_ptr<Var>\ op)\ :\ \mbox{\hyperlink{classExpr}{Expr}}(),\ var\{std::move(op)\}\ \{\}}
+\DoxyCodeLine{00838\ }
+\DoxyCodeLine{00839\ \ \ \ \ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00840\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}(var-\/>get\_type())\ \{}
+\DoxyCodeLine{00841\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 0:}
+\DoxyCodeLine{00842\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00843\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ val;}
+\DoxyCodeLine{00844\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cin\ >>\ val;}
+\DoxyCodeLine{00845\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(val);}
+\DoxyCodeLine{00846\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00847\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00848\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 1:}
+\DoxyCodeLine{00849\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00850\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ str;}
+\DoxyCodeLine{00851\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cin\ >>\ str;}
+\DoxyCodeLine{00852\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(str);}
+\DoxyCodeLine{00853\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00854\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00855\ }
+\DoxyCodeLine{00856\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ 2:}
+\DoxyCodeLine{00857\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00858\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ b;}
+\DoxyCodeLine{00859\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cin\ >>\ b;}
+\DoxyCodeLine{00860\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ var-\/>set\_value(b);}
+\DoxyCodeLine{00861\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00862\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00863\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00864\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!std::cin)\ \{}
+\DoxyCodeLine{00865\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Error:\ input\ was\ of\ the\ wrong\ type,\ exitting...\(\backslash\)n"{}};}
+\DoxyCodeLine{00866\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00867\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00868\ \ \ \ \ \}}
+\DoxyCodeLine{00869\ }
+\DoxyCodeLine{00870\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classRead_a6376f03c44d89b572cf72f9cd6ad060b}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00871\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ READ\ "{}};}
+\DoxyCodeLine{00872\ \ \ \ \ \ \ \ \ var-\/>visit();}
+\DoxyCodeLine{00873\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00874\ \ \ \ \ \}}
 \DoxyCodeLine{00875\ }
-\DoxyCodeLine{00880\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUnary}{Unary}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classOperand}{Operand}}\ \{}
-\DoxyCodeLine{00881\ \ \ \ \ std::unique\_ptr<Operand>\ op;}
-\DoxyCodeLine{00882\ \ \ \ \ std::unique\_ptr<Literal>\ evaluated;}
-\DoxyCodeLine{00883\ }
-\DoxyCodeLine{00884\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00885\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classUnary}{Unary}}(std::unique\_ptr<Operand>\ op)\ :\ \mbox{\hyperlink{classOperand}{Operand}}(),\ op\ \{std::move(op)\}\ \{\}}
-\DoxyCodeLine{00886\ }
-\DoxyCodeLine{00887\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ *\mbox{\hyperlink{classUnary_af67dd3a8c1b31647294224b8d1e1641f}{get\_value}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00888\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ val\ =\ op-\/>\mbox{\hyperlink{classLiteral_a4657c3ddd270e5ba3e63551b659d746d}{get\_value}}();}
-\DoxyCodeLine{00889\ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(!*val);}
-\DoxyCodeLine{00890\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ evaluated.get();}
-\DoxyCodeLine{00891\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00892\ }
-\DoxyCodeLine{00893\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUnary_acc442bc64f9d8d8763e03979a51a06ec}{truthy}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00894\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !op-\/>truthy();}
-\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00896\ }
-\DoxyCodeLine{00897\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classUnary_ab15a59faff1ddccb7158887893b81d34}{get\_type}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00898\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
-\DoxyCodeLine{00899\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00900\ }
-\DoxyCodeLine{00901\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00902\ }
-\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00904\ }
-\DoxyCodeLine{00905\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnary_ae2c452fc180e1eb9d17f3704f930e95d}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ !\ "{}};}
-\DoxyCodeLine{00907\ \ \ \ \ \ \ \ \ \ \ \ \ op-\/>visit();}
-\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
-\DoxyCodeLine{00909\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00910\ }
-\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUnary_a1f489fdb7f995f3bbbbc69ee8d68b97c}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
-\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ op-\/>analyse();}
-\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00914\ }
-\DoxyCodeLine{00915\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a2d6ccf52e88f6d8cce9676e4a9d296ea}{operator+}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00916\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
-\DoxyCodeLine{00917\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00876\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classRead_a0e9727f11b3b62e6257356c469da7460}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00877\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ var-\/>analyse();}
+\DoxyCodeLine{00878\ \ \ \ \ \}}
+\DoxyCodeLine{00879\ \};}
+\DoxyCodeLine{00880\ }
+\DoxyCodeLine{00885\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classUnary}{Unary}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classOperand}{Operand}}\ \{}
+\DoxyCodeLine{00886\ \ \ \ \ std::unique\_ptr<Operand>\ op;}
+\DoxyCodeLine{00887\ \ \ \ \ std::unique\_ptr<Literal>\ evaluated;}
+\DoxyCodeLine{00888\ }
+\DoxyCodeLine{00889\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00890\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classUnary}{Unary}}(std::unique\_ptr<Operand>\ op)\ :\ \mbox{\hyperlink{classOperand}{Operand}}(),\ op\ \{std::move(op)\}\ \{\}}
+\DoxyCodeLine{00891\ }
+\DoxyCodeLine{00892\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classLiteral}{Literal}}\ *\mbox{\hyperlink{classUnary_af67dd3a8c1b31647294224b8d1e1641f}{get\_value}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00893\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ val\ =\ op-\/>\mbox{\hyperlink{classLiteral_a4657c3ddd270e5ba3e63551b659d746d}{get\_value}}();}
+\DoxyCodeLine{00894\ \ \ \ \ \ \ \ \ \ \ \ \ evaluated\ =\ std::make\_unique<Literal>(!*val);}
+\DoxyCodeLine{00895\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ evaluated.get();}
+\DoxyCodeLine{00896\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00897\ }
+\DoxyCodeLine{00898\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUnary_acc442bc64f9d8d8763e03979a51a06ec}{truthy}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00899\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !op-\/>truthy();}
+\DoxyCodeLine{00900\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00901\ }
+\DoxyCodeLine{00902\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classUnary_ab15a59faff1ddccb7158887893b81d34}{get\_type}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00903\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{00904\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00905\ }
+\DoxyCodeLine{00906\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ interpet(\textcolor{keywordtype}{void})\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00907\ }
+\DoxyCodeLine{00908\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00909\ }
+\DoxyCodeLine{00910\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classUnary_ae2c452fc180e1eb9d17f3704f930e95d}{visit}}(\textcolor{keywordtype}{void})\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00911\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}(\ !\ "{}};}
+\DoxyCodeLine{00912\ \ \ \ \ \ \ \ \ \ \ \ \ op-\/>visit();}
+\DoxyCodeLine{00913\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{})\ "{}};}
+\DoxyCodeLine{00914\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00915\ }
+\DoxyCodeLine{00916\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classUnary_a1f489fdb7f995f3bbbbc69ee8d68b97c}{analyse}}()\textcolor{keyword}{\ const\ override\ }\{}
+\DoxyCodeLine{00917\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ op-\/>analyse();}
 \DoxyCodeLine{00918\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00919\ }
-\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a41b63291f9eeea3854d1897c8079fee5}{operator-\/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00920\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a2d6ccf52e88f6d8cce9676e4a9d296ea}{operator+}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
 \DoxyCodeLine{00921\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
 \DoxyCodeLine{00922\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
 \DoxyCodeLine{00923\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00924\ }
-\DoxyCodeLine{00925\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_ae9daf4e57b28c67c06f28068742857fe}{operator*}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00925\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a41b63291f9eeea3854d1897c8079fee5}{operator-\/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
 \DoxyCodeLine{00926\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
 \DoxyCodeLine{00927\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
 \DoxyCodeLine{00928\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00929\ }
-\DoxyCodeLine{00930\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_ac49d7b6b8a1875dcd89c0f2ecdf1ad90}{operator/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00930\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_ae9daf4e57b28c67c06f28068742857fe}{operator*}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
 \DoxyCodeLine{00931\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
 \DoxyCodeLine{00932\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
 \DoxyCodeLine{00933\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00934\ }
-\DoxyCodeLine{00935\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a44282f7e04c61e1af3e1745ea2b307c4}{operator\&\&}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00935\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_ac49d7b6b8a1875dcd89c0f2ecdf1ad90}{operator/}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
 \DoxyCodeLine{00936\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
 \DoxyCodeLine{00937\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
 \DoxyCodeLine{00938\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00939\ }
-\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a2638db4c0efc54e12845d53db761e200}{operator==}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00940\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a44282f7e04c61e1af3e1745ea2b307c4}{operator\&\&}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
 \DoxyCodeLine{00941\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
 \DoxyCodeLine{00942\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
 \DoxyCodeLine{00943\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00944\ }
-\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a726e14a154abc3a2620ad4236619d0b0}{operator<}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00945\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a2638db4c0efc54e12845d53db761e200}{operator==}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
 \DoxyCodeLine{00946\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
 \DoxyCodeLine{00947\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
 \DoxyCodeLine{00948\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{00949\ }
-\DoxyCodeLine{00950\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a24feea5bb3a51d2c520c12a4b76d9fdd}{operator!}}()\textcolor{keyword}{\ override\ }\{}
-\DoxyCodeLine{00951\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !*this-\/>op;}
-\DoxyCodeLine{00952\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00953\ \};}
-\DoxyCodeLine{00954\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00950\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a726e14a154abc3a2620ad4236619d0b0}{operator<}}(\mbox{\hyperlink{classOperand}{Operand}}\ \&)\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00951\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}Invalid\ operation\(\backslash\)n"{}};}
+\DoxyCodeLine{00952\ \ \ \ \ \ \ \ \ \ \ \ \ std::exit(1);}
+\DoxyCodeLine{00953\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00954\ }
+\DoxyCodeLine{00955\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classLiteral}{Literal}}\ \mbox{\hyperlink{classUnary_a24feea5bb3a51d2c520c12a4b76d9fdd}{operator!}}()\textcolor{keyword}{\ override\ }\{}
+\DoxyCodeLine{00956\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ !*this-\/>op;}
+\DoxyCodeLine{00957\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00958\ \};}
+\DoxyCodeLine{00959\ \textcolor{preprocessor}{\#endif}}
 
 \end{DoxyCode}

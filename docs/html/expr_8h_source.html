@@ -504,420 +504,425 @@ $(function() {
 <div class="line"><a id="l00515" name="l00515"></a><span class="lineno">  515</span> </div>
 <div class="line"><a id="l00516" name="l00516"></a><span class="lineno">  516</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00522" name="l00522"></a><span class="lineno"><a class="line" href="classBop.html#a9b5803caf0398a42bb46e59416009408">  522</a></span>        <a class="code hl_function" href="classBop.html#a9b5803caf0398a42bb46e59416009408">Bop</a>(std::unique_ptr&lt;Token&gt; tok, std::unique_ptr&lt;Operand&gt; left, std::unique_ptr&lt;Operand&gt; right)</div>
-<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>            : <a class="code hl_class" href="classOperand.html">Operand</a>(std::move(tok)), left{std::move(left)}, right{std::move(right)} {}</div>
-<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span> </div>
-<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span> </div>
-<div class="line"><a id="l00526" name="l00526"></a><span class="lineno"><a class="line" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">  526</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">analyse</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>            <span class="keywordtype">bool</span> has_error = left-&gt;analyse();</div>
-<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>            has_error |= right-&gt;analyse();</div>
+<div class="line"><a id="l00523" name="l00523"></a><span class="lineno">  523</span>            : <a class="code hl_class" href="classOperand.html">Operand</a>(std::move(tok)), left{std::move(left)}, right{std::move(right)} {</div>
+<div class="line"><a id="l00524" name="l00524"></a><span class="lineno">  524</span>                <span class="keywordflow">if</span> (left == <span class="keyword">nullptr</span> || right == <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00525" name="l00525"></a><span class="lineno">  525</span>                    std::cout &lt;&lt; <span class="stringliteral">&quot;Missing operand &quot;</span> &lt;&lt; token-&gt;line;</div>
+<div class="line"><a id="l00526" name="l00526"></a><span class="lineno">  526</span>                    std::exit(1);</div>
+<div class="line"><a id="l00527" name="l00527"></a><span class="lineno">  527</span>                }</div>
+<div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>            }</div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span> </div>
-<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span>            <span class="keywordflow">if</span>(has_error) {</div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Semantical error in bop\n&quot;</span>;</div>
-<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>            }</div>
-<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span> </div>
+<div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span> </div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno"><a class="line" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">  531</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classBop.html#ac2504be10088640871bb1091f2b8abdf">analyse</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>            <span class="keywordtype">bool</span> has_error = left-&gt;analyse();</div>
+<div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>            has_error |= right-&gt;analyse();</div>
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span> </div>
-<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>            <span class="keywordflow">return</span> has_error;</div>
-<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>        }</div>
-<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span> </div>
-<div class="line"><a id="l00542" name="l00542"></a><span class="lineno"><a class="line" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">  542</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> *<a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00543" name="l00543"></a><span class="lineno">  543</span>            <span class="keywordflow">if</span> (evaluated) {</div>
-<div class="line"><a id="l00544" name="l00544"></a><span class="lineno">  544</span>                <span class="comment">// use cached value</span></div>
-<div class="line"><a id="l00545" name="l00545"></a><span class="lineno">  545</span>                <span class="keywordflow">return</span> evaluated.get();</div>
-<div class="line"><a id="l00546" name="l00546"></a><span class="lineno">  546</span>            }</div>
-<div class="line"><a id="l00547" name="l00547"></a><span class="lineno">  547</span> </div>
-<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>            <span class="keywordflow">switch</span>(token-&gt;type) {</div>
-<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>                <span class="keywordflow">case</span> token_type::ADDITION:</div>
-<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left + *right-&gt;get_value());</div>
-<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00535" name="l00535"></a><span class="lineno">  535</span>            <span class="keywordflow">if</span>(has_error) {</div>
+<div class="line"><a id="l00536" name="l00536"></a><span class="lineno">  536</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Semantical error in bop\n&quot;</span>;</div>
+<div class="line"><a id="l00537" name="l00537"></a><span class="lineno">  537</span>            }</div>
+<div class="line"><a id="l00538" name="l00538"></a><span class="lineno">  538</span> </div>
+<div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span> </div>
+<div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>            <span class="keywordflow">return</span> has_error;</div>
+<div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>        }</div>
+<div class="line"><a id="l00542" name="l00542"></a><span class="lineno">  542</span> </div>
+<div class="line"><a id="l00547" name="l00547"></a><span class="lineno"><a class="line" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">  547</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> *<a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00548" name="l00548"></a><span class="lineno">  548</span>            <span class="keywordflow">if</span> (evaluated) {</div>
+<div class="line"><a id="l00549" name="l00549"></a><span class="lineno">  549</span>                <span class="comment">// use cached value</span></div>
+<div class="line"><a id="l00550" name="l00550"></a><span class="lineno">  550</span>                <span class="keywordflow">return</span> evaluated.get();</div>
+<div class="line"><a id="l00551" name="l00551"></a><span class="lineno">  551</span>            }</div>
 <div class="line"><a id="l00552" name="l00552"></a><span class="lineno">  552</span> </div>
-<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>                <span class="keywordflow">case</span> token_type::SUBTRACTION:</div>
-<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left - *right-&gt;get_value());</div>
-<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span> </div>
-<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span>                <span class="keywordflow">case</span> token_type::MULTIPLICATION:</div>
-<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left * *right-&gt;get_value());</div>
-<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span> </div>
-<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span>                <span class="keywordflow">case</span> token_type::DIVISION:</div>
-<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left / *right-&gt;get_value());</div>
-<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span> </div>
-<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span>                <span class="keywordflow">case</span> token_type::LT:</div>
-<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left &lt; *right-&gt;<a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>());</div>
-<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span> </div>
-<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span>                <span class="keywordflow">case</span> token_type::EQ:</div>
-<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left == *right-&gt;get_value());</div>
-<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span> </div>
-<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span>                <span class="keywordflow">case</span> token_type::AND:</div>
-<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left &amp;&amp; *right-&gt;get_value());</div>
-<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span> </div>
-<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span>                <span class="keywordflow">case</span> token_type::ASSIGN:</div>
-<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>                    {</div>
-<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>                        <span class="keyword">auto</span> var = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classVar.html">Var</a>&amp;<span class="keyword">&gt;</span>(*left);</div>
-<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>                        var.set_value(right-&gt;get_value());</div>
-<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span>                    }</div>
-<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>                <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>                    std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation (&quot;</span> &lt;&lt; token-&gt;token &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>                    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>            }</div>
-<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>            <span class="keywordflow">return</span> evaluated.get();</div>
-<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>        }</div>
-<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span> </div>
-<div class="line"><a id="l00590" name="l00590"></a><span class="lineno"><a class="line" href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">  590</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">truthy</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>()-&gt;<a class="code hl_function" href="classLiteral.html#a8c2620183928974b79f0a77c51360e56">truthy</a>();</div>
-<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>        }</div>
-<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span> </div>
-<div class="line"><a id="l00594" name="l00594"></a><span class="lineno"><a class="line" href="classBop.html#a7ba76a51676d066a2a183a1594a96111">  594</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classBop.html#a7ba76a51676d066a2a183a1594a96111">get_type</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00595" name="l00595"></a><span class="lineno">  595</span>            <span class="keywordtype">int</span> r = right-&gt;get_type();</div>
-<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>            <span class="keywordtype">int</span> l = left-&gt;<a class="code hl_function" href="classLiteral.html#a510ac8f088dfdad1bd21b9e690853890">get_type</a>();</div>
-<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span> </div>
-<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span>            <span class="keywordflow">if</span> (l != r) {</div>
-<div class="line"><a id="l00599" name="l00599"></a><span class="lineno">  599</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Error: incompatible types line &quot;</span> &lt;&lt; token-&gt;line &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>                std::exit(1);</div>
-<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span>                <span class="keywordflow">if</span> (token-&gt;type == token_type::EQ || token-&gt;type == token_type::LT){</div>
-<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>                    <span class="keywordflow">return</span> 1;</div>
-<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>                }</div>
-<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>            }</div>
-<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>            <span class="keywordflow">return</span> l;</div>
-<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>        }</div>
-<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span> </div>
-<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>            this-&gt;<a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>();</div>
-<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>        }</div>
-<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span> </div>
-<div class="line"><a id="l00613" name="l00613"></a><span class="lineno"><a class="line" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">  613</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override  </span>{</div>
-<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>            std::cout &lt;&lt; token-&gt;token &lt;&lt; <span class="stringliteral">&quot; ( &quot;</span>;</div>
-<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>            left-&gt;visit();</div>
-<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>            <span class="keywordflow">if</span> (right)</div>
-<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span>                right-&gt;visit();</div>
-<div class="line"><a id="l00618" name="l00618"></a><span class="lineno">  618</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
-<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>        }</div>
-<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span> </div>
-<div class="line"><a id="l00621" name="l00621"></a><span class="lineno"><a class="line" href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">  621</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">operator+</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>            std::exit(1);</div>
+<div class="line"><a id="l00553" name="l00553"></a><span class="lineno">  553</span>            <span class="keywordflow">switch</span>(token-&gt;type) {</div>
+<div class="line"><a id="l00554" name="l00554"></a><span class="lineno">  554</span>                <span class="keywordflow">case</span> token_type::ADDITION:</div>
+<div class="line"><a id="l00555" name="l00555"></a><span class="lineno">  555</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left + *right-&gt;get_value());</div>
+<div class="line"><a id="l00556" name="l00556"></a><span class="lineno">  556</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00557" name="l00557"></a><span class="lineno">  557</span> </div>
+<div class="line"><a id="l00558" name="l00558"></a><span class="lineno">  558</span>                <span class="keywordflow">case</span> token_type::SUBTRACTION:</div>
+<div class="line"><a id="l00559" name="l00559"></a><span class="lineno">  559</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left - *right-&gt;get_value());</div>
+<div class="line"><a id="l00560" name="l00560"></a><span class="lineno">  560</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00561" name="l00561"></a><span class="lineno">  561</span> </div>
+<div class="line"><a id="l00562" name="l00562"></a><span class="lineno">  562</span>                <span class="keywordflow">case</span> token_type::MULTIPLICATION:</div>
+<div class="line"><a id="l00563" name="l00563"></a><span class="lineno">  563</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left * *right-&gt;get_value());</div>
+<div class="line"><a id="l00564" name="l00564"></a><span class="lineno">  564</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00565" name="l00565"></a><span class="lineno">  565</span> </div>
+<div class="line"><a id="l00566" name="l00566"></a><span class="lineno">  566</span>                <span class="keywordflow">case</span> token_type::DIVISION:</div>
+<div class="line"><a id="l00567" name="l00567"></a><span class="lineno">  567</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left / *right-&gt;get_value());</div>
+<div class="line"><a id="l00568" name="l00568"></a><span class="lineno">  568</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00569" name="l00569"></a><span class="lineno">  569</span> </div>
+<div class="line"><a id="l00570" name="l00570"></a><span class="lineno">  570</span>                <span class="keywordflow">case</span> token_type::LT:</div>
+<div class="line"><a id="l00571" name="l00571"></a><span class="lineno">  571</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left &lt; *right-&gt;<a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>());</div>
+<div class="line"><a id="l00572" name="l00572"></a><span class="lineno">  572</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00573" name="l00573"></a><span class="lineno">  573</span> </div>
+<div class="line"><a id="l00574" name="l00574"></a><span class="lineno">  574</span>                <span class="keywordflow">case</span> token_type::EQ:</div>
+<div class="line"><a id="l00575" name="l00575"></a><span class="lineno">  575</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left == *right-&gt;get_value());</div>
+<div class="line"><a id="l00576" name="l00576"></a><span class="lineno">  576</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00577" name="l00577"></a><span class="lineno">  577</span> </div>
+<div class="line"><a id="l00578" name="l00578"></a><span class="lineno">  578</span>                <span class="keywordflow">case</span> token_type::AND:</div>
+<div class="line"><a id="l00579" name="l00579"></a><span class="lineno">  579</span>                    evaluated = std::make_unique&lt;Literal&gt;(*left &amp;&amp; *right-&gt;get_value());</div>
+<div class="line"><a id="l00580" name="l00580"></a><span class="lineno">  580</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00581" name="l00581"></a><span class="lineno">  581</span> </div>
+<div class="line"><a id="l00582" name="l00582"></a><span class="lineno">  582</span>                <span class="keywordflow">case</span> token_type::ASSIGN:</div>
+<div class="line"><a id="l00583" name="l00583"></a><span class="lineno">  583</span>                    {</div>
+<div class="line"><a id="l00584" name="l00584"></a><span class="lineno">  584</span>                        <span class="keyword">auto</span> var = <span class="keyword">dynamic_cast&lt;</span><a class="code hl_class" href="classVar.html">Var</a>&amp;<span class="keyword">&gt;</span>(*left);</div>
+<div class="line"><a id="l00585" name="l00585"></a><span class="lineno">  585</span>                        var.set_value(right-&gt;get_value());</div>
+<div class="line"><a id="l00586" name="l00586"></a><span class="lineno">  586</span>                    }</div>
+<div class="line"><a id="l00587" name="l00587"></a><span class="lineno">  587</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00588" name="l00588"></a><span class="lineno">  588</span>                <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00589" name="l00589"></a><span class="lineno">  589</span>                    std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation (&quot;</span> &lt;&lt; token-&gt;token &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00590" name="l00590"></a><span class="lineno">  590</span>                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00591" name="l00591"></a><span class="lineno">  591</span>            }</div>
+<div class="line"><a id="l00592" name="l00592"></a><span class="lineno">  592</span>            <span class="keywordflow">return</span> evaluated.get();</div>
+<div class="line"><a id="l00593" name="l00593"></a><span class="lineno">  593</span>        }</div>
+<div class="line"><a id="l00594" name="l00594"></a><span class="lineno">  594</span> </div>
+<div class="line"><a id="l00595" name="l00595"></a><span class="lineno"><a class="line" href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">  595</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">truthy</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00596" name="l00596"></a><span class="lineno">  596</span>            <span class="keywordflow">return</span> <a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>()-&gt;<a class="code hl_function" href="classLiteral.html#a8c2620183928974b79f0a77c51360e56">truthy</a>();</div>
+<div class="line"><a id="l00597" name="l00597"></a><span class="lineno">  597</span>        }</div>
+<div class="line"><a id="l00598" name="l00598"></a><span class="lineno">  598</span> </div>
+<div class="line"><a id="l00599" name="l00599"></a><span class="lineno"><a class="line" href="classBop.html#a7ba76a51676d066a2a183a1594a96111">  599</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classBop.html#a7ba76a51676d066a2a183a1594a96111">get_type</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00600" name="l00600"></a><span class="lineno">  600</span>            <span class="keywordtype">int</span> r = right-&gt;get_type();</div>
+<div class="line"><a id="l00601" name="l00601"></a><span class="lineno">  601</span>            <span class="keywordtype">int</span> l = left-&gt;<a class="code hl_function" href="classLiteral.html#a510ac8f088dfdad1bd21b9e690853890">get_type</a>();</div>
+<div class="line"><a id="l00602" name="l00602"></a><span class="lineno">  602</span> </div>
+<div class="line"><a id="l00603" name="l00603"></a><span class="lineno">  603</span>            <span class="keywordflow">if</span> (l != r) {</div>
+<div class="line"><a id="l00604" name="l00604"></a><span class="lineno">  604</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Error: incompatible types line &quot;</span> &lt;&lt; token-&gt;line &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00605" name="l00605"></a><span class="lineno">  605</span>                std::exit(1);</div>
+<div class="line"><a id="l00606" name="l00606"></a><span class="lineno">  606</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00607" name="l00607"></a><span class="lineno">  607</span>                <span class="keywordflow">if</span> (token-&gt;type == token_type::EQ || token-&gt;type == token_type::LT){</div>
+<div class="line"><a id="l00608" name="l00608"></a><span class="lineno">  608</span>                    <span class="keywordflow">return</span> 1;</div>
+<div class="line"><a id="l00609" name="l00609"></a><span class="lineno">  609</span>                }</div>
+<div class="line"><a id="l00610" name="l00610"></a><span class="lineno">  610</span>            }</div>
+<div class="line"><a id="l00611" name="l00611"></a><span class="lineno">  611</span>            <span class="keywordflow">return</span> l;</div>
+<div class="line"><a id="l00612" name="l00612"></a><span class="lineno">  612</span>        }</div>
+<div class="line"><a id="l00613" name="l00613"></a><span class="lineno">  613</span> </div>
+<div class="line"><a id="l00614" name="l00614"></a><span class="lineno">  614</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00615" name="l00615"></a><span class="lineno">  615</span>            this-&gt;<a class="code hl_function" href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">get_value</a>();</div>
+<div class="line"><a id="l00616" name="l00616"></a><span class="lineno">  616</span>        }</div>
+<div class="line"><a id="l00617" name="l00617"></a><span class="lineno">  617</span> </div>
+<div class="line"><a id="l00618" name="l00618"></a><span class="lineno"><a class="line" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">  618</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override  </span>{</div>
+<div class="line"><a id="l00619" name="l00619"></a><span class="lineno">  619</span>            std::cout &lt;&lt; token-&gt;token &lt;&lt; <span class="stringliteral">&quot; ( &quot;</span>;</div>
+<div class="line"><a id="l00620" name="l00620"></a><span class="lineno">  620</span>            left-&gt;visit();</div>
+<div class="line"><a id="l00621" name="l00621"></a><span class="lineno">  621</span>            <span class="keywordflow">if</span> (right)</div>
+<div class="line"><a id="l00622" name="l00622"></a><span class="lineno">  622</span>                right-&gt;visit();</div>
+<div class="line"><a id="l00623" name="l00623"></a><span class="lineno">  623</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
 <div class="line"><a id="l00624" name="l00624"></a><span class="lineno">  624</span>        }</div>
-<div class="line"><a id="l00625" name="l00625"></a><span class="lineno"><a class="line" href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">  625</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">operator-</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00626" name="l00626"></a><span class="lineno">  626</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>            std::exit(1);</div>
-<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>        }</div>
-<div class="line"><a id="l00629" name="l00629"></a><span class="lineno"><a class="line" href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">  629</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">operator*</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00630" name="l00630"></a><span class="lineno">  630</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>            std::exit(1);</div>
-<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>        }</div>
-<div class="line"><a id="l00633" name="l00633"></a><span class="lineno"><a class="line" href="classBop.html#ace84769a052a00b372f5479b2b812645">  633</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#ace84769a052a00b372f5479b2b812645">operator/</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00634" name="l00634"></a><span class="lineno">  634</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>            std::exit(1);</div>
-<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>        }</div>
-<div class="line"><a id="l00637" name="l00637"></a><span class="lineno"><a class="line" href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">  637</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">operator&amp;&amp;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00638" name="l00638"></a><span class="lineno">  638</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>            std::exit(1);</div>
-<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>        }</div>
-<div class="line"><a id="l00641" name="l00641"></a><span class="lineno"><a class="line" href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">  641</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">operator==</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00642" name="l00642"></a><span class="lineno">  642</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>            std::exit(1);</div>
-<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>        }</div>
-<div class="line"><a id="l00645" name="l00645"></a><span class="lineno"><a class="line" href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">  645</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">operator&lt;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00646" name="l00646"></a><span class="lineno">  646</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>            std::exit(1);</div>
-<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>        }</div>
-<div class="line"><a id="l00649" name="l00649"></a><span class="lineno"><a class="line" href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">  649</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">operator!</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00650" name="l00650"></a><span class="lineno">  650</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>            std::exit(1);</div>
-<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>        }</div>
-<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>    <span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00654" name="l00654"></a><span class="lineno">  654</span>        <span class="keywordtype">bool</span> is_boolean() {</div>
-<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>            <span class="keywordflow">return</span> token-&gt;type == token_type::LT || token-&gt;type == token_type::EQ;</div>
-<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>        }</div>
-<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>};</div>
-<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span> </div>
-<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span> </div>
-<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span> </div>
-<div class="line"><a id="l00664" name="l00664"></a><span class="lineno"><a class="line" href="classIf.html">  664</a></span><span class="keyword">class </span><a class="code hl_class" href="classIf.html">If</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
-<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span>    std::unique_ptr&lt;Operand&gt; condition;</div>
-<div class="line"><a id="l00666" name="l00666"></a><span class="lineno">  666</span>    std::unique_ptr&lt;StatementList&gt; truthy;</div>
-<div class="line"><a id="l00667" name="l00667"></a><span class="lineno">  667</span>    std::unique_ptr&lt;StatementList&gt; falsy;</div>
-<div class="line"><a id="l00668" name="l00668"></a><span class="lineno">  668</span> </div>
-<div class="line"><a id="l00669" name="l00669"></a><span class="lineno">  669</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00678" name="l00678"></a><span class="lineno"><a class="line" href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">  678</a></span>        <a class="code hl_function" href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">If</a>(std::unique_ptr&lt;Operand&gt; condition, std::unique_ptr&lt;StatementList&gt; truthy,</div>
-<div class="line"><a id="l00679" name="l00679"></a><span class="lineno">  679</span>                std::unique_ptr&lt;StatementList&gt; falsy) :</div>
-<div class="line"><a id="l00680" name="l00680"></a><span class="lineno">  680</span>            <a class="code hl_class" href="classExpr.html">Expr</a>(), condition{std::move(condition)}, truthy{std::move(truthy)},</div>
-<div class="line"><a id="l00681" name="l00681"></a><span class="lineno">  681</span>            falsy{std::move(falsy)} {}</div>
-<div class="line"><a id="l00682" name="l00682"></a><span class="lineno">  682</span> </div>
-<div class="line"><a id="l00683" name="l00683"></a><span class="lineno"><a class="line" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">  683</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">analyse</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>            <span class="keywordtype">bool</span> error = condition-&gt;analyse() || truthy-&gt;analyse();</div>
-<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            <span class="keywordflow">if</span> (falsy != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>                error |= falsy-&gt;analyse();</div>
-<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span>            }</div>
-<div class="line"><a id="l00688" name="l00688"></a><span class="lineno">  688</span>            <span class="keywordflow">return</span> error;</div>
-<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>        }</div>
-<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span> </div>
-<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>        <span class="keywordtype">void</span> interpet()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>            <span class="keywordflow">if</span>(condition-&gt;truthy()) {</div>
-<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>                truthy-&gt;interpet();</div>
-<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>            } <span class="keywordflow">else</span> {</div>
-<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span>                <span class="keywordflow">if</span> (falsy != <span class="keyword">nullptr</span>) {</div>
-<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>                    falsy-&gt;interpet();</div>
-<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>                }</div>
-<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>            }</div>
-<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>        }</div>
-<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span> </div>
-<div class="line"><a id="l00701" name="l00701"></a><span class="lineno"><a class="line" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">  701</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">visit</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;( IF &quot;</span>;</div>
-<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>            condition-&gt;visit();</div>
-<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
-<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span>            truthy-&gt;visit();</div>
-<div class="line"><a id="l00706" name="l00706"></a><span class="lineno">  706</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>            <span class="keywordflow">if</span> (falsy) {</div>
-<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>                std::cout &lt;&lt; <span class="stringliteral">&quot; ELSE (&quot;</span>;</div>
-<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>                falsy-&gt;visit();</div>
-<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>            }</div>
-<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>        }</div>
-<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>};</div>
-<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span> </div>
-<div class="line"><a id="l00719" name="l00719"></a><span class="lineno"><a class="line" href="classRange.html">  719</a></span><span class="keyword">class </span><a class="code hl_class" href="classRange.html">Range</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
-<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span>    std::unique_ptr&lt;Operand&gt; start;</div>
-<div class="line"><a id="l00721" name="l00721"></a><span class="lineno">  721</span>    std::unique_ptr&lt;Operand&gt; end;</div>
-<div class="line"><a id="l00722" name="l00722"></a><span class="lineno">  722</span>    <span class="keywordtype">int</span> current;</div>
-<div class="line"><a id="l00723" name="l00723"></a><span class="lineno">  723</span> </div>
-<div class="line"><a id="l00724" name="l00724"></a><span class="lineno">  724</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>        <a class="code hl_class" href="classRange.html">Range</a>(std::unique_ptr&lt;Operand&gt; start, std::unique_ptr&lt;Operand&gt; end) :</div>
-<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>            <a class="code hl_class" href="classExpr.html">Expr</a>(), start{std::move(start)}, end{std::move(end)}, current{0} { }</div>
-<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span> </div>
-<div class="line"><a id="l00732" name="l00732"></a><span class="lineno"><a class="line" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">  732</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">get_next</a>() {</div>
-<div class="line"><a id="l00733" name="l00733"></a><span class="lineno">  733</span>            <span class="keywordflow">return</span> current++;</div>
-<div class="line"><a id="l00734" name="l00734"></a><span class="lineno">  734</span>        }</div>
-<div class="line"><a id="l00735" name="l00735"></a><span class="lineno">  735</span> </div>
-<div class="line"><a id="l00739" name="l00739"></a><span class="lineno"><a class="line" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">  739</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">is_done</a>() {</div>
-<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span>            <span class="keywordflow">return</span> !(current &lt;= (std::get&lt;int&gt;(end-&gt;get_value()-&gt;value)));</div>
-<div class="line"><a id="l00741" name="l00741"></a><span class="lineno">  741</span>        }</div>
-<div class="line"><a id="l00742" name="l00742"></a><span class="lineno">  742</span> </div>
-<div class="line"><a id="l00743" name="l00743"></a><span class="lineno"><a class="line" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">  743</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">analyse</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00744" name="l00744"></a><span class="lineno">  744</span>           <span class="keywordtype">bool</span> error = start-&gt;get_type() || end-&gt;get_type();</div>
-<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>           <span class="keywordflow">if</span> (error) {</div>
-<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>               std::cout &lt;&lt; <span class="stringliteral">&quot;Error range contains non integers\n&quot;</span>;</div>
-<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span>               <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00748" name="l00748"></a><span class="lineno">  748</span>           }</div>
-<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>           <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>        }</div>
-<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span> </div>
-<div class="line"><a id="l00757" name="l00757"></a><span class="lineno"><a class="line" href="classRange.html#a102920685f9fce3de95aa539d763702d">  757</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRange.html#a102920685f9fce3de95aa539d763702d">interpet</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00758" name="l00758"></a><span class="lineno">  758</span>            <span class="keyword">auto</span> val = std::get_if&lt;int&gt;(&amp;this-&gt;start-&gt;get_value()-&gt;value);</div>
-<div class="line"><a id="l00759" name="l00759"></a><span class="lineno">  759</span>            <span class="keywordflow">if</span> (val) {</div>
-<div class="line"><a id="l00760" name="l00760"></a><span class="lineno">  760</span>                current = *val;</div>
-<div class="line"><a id="l00761" name="l00761"></a><span class="lineno">  761</span>            }</div>
-<div class="line"><a id="l00762" name="l00762"></a><span class="lineno">  762</span>        }</div>
-<div class="line"><a id="l00763" name="l00763"></a><span class="lineno"><a class="line" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">  763</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">visit</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>            start-&gt;visit();</div>
-<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;..&quot;</span>;</div>
-<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>            end-&gt;visit();</div>
+<div class="line"><a id="l00625" name="l00625"></a><span class="lineno">  625</span> </div>
+<div class="line"><a id="l00626" name="l00626"></a><span class="lineno"><a class="line" href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">  626</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">operator+</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00627" name="l00627"></a><span class="lineno">  627</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00628" name="l00628"></a><span class="lineno">  628</span>            std::exit(1);</div>
+<div class="line"><a id="l00629" name="l00629"></a><span class="lineno">  629</span>        }</div>
+<div class="line"><a id="l00630" name="l00630"></a><span class="lineno"><a class="line" href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">  630</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">operator-</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00631" name="l00631"></a><span class="lineno">  631</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00632" name="l00632"></a><span class="lineno">  632</span>            std::exit(1);</div>
+<div class="line"><a id="l00633" name="l00633"></a><span class="lineno">  633</span>        }</div>
+<div class="line"><a id="l00634" name="l00634"></a><span class="lineno"><a class="line" href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">  634</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">operator*</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00635" name="l00635"></a><span class="lineno">  635</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00636" name="l00636"></a><span class="lineno">  636</span>            std::exit(1);</div>
+<div class="line"><a id="l00637" name="l00637"></a><span class="lineno">  637</span>        }</div>
+<div class="line"><a id="l00638" name="l00638"></a><span class="lineno"><a class="line" href="classBop.html#ace84769a052a00b372f5479b2b812645">  638</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#ace84769a052a00b372f5479b2b812645">operator/</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00639" name="l00639"></a><span class="lineno">  639</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00640" name="l00640"></a><span class="lineno">  640</span>            std::exit(1);</div>
+<div class="line"><a id="l00641" name="l00641"></a><span class="lineno">  641</span>        }</div>
+<div class="line"><a id="l00642" name="l00642"></a><span class="lineno"><a class="line" href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">  642</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">operator&amp;&amp;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00643" name="l00643"></a><span class="lineno">  643</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00644" name="l00644"></a><span class="lineno">  644</span>            std::exit(1);</div>
+<div class="line"><a id="l00645" name="l00645"></a><span class="lineno">  645</span>        }</div>
+<div class="line"><a id="l00646" name="l00646"></a><span class="lineno"><a class="line" href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">  646</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">operator==</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00647" name="l00647"></a><span class="lineno">  647</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00648" name="l00648"></a><span class="lineno">  648</span>            std::exit(1);</div>
+<div class="line"><a id="l00649" name="l00649"></a><span class="lineno">  649</span>        }</div>
+<div class="line"><a id="l00650" name="l00650"></a><span class="lineno"><a class="line" href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">  650</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">operator&lt;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00651" name="l00651"></a><span class="lineno">  651</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00652" name="l00652"></a><span class="lineno">  652</span>            std::exit(1);</div>
+<div class="line"><a id="l00653" name="l00653"></a><span class="lineno">  653</span>        }</div>
+<div class="line"><a id="l00654" name="l00654"></a><span class="lineno"><a class="line" href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">  654</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">operator!</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00655" name="l00655"></a><span class="lineno">  655</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00656" name="l00656"></a><span class="lineno">  656</span>            std::exit(1);</div>
+<div class="line"><a id="l00657" name="l00657"></a><span class="lineno">  657</span>        }</div>
+<div class="line"><a id="l00658" name="l00658"></a><span class="lineno">  658</span>    <span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00659" name="l00659"></a><span class="lineno">  659</span>        <span class="keywordtype">bool</span> is_boolean() {</div>
+<div class="line"><a id="l00660" name="l00660"></a><span class="lineno">  660</span>            <span class="keywordflow">return</span> token-&gt;type == token_type::LT || token-&gt;type == token_type::EQ;</div>
+<div class="line"><a id="l00661" name="l00661"></a><span class="lineno">  661</span>        }</div>
+<div class="line"><a id="l00662" name="l00662"></a><span class="lineno">  662</span>};</div>
+<div class="line"><a id="l00663" name="l00663"></a><span class="lineno">  663</span> </div>
+<div class="line"><a id="l00664" name="l00664"></a><span class="lineno">  664</span> </div>
+<div class="line"><a id="l00665" name="l00665"></a><span class="lineno">  665</span> </div>
+<div class="line"><a id="l00669" name="l00669"></a><span class="lineno"><a class="line" href="classIf.html">  669</a></span><span class="keyword">class </span><a class="code hl_class" href="classIf.html">If</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
+<div class="line"><a id="l00670" name="l00670"></a><span class="lineno">  670</span>    std::unique_ptr&lt;Operand&gt; condition;</div>
+<div class="line"><a id="l00671" name="l00671"></a><span class="lineno">  671</span>    std::unique_ptr&lt;StatementList&gt; truthy;</div>
+<div class="line"><a id="l00672" name="l00672"></a><span class="lineno">  672</span>    std::unique_ptr&lt;StatementList&gt; falsy;</div>
+<div class="line"><a id="l00673" name="l00673"></a><span class="lineno">  673</span> </div>
+<div class="line"><a id="l00674" name="l00674"></a><span class="lineno">  674</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00683" name="l00683"></a><span class="lineno"><a class="line" href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">  683</a></span>        <a class="code hl_function" href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">If</a>(std::unique_ptr&lt;Operand&gt; condition, std::unique_ptr&lt;StatementList&gt; truthy,</div>
+<div class="line"><a id="l00684" name="l00684"></a><span class="lineno">  684</span>                std::unique_ptr&lt;StatementList&gt; falsy) :</div>
+<div class="line"><a id="l00685" name="l00685"></a><span class="lineno">  685</span>            <a class="code hl_class" href="classExpr.html">Expr</a>(), condition{std::move(condition)}, truthy{std::move(truthy)},</div>
+<div class="line"><a id="l00686" name="l00686"></a><span class="lineno">  686</span>            falsy{std::move(falsy)} {}</div>
+<div class="line"><a id="l00687" name="l00687"></a><span class="lineno">  687</span> </div>
+<div class="line"><a id="l00688" name="l00688"></a><span class="lineno"><a class="line" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">  688</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">analyse</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00689" name="l00689"></a><span class="lineno">  689</span>            <span class="keywordtype">bool</span> error = condition-&gt;analyse() || truthy-&gt;analyse();</div>
+<div class="line"><a id="l00690" name="l00690"></a><span class="lineno">  690</span>            <span class="keywordflow">if</span> (falsy != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00691" name="l00691"></a><span class="lineno">  691</span>                error |= falsy-&gt;analyse();</div>
+<div class="line"><a id="l00692" name="l00692"></a><span class="lineno">  692</span>            }</div>
+<div class="line"><a id="l00693" name="l00693"></a><span class="lineno">  693</span>            <span class="keywordflow">return</span> error;</div>
+<div class="line"><a id="l00694" name="l00694"></a><span class="lineno">  694</span>        }</div>
+<div class="line"><a id="l00695" name="l00695"></a><span class="lineno">  695</span> </div>
+<div class="line"><a id="l00696" name="l00696"></a><span class="lineno">  696</span>        <span class="keywordtype">void</span> interpet()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00697" name="l00697"></a><span class="lineno">  697</span>            <span class="keywordflow">if</span>(condition-&gt;truthy()) {</div>
+<div class="line"><a id="l00698" name="l00698"></a><span class="lineno">  698</span>                truthy-&gt;interpet();</div>
+<div class="line"><a id="l00699" name="l00699"></a><span class="lineno">  699</span>            } <span class="keywordflow">else</span> {</div>
+<div class="line"><a id="l00700" name="l00700"></a><span class="lineno">  700</span>                <span class="keywordflow">if</span> (falsy != <span class="keyword">nullptr</span>) {</div>
+<div class="line"><a id="l00701" name="l00701"></a><span class="lineno">  701</span>                    falsy-&gt;interpet();</div>
+<div class="line"><a id="l00702" name="l00702"></a><span class="lineno">  702</span>                }</div>
+<div class="line"><a id="l00703" name="l00703"></a><span class="lineno">  703</span>            }</div>
+<div class="line"><a id="l00704" name="l00704"></a><span class="lineno">  704</span>        }</div>
+<div class="line"><a id="l00705" name="l00705"></a><span class="lineno">  705</span> </div>
+<div class="line"><a id="l00706" name="l00706"></a><span class="lineno"><a class="line" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">  706</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">visit</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00707" name="l00707"></a><span class="lineno">  707</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;( IF &quot;</span>;</div>
+<div class="line"><a id="l00708" name="l00708"></a><span class="lineno">  708</span>            condition-&gt;visit();</div>
+<div class="line"><a id="l00709" name="l00709"></a><span class="lineno">  709</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;(&quot;</span>;</div>
+<div class="line"><a id="l00710" name="l00710"></a><span class="lineno">  710</span>            truthy-&gt;visit();</div>
+<div class="line"><a id="l00711" name="l00711"></a><span class="lineno">  711</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00712" name="l00712"></a><span class="lineno">  712</span>            <span class="keywordflow">if</span> (falsy) {</div>
+<div class="line"><a id="l00713" name="l00713"></a><span class="lineno">  713</span>                std::cout &lt;&lt; <span class="stringliteral">&quot; ELSE (&quot;</span>;</div>
+<div class="line"><a id="l00714" name="l00714"></a><span class="lineno">  714</span>                falsy-&gt;visit();</div>
+<div class="line"><a id="l00715" name="l00715"></a><span class="lineno">  715</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00716" name="l00716"></a><span class="lineno">  716</span>            }</div>
+<div class="line"><a id="l00717" name="l00717"></a><span class="lineno">  717</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00718" name="l00718"></a><span class="lineno">  718</span>        }</div>
+<div class="line"><a id="l00719" name="l00719"></a><span class="lineno">  719</span>};</div>
+<div class="line"><a id="l00720" name="l00720"></a><span class="lineno">  720</span> </div>
+<div class="line"><a id="l00724" name="l00724"></a><span class="lineno"><a class="line" href="classRange.html">  724</a></span><span class="keyword">class </span><a class="code hl_class" href="classRange.html">Range</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
+<div class="line"><a id="l00725" name="l00725"></a><span class="lineno">  725</span>    std::unique_ptr&lt;Operand&gt; start;</div>
+<div class="line"><a id="l00726" name="l00726"></a><span class="lineno">  726</span>    std::unique_ptr&lt;Operand&gt; end;</div>
+<div class="line"><a id="l00727" name="l00727"></a><span class="lineno">  727</span>    <span class="keywordtype">int</span> current;</div>
+<div class="line"><a id="l00728" name="l00728"></a><span class="lineno">  728</span> </div>
+<div class="line"><a id="l00729" name="l00729"></a><span class="lineno">  729</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00730" name="l00730"></a><span class="lineno">  730</span>        <a class="code hl_class" href="classRange.html">Range</a>(std::unique_ptr&lt;Operand&gt; start, std::unique_ptr&lt;Operand&gt; end) :</div>
+<div class="line"><a id="l00731" name="l00731"></a><span class="lineno">  731</span>            <a class="code hl_class" href="classExpr.html">Expr</a>(), start{std::move(start)}, end{std::move(end)}, current{0} { }</div>
+<div class="line"><a id="l00732" name="l00732"></a><span class="lineno">  732</span> </div>
+<div class="line"><a id="l00737" name="l00737"></a><span class="lineno"><a class="line" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">  737</a></span>        <span class="keywordtype">int</span> <a class="code hl_function" href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">get_next</a>() {</div>
+<div class="line"><a id="l00738" name="l00738"></a><span class="lineno">  738</span>            <span class="keywordflow">return</span> current++;</div>
+<div class="line"><a id="l00739" name="l00739"></a><span class="lineno">  739</span>        }</div>
+<div class="line"><a id="l00740" name="l00740"></a><span class="lineno">  740</span> </div>
+<div class="line"><a id="l00744" name="l00744"></a><span class="lineno"><a class="line" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">  744</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">is_done</a>() {</div>
+<div class="line"><a id="l00745" name="l00745"></a><span class="lineno">  745</span>            <span class="keywordflow">return</span> !(current &lt;= (std::get&lt;int&gt;(end-&gt;get_value()-&gt;value)));</div>
+<div class="line"><a id="l00746" name="l00746"></a><span class="lineno">  746</span>        }</div>
+<div class="line"><a id="l00747" name="l00747"></a><span class="lineno">  747</span> </div>
+<div class="line"><a id="l00748" name="l00748"></a><span class="lineno"><a class="line" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">  748</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">analyse</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00749" name="l00749"></a><span class="lineno">  749</span>           <span class="keywordtype">bool</span> error = start-&gt;get_type() || end-&gt;get_type();</div>
+<div class="line"><a id="l00750" name="l00750"></a><span class="lineno">  750</span>           <span class="keywordflow">if</span> (error) {</div>
+<div class="line"><a id="l00751" name="l00751"></a><span class="lineno">  751</span>               std::cout &lt;&lt; <span class="stringliteral">&quot;Error range contains non integers\n&quot;</span>;</div>
+<div class="line"><a id="l00752" name="l00752"></a><span class="lineno">  752</span>               <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00753" name="l00753"></a><span class="lineno">  753</span>           }</div>
+<div class="line"><a id="l00754" name="l00754"></a><span class="lineno">  754</span>           <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00755" name="l00755"></a><span class="lineno">  755</span>        }</div>
+<div class="line"><a id="l00756" name="l00756"></a><span class="lineno">  756</span> </div>
+<div class="line"><a id="l00762" name="l00762"></a><span class="lineno"><a class="line" href="classRange.html#a102920685f9fce3de95aa539d763702d">  762</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRange.html#a102920685f9fce3de95aa539d763702d">interpet</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00763" name="l00763"></a><span class="lineno">  763</span>            <span class="keyword">auto</span> val = std::get_if&lt;int&gt;(&amp;this-&gt;start-&gt;get_value()-&gt;value);</div>
+<div class="line"><a id="l00764" name="l00764"></a><span class="lineno">  764</span>            <span class="keywordflow">if</span> (val) {</div>
+<div class="line"><a id="l00765" name="l00765"></a><span class="lineno">  765</span>                current = *val;</div>
+<div class="line"><a id="l00766" name="l00766"></a><span class="lineno">  766</span>            }</div>
 <div class="line"><a id="l00767" name="l00767"></a><span class="lineno">  767</span>        }</div>
-<div class="line"><a id="l00768" name="l00768"></a><span class="lineno">  768</span>};</div>
-<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span> </div>
-<div class="line"><a id="l00773" name="l00773"></a><span class="lineno"><a class="line" href="classFor.html">  773</a></span><span class="keyword">class </span><a class="code hl_class" href="classFor.html">For</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
-<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span>    std::unique_ptr&lt;Var&gt; var;</div>
-<div class="line"><a id="l00775" name="l00775"></a><span class="lineno">  775</span>    std::unique_ptr&lt;Range&gt; range;</div>
-<div class="line"><a id="l00776" name="l00776"></a><span class="lineno">  776</span>    std::unique_ptr&lt;StatementList&gt; loop;</div>
-<div class="line"><a id="l00777" name="l00777"></a><span class="lineno">  777</span> </div>
-<div class="line"><a id="l00778" name="l00778"></a><span class="lineno">  778</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>        <a class="code hl_class" href="classFor.html">For</a>(std::unique_ptr&lt;Token&gt; variable, std::unique_ptr&lt;Range&gt; range,</div>
-<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>                std::unique_ptr&lt;StatementList&gt; statement_list) : <a class="code hl_class" href="classExpr.html">Expr</a>(), var{std::make_unique&lt;Var&gt;(std::move(variable))},</div>
-<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>                    range{std::move(range)}, loop{std::move(statement_list)} {}</div>
+<div class="line"><a id="l00768" name="l00768"></a><span class="lineno"><a class="line" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">  768</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">visit</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00769" name="l00769"></a><span class="lineno">  769</span>            start-&gt;visit();</div>
+<div class="line"><a id="l00770" name="l00770"></a><span class="lineno">  770</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;..&quot;</span>;</div>
+<div class="line"><a id="l00771" name="l00771"></a><span class="lineno">  771</span>            end-&gt;visit();</div>
+<div class="line"><a id="l00772" name="l00772"></a><span class="lineno">  772</span>        }</div>
+<div class="line"><a id="l00773" name="l00773"></a><span class="lineno">  773</span>};</div>
+<div class="line"><a id="l00774" name="l00774"></a><span class="lineno">  774</span> </div>
+<div class="line"><a id="l00778" name="l00778"></a><span class="lineno"><a class="line" href="classFor.html">  778</a></span><span class="keyword">class </span><a class="code hl_class" href="classFor.html">For</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
+<div class="line"><a id="l00779" name="l00779"></a><span class="lineno">  779</span>    std::unique_ptr&lt;Var&gt; var;</div>
+<div class="line"><a id="l00780" name="l00780"></a><span class="lineno">  780</span>    std::unique_ptr&lt;Range&gt; range;</div>
+<div class="line"><a id="l00781" name="l00781"></a><span class="lineno">  781</span>    std::unique_ptr&lt;StatementList&gt; loop;</div>
 <div class="line"><a id="l00782" name="l00782"></a><span class="lineno">  782</span> </div>
-<div class="line"><a id="l00783" name="l00783"></a><span class="lineno"><a class="line" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">  783</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">analyse</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>            <span class="keywordflow">return</span> var-&gt;analyse() || loop-&gt;analyse() || range-&gt;analyse();</div>
-<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>        }</div>
-<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span> </div>
-<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span>        <span class="keywordtype">void</span> interpet()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00788" name="l00788"></a><span class="lineno">  788</span>            range-&gt;interpet();</div>
-<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>            <span class="keywordflow">while</span>(!range-&gt;is_done()) {</div>
-<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>                var-&gt;set_value(range-&gt;get_next());</div>
-<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span>                loop-&gt;interpet();</div>
-<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>            }</div>
-<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>        }</div>
-<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span> </div>
-<div class="line"><a id="l00795" name="l00795"></a><span class="lineno"><a class="line" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">  795</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;(FOR &quot;</span>;</div>
-<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>            var-&gt;visit();</div>
-<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>            range-&gt;visit();</div>
-<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span>            std::cout &lt;&lt; <span class="stringliteral">&quot; ( &quot;</span>;</div>
-<div class="line"><a id="l00800" name="l00800"></a><span class="lineno">  800</span>            loop-&gt;visit();</div>
-<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
-<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>        }</div>
-<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>};</div>
-<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span> </div>
-<div class="line"><a id="l00808" name="l00808"></a><span class="lineno"><a class="line" href="classPrint.html">  808</a></span><span class="keyword">class </span><a class="code hl_class" href="classPrint.html">Print</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
-<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span>    std::unique_ptr&lt;Operand&gt; expr;</div>
-<div class="line"><a id="l00810" name="l00810"></a><span class="lineno">  810</span> </div>
-<div class="line"><a id="l00811" name="l00811"></a><span class="lineno">  811</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00812" name="l00812"></a><span class="lineno">  812</span>    <a class="code hl_class" href="classPrint.html">Print</a>(std::unique_ptr&lt;Operand&gt; expr) : <a class="code hl_class" href="classExpr.html">Expr</a>(), expr{std::move(expr)} {}</div>
-<div class="line"><a id="l00813" name="l00813"></a><span class="lineno">  813</span> </div>
-<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span>        std::visit([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;x) { std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>; }, expr-&gt;get_value()-&gt;value);</div>
-<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span>    }</div>
-<div class="line"><a id="l00817" name="l00817"></a><span class="lineno"><a class="line" href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">  817</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;( PRINT &quot;</span>;</div>
-<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>        expr-&gt;visit();</div>
-<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
+<div class="line"><a id="l00783" name="l00783"></a><span class="lineno">  783</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00784" name="l00784"></a><span class="lineno">  784</span>        <a class="code hl_class" href="classFor.html">For</a>(std::unique_ptr&lt;Token&gt; variable, std::unique_ptr&lt;Range&gt; range,</div>
+<div class="line"><a id="l00785" name="l00785"></a><span class="lineno">  785</span>                std::unique_ptr&lt;StatementList&gt; statement_list) : <a class="code hl_class" href="classExpr.html">Expr</a>(), var{std::make_unique&lt;Var&gt;(std::move(variable))},</div>
+<div class="line"><a id="l00786" name="l00786"></a><span class="lineno">  786</span>                    range{std::move(range)}, loop{std::move(statement_list)} {}</div>
+<div class="line"><a id="l00787" name="l00787"></a><span class="lineno">  787</span> </div>
+<div class="line"><a id="l00788" name="l00788"></a><span class="lineno"><a class="line" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">  788</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">analyse</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00789" name="l00789"></a><span class="lineno">  789</span>            <span class="keywordflow">return</span> var-&gt;analyse() || loop-&gt;analyse() || range-&gt;analyse();</div>
+<div class="line"><a id="l00790" name="l00790"></a><span class="lineno">  790</span>        }</div>
+<div class="line"><a id="l00791" name="l00791"></a><span class="lineno">  791</span> </div>
+<div class="line"><a id="l00792" name="l00792"></a><span class="lineno">  792</span>        <span class="keywordtype">void</span> interpet()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00793" name="l00793"></a><span class="lineno">  793</span>            range-&gt;interpet();</div>
+<div class="line"><a id="l00794" name="l00794"></a><span class="lineno">  794</span>            <span class="keywordflow">while</span>(!range-&gt;is_done()) {</div>
+<div class="line"><a id="l00795" name="l00795"></a><span class="lineno">  795</span>                var-&gt;set_value(range-&gt;get_next());</div>
+<div class="line"><a id="l00796" name="l00796"></a><span class="lineno">  796</span>                loop-&gt;interpet();</div>
+<div class="line"><a id="l00797" name="l00797"></a><span class="lineno">  797</span>            }</div>
+<div class="line"><a id="l00798" name="l00798"></a><span class="lineno">  798</span>        }</div>
+<div class="line"><a id="l00799" name="l00799"></a><span class="lineno">  799</span> </div>
+<div class="line"><a id="l00800" name="l00800"></a><span class="lineno"><a class="line" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">  800</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00801" name="l00801"></a><span class="lineno">  801</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;(FOR &quot;</span>;</div>
+<div class="line"><a id="l00802" name="l00802"></a><span class="lineno">  802</span>            var-&gt;visit();</div>
+<div class="line"><a id="l00803" name="l00803"></a><span class="lineno">  803</span>            range-&gt;visit();</div>
+<div class="line"><a id="l00804" name="l00804"></a><span class="lineno">  804</span>            std::cout &lt;&lt; <span class="stringliteral">&quot; ( &quot;</span>;</div>
+<div class="line"><a id="l00805" name="l00805"></a><span class="lineno">  805</span>            loop-&gt;visit();</div>
+<div class="line"><a id="l00806" name="l00806"></a><span class="lineno">  806</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;)&quot;</span>;</div>
+<div class="line"><a id="l00807" name="l00807"></a><span class="lineno">  807</span>        }</div>
+<div class="line"><a id="l00808" name="l00808"></a><span class="lineno">  808</span>};</div>
+<div class="line"><a id="l00809" name="l00809"></a><span class="lineno">  809</span> </div>
+<div class="line"><a id="l00813" name="l00813"></a><span class="lineno"><a class="line" href="classPrint.html">  813</a></span><span class="keyword">class </span><a class="code hl_class" href="classPrint.html">Print</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
+<div class="line"><a id="l00814" name="l00814"></a><span class="lineno">  814</span>    std::unique_ptr&lt;Operand&gt; expr;</div>
+<div class="line"><a id="l00815" name="l00815"></a><span class="lineno">  815</span> </div>
+<div class="line"><a id="l00816" name="l00816"></a><span class="lineno">  816</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00817" name="l00817"></a><span class="lineno">  817</span>    <a class="code hl_class" href="classPrint.html">Print</a>(std::unique_ptr&lt;Operand&gt; expr) : <a class="code hl_class" href="classExpr.html">Expr</a>(), expr{std::move(expr)} {}</div>
+<div class="line"><a id="l00818" name="l00818"></a><span class="lineno">  818</span> </div>
+<div class="line"><a id="l00819" name="l00819"></a><span class="lineno">  819</span>    <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00820" name="l00820"></a><span class="lineno">  820</span>        std::visit([](<span class="keyword">const</span> <span class="keyword">auto</span> &amp;x) { std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>; }, expr-&gt;get_value()-&gt;value);</div>
 <div class="line"><a id="l00821" name="l00821"></a><span class="lineno">  821</span>    }</div>
-<div class="line"><a id="l00822" name="l00822"></a><span class="lineno"><a class="line" href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">  822</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">analyse</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> expr-&gt;analyse(); }</div>
-<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>};</div>
-<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span> </div>
-<div class="line"><a id="l00828" name="l00828"></a><span class="lineno"><a class="line" href="classRead.html">  828</a></span><span class="keyword">class </span><a class="code hl_class" href="classRead.html">Read</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
-<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span>    std::unique_ptr&lt;Var&gt; var;</div>
-<div class="line"><a id="l00830" name="l00830"></a><span class="lineno">  830</span> </div>
-<div class="line"><a id="l00831" name="l00831"></a><span class="lineno">  831</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00832" name="l00832"></a><span class="lineno">  832</span>    <a class="code hl_class" href="classRead.html">Read</a>(std::unique_ptr&lt;Var&gt; op) : <a class="code hl_class" href="classExpr.html">Expr</a>(), var{std::move(op)} {}</div>
-<div class="line"><a id="l00833" name="l00833"></a><span class="lineno">  833</span> </div>
-<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>    <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span>        <span class="keywordflow">switch</span>(var-&gt;get_type()) {</div>
-<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span>            <span class="keywordflow">case</span> 0:</div>
-<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>                {</div>
-<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span>                    <span class="keywordtype">int</span> val;</div>
-<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>                    std::cin &gt;&gt; val;</div>
-<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>                    var-&gt;set_value(val);</div>
-<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>                }</div>
-<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>            <span class="keywordflow">case</span> 1:</div>
-<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>                {</div>
-<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>                    std::string str;</div>
-<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>                    std::cin &gt;&gt; str;</div>
-<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>                    var-&gt;set_value(str);</div>
-<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>                }</div>
-<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span> </div>
-<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>            <span class="keywordflow">case</span> 2:</div>
-<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>                {</div>
-<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>                    <span class="keywordtype">bool</span> b;</div>
-<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>                    std::cin &gt;&gt; b;</div>
-<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span>                    var-&gt;set_value(b);</div>
-<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>                }</div>
-<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>                <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>        }</div>
-<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>        <span class="keywordflow">if</span> (!std::cin) {</div>
-<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Error: input was of the wrong type, exitting...\n&quot;</span>;</div>
-<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>            std::exit(1);</div>
-<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>        }</div>
-<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>    }</div>
-<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span> </div>
-<div class="line"><a id="l00865" name="l00865"></a><span class="lineno"><a class="line" href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">  865</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;( READ &quot;</span>;</div>
-<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>        var-&gt;visit();</div>
-<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
-<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span>    }</div>
-<div class="line"><a id="l00870" name="l00870"></a><span class="lineno">  870</span> </div>
-<div class="line"><a id="l00871" name="l00871"></a><span class="lineno"><a class="line" href="classRead.html#a0e9727f11b3b62e6257356c469da7460">  871</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classRead.html#a0e9727f11b3b62e6257356c469da7460">analyse</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>        <span class="keywordflow">return</span> var-&gt;analyse();</div>
-<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>    }</div>
-<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>};</div>
+<div class="line"><a id="l00822" name="l00822"></a><span class="lineno"><a class="line" href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">  822</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00823" name="l00823"></a><span class="lineno">  823</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;( PRINT &quot;</span>;</div>
+<div class="line"><a id="l00824" name="l00824"></a><span class="lineno">  824</span>        expr-&gt;visit();</div>
+<div class="line"><a id="l00825" name="l00825"></a><span class="lineno">  825</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
+<div class="line"><a id="l00826" name="l00826"></a><span class="lineno">  826</span>    }</div>
+<div class="line"><a id="l00827" name="l00827"></a><span class="lineno"><a class="line" href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">  827</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">analyse</a>()<span class="keyword"> const override </span>{ <span class="keywordflow">return</span> expr-&gt;analyse(); }</div>
+<div class="line"><a id="l00828" name="l00828"></a><span class="lineno">  828</span>};</div>
+<div class="line"><a id="l00829" name="l00829"></a><span class="lineno">  829</span> </div>
+<div class="line"><a id="l00833" name="l00833"></a><span class="lineno"><a class="line" href="classRead.html">  833</a></span><span class="keyword">class </span><a class="code hl_class" href="classRead.html">Read</a> : <span class="keyword">public</span> <a class="code hl_class" href="classExpr.html">Expr</a> {</div>
+<div class="line"><a id="l00834" name="l00834"></a><span class="lineno">  834</span>    std::unique_ptr&lt;Var&gt; var;</div>
+<div class="line"><a id="l00835" name="l00835"></a><span class="lineno">  835</span> </div>
+<div class="line"><a id="l00836" name="l00836"></a><span class="lineno">  836</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00837" name="l00837"></a><span class="lineno">  837</span>    <a class="code hl_class" href="classRead.html">Read</a>(std::unique_ptr&lt;Var&gt; op) : <a class="code hl_class" href="classExpr.html">Expr</a>(), var{std::move(op)} {}</div>
+<div class="line"><a id="l00838" name="l00838"></a><span class="lineno">  838</span> </div>
+<div class="line"><a id="l00839" name="l00839"></a><span class="lineno">  839</span>    <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00840" name="l00840"></a><span class="lineno">  840</span>        <span class="keywordflow">switch</span>(var-&gt;get_type()) {</div>
+<div class="line"><a id="l00841" name="l00841"></a><span class="lineno">  841</span>            <span class="keywordflow">case</span> 0:</div>
+<div class="line"><a id="l00842" name="l00842"></a><span class="lineno">  842</span>                {</div>
+<div class="line"><a id="l00843" name="l00843"></a><span class="lineno">  843</span>                    <span class="keywordtype">int</span> val;</div>
+<div class="line"><a id="l00844" name="l00844"></a><span class="lineno">  844</span>                    std::cin &gt;&gt; val;</div>
+<div class="line"><a id="l00845" name="l00845"></a><span class="lineno">  845</span>                    var-&gt;set_value(val);</div>
+<div class="line"><a id="l00846" name="l00846"></a><span class="lineno">  846</span>                }</div>
+<div class="line"><a id="l00847" name="l00847"></a><span class="lineno">  847</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00848" name="l00848"></a><span class="lineno">  848</span>            <span class="keywordflow">case</span> 1:</div>
+<div class="line"><a id="l00849" name="l00849"></a><span class="lineno">  849</span>                {</div>
+<div class="line"><a id="l00850" name="l00850"></a><span class="lineno">  850</span>                    std::string str;</div>
+<div class="line"><a id="l00851" name="l00851"></a><span class="lineno">  851</span>                    std::cin &gt;&gt; str;</div>
+<div class="line"><a id="l00852" name="l00852"></a><span class="lineno">  852</span>                    var-&gt;set_value(str);</div>
+<div class="line"><a id="l00853" name="l00853"></a><span class="lineno">  853</span>                }</div>
+<div class="line"><a id="l00854" name="l00854"></a><span class="lineno">  854</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00855" name="l00855"></a><span class="lineno">  855</span> </div>
+<div class="line"><a id="l00856" name="l00856"></a><span class="lineno">  856</span>            <span class="keywordflow">case</span> 2:</div>
+<div class="line"><a id="l00857" name="l00857"></a><span class="lineno">  857</span>                {</div>
+<div class="line"><a id="l00858" name="l00858"></a><span class="lineno">  858</span>                    <span class="keywordtype">bool</span> b;</div>
+<div class="line"><a id="l00859" name="l00859"></a><span class="lineno">  859</span>                    std::cin &gt;&gt; b;</div>
+<div class="line"><a id="l00860" name="l00860"></a><span class="lineno">  860</span>                    var-&gt;set_value(b);</div>
+<div class="line"><a id="l00861" name="l00861"></a><span class="lineno">  861</span>                }</div>
+<div class="line"><a id="l00862" name="l00862"></a><span class="lineno">  862</span>                <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00863" name="l00863"></a><span class="lineno">  863</span>        }</div>
+<div class="line"><a id="l00864" name="l00864"></a><span class="lineno">  864</span>        <span class="keywordflow">if</span> (!std::cin) {</div>
+<div class="line"><a id="l00865" name="l00865"></a><span class="lineno">  865</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Error: input was of the wrong type, exitting...\n&quot;</span>;</div>
+<div class="line"><a id="l00866" name="l00866"></a><span class="lineno">  866</span>            std::exit(1);</div>
+<div class="line"><a id="l00867" name="l00867"></a><span class="lineno">  867</span>        }</div>
+<div class="line"><a id="l00868" name="l00868"></a><span class="lineno">  868</span>    }</div>
+<div class="line"><a id="l00869" name="l00869"></a><span class="lineno">  869</span> </div>
+<div class="line"><a id="l00870" name="l00870"></a><span class="lineno"><a class="line" href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">  870</a></span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00871" name="l00871"></a><span class="lineno">  871</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;( READ &quot;</span>;</div>
+<div class="line"><a id="l00872" name="l00872"></a><span class="lineno">  872</span>        var-&gt;visit();</div>
+<div class="line"><a id="l00873" name="l00873"></a><span class="lineno">  873</span>        std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
+<div class="line"><a id="l00874" name="l00874"></a><span class="lineno">  874</span>    }</div>
 <div class="line"><a id="l00875" name="l00875"></a><span class="lineno">  875</span> </div>
-<div class="line"><a id="l00880" name="l00880"></a><span class="lineno"><a class="line" href="classUnary.html">  880</a></span><span class="keyword">class </span><a class="code hl_class" href="classUnary.html">Unary</a> : <span class="keyword">public</span> <a class="code hl_class" href="classOperand.html">Operand</a> {</div>
-<div class="line"><a id="l00881" name="l00881"></a><span class="lineno">  881</span>    std::unique_ptr&lt;Operand&gt; op;</div>
-<div class="line"><a id="l00882" name="l00882"></a><span class="lineno">  882</span>    std::unique_ptr&lt;Literal&gt; evaluated;</div>
-<div class="line"><a id="l00883" name="l00883"></a><span class="lineno">  883</span> </div>
-<div class="line"><a id="l00884" name="l00884"></a><span class="lineno">  884</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00885" name="l00885"></a><span class="lineno">  885</span>        <a class="code hl_class" href="classUnary.html">Unary</a>(std::unique_ptr&lt;Operand&gt; op) : <a class="code hl_class" href="classOperand.html">Operand</a>(), op {std::move(op)} {}</div>
-<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span> </div>
-<div class="line"><a id="l00887" name="l00887"></a><span class="lineno"><a class="line" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">  887</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> *<a class="code hl_function" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">get_value</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span>            <span class="keyword">auto</span> val = op-&gt;<a class="code hl_function" href="classLiteral.html#a4657c3ddd270e5ba3e63551b659d746d">get_value</a>();</div>
-<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>            evaluated = std::make_unique&lt;Literal&gt;(!*val);</div>
-<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>            <span class="keywordflow">return</span> evaluated.get();</div>
-<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span>        }</div>
-<div class="line"><a id="l00892" name="l00892"></a><span class="lineno">  892</span> </div>
-<div class="line"><a id="l00893" name="l00893"></a><span class="lineno"><a class="line" href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">  893</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">truthy</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>            <span class="keywordflow">return</span> !op-&gt;truthy();</div>
-<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>        }</div>
-<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span> </div>
-<div class="line"><a id="l00897" name="l00897"></a><span class="lineno"><a class="line" href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">  897</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">get_type</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00898" name="l00898"></a><span class="lineno">  898</span>           <span class="keywordflow">return</span> 2;</div>
-<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>        }</div>
-<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span> </div>
-<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00902" name="l00902"></a><span class="lineno">  902</span> </div>
-<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>        }</div>
-<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span> </div>
-<div class="line"><a id="l00905" name="l00905"></a><span class="lineno"><a class="line" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">  905</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;( ! &quot;</span>;</div>
-<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span>            op-&gt;visit();</div>
-<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
-<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span>        }</div>
-<div class="line"><a id="l00910" name="l00910"></a><span class="lineno">  910</span> </div>
-<div class="line"><a id="l00911" name="l00911"></a><span class="lineno"><a class="line" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">  911</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">analyse</a>()<span class="keyword"> const override </span>{</div>
-<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>            <span class="keywordflow">return</span> op-&gt;analyse();</div>
-<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>        }</div>
-<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span> </div>
-<div class="line"><a id="l00915" name="l00915"></a><span class="lineno"><a class="line" href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">  915</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">operator+</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00916" name="l00916"></a><span class="lineno">  916</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
-<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>            std::exit(1);</div>
+<div class="line"><a id="l00876" name="l00876"></a><span class="lineno"><a class="line" href="classRead.html#a0e9727f11b3b62e6257356c469da7460">  876</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="classRead.html#a0e9727f11b3b62e6257356c469da7460">analyse</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00877" name="l00877"></a><span class="lineno">  877</span>        <span class="keywordflow">return</span> var-&gt;analyse();</div>
+<div class="line"><a id="l00878" name="l00878"></a><span class="lineno">  878</span>    }</div>
+<div class="line"><a id="l00879" name="l00879"></a><span class="lineno">  879</span>};</div>
+<div class="line"><a id="l00880" name="l00880"></a><span class="lineno">  880</span> </div>
+<div class="line"><a id="l00885" name="l00885"></a><span class="lineno"><a class="line" href="classUnary.html">  885</a></span><span class="keyword">class </span><a class="code hl_class" href="classUnary.html">Unary</a> : <span class="keyword">public</span> <a class="code hl_class" href="classOperand.html">Operand</a> {</div>
+<div class="line"><a id="l00886" name="l00886"></a><span class="lineno">  886</span>    std::unique_ptr&lt;Operand&gt; op;</div>
+<div class="line"><a id="l00887" name="l00887"></a><span class="lineno">  887</span>    std::unique_ptr&lt;Literal&gt; evaluated;</div>
+<div class="line"><a id="l00888" name="l00888"></a><span class="lineno">  888</span> </div>
+<div class="line"><a id="l00889" name="l00889"></a><span class="lineno">  889</span>    <span class="keyword">public</span>:</div>
+<div class="line"><a id="l00890" name="l00890"></a><span class="lineno">  890</span>        <a class="code hl_class" href="classUnary.html">Unary</a>(std::unique_ptr&lt;Operand&gt; op) : <a class="code hl_class" href="classOperand.html">Operand</a>(), op {std::move(op)} {}</div>
+<div class="line"><a id="l00891" name="l00891"></a><span class="lineno">  891</span> </div>
+<div class="line"><a id="l00892" name="l00892"></a><span class="lineno"><a class="line" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">  892</a></span>        <span class="keyword">virtual</span> <a class="code hl_class" href="classLiteral.html">Literal</a> *<a class="code hl_function" href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">get_value</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00893" name="l00893"></a><span class="lineno">  893</span>            <span class="keyword">auto</span> val = op-&gt;<a class="code hl_function" href="classLiteral.html#a4657c3ddd270e5ba3e63551b659d746d">get_value</a>();</div>
+<div class="line"><a id="l00894" name="l00894"></a><span class="lineno">  894</span>            evaluated = std::make_unique&lt;Literal&gt;(!*val);</div>
+<div class="line"><a id="l00895" name="l00895"></a><span class="lineno">  895</span>            <span class="keywordflow">return</span> evaluated.get();</div>
+<div class="line"><a id="l00896" name="l00896"></a><span class="lineno">  896</span>        }</div>
+<div class="line"><a id="l00897" name="l00897"></a><span class="lineno">  897</span> </div>
+<div class="line"><a id="l00898" name="l00898"></a><span class="lineno"><a class="line" href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">  898</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">truthy</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00899" name="l00899"></a><span class="lineno">  899</span>            <span class="keywordflow">return</span> !op-&gt;truthy();</div>
+<div class="line"><a id="l00900" name="l00900"></a><span class="lineno">  900</span>        }</div>
+<div class="line"><a id="l00901" name="l00901"></a><span class="lineno">  901</span> </div>
+<div class="line"><a id="l00902" name="l00902"></a><span class="lineno"><a class="line" href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">  902</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code hl_function" href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">get_type</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00903" name="l00903"></a><span class="lineno">  903</span>           <span class="keywordflow">return</span> 2;</div>
+<div class="line"><a id="l00904" name="l00904"></a><span class="lineno">  904</span>        }</div>
+<div class="line"><a id="l00905" name="l00905"></a><span class="lineno">  905</span> </div>
+<div class="line"><a id="l00906" name="l00906"></a><span class="lineno">  906</span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> interpet(<span class="keywordtype">void</span>)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00907" name="l00907"></a><span class="lineno">  907</span> </div>
+<div class="line"><a id="l00908" name="l00908"></a><span class="lineno">  908</span>        }</div>
+<div class="line"><a id="l00909" name="l00909"></a><span class="lineno">  909</span> </div>
+<div class="line"><a id="l00910" name="l00910"></a><span class="lineno"><a class="line" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">  910</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">visit</a>(<span class="keywordtype">void</span>)<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00911" name="l00911"></a><span class="lineno">  911</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;( ! &quot;</span>;</div>
+<div class="line"><a id="l00912" name="l00912"></a><span class="lineno">  912</span>            op-&gt;visit();</div>
+<div class="line"><a id="l00913" name="l00913"></a><span class="lineno">  913</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;) &quot;</span>;</div>
+<div class="line"><a id="l00914" name="l00914"></a><span class="lineno">  914</span>        }</div>
+<div class="line"><a id="l00915" name="l00915"></a><span class="lineno">  915</span> </div>
+<div class="line"><a id="l00916" name="l00916"></a><span class="lineno"><a class="line" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">  916</a></span>        <span class="keyword">virtual</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">analyse</a>()<span class="keyword"> const override </span>{</div>
+<div class="line"><a id="l00917" name="l00917"></a><span class="lineno">  917</span>            <span class="keywordflow">return</span> op-&gt;analyse();</div>
 <div class="line"><a id="l00918" name="l00918"></a><span class="lineno">  918</span>        }</div>
 <div class="line"><a id="l00919" name="l00919"></a><span class="lineno">  919</span> </div>
-<div class="line"><a id="l00920" name="l00920"></a><span class="lineno"><a class="line" href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">  920</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">operator-</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00920" name="l00920"></a><span class="lineno"><a class="line" href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">  920</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">operator+</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00921" name="l00921"></a><span class="lineno">  921</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
 <div class="line"><a id="l00922" name="l00922"></a><span class="lineno">  922</span>            std::exit(1);</div>
 <div class="line"><a id="l00923" name="l00923"></a><span class="lineno">  923</span>        }</div>
 <div class="line"><a id="l00924" name="l00924"></a><span class="lineno">  924</span> </div>
-<div class="line"><a id="l00925" name="l00925"></a><span class="lineno"><a class="line" href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">  925</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">operator*</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00925" name="l00925"></a><span class="lineno"><a class="line" href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">  925</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">operator-</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00926" name="l00926"></a><span class="lineno">  926</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
 <div class="line"><a id="l00927" name="l00927"></a><span class="lineno">  927</span>            std::exit(1);</div>
 <div class="line"><a id="l00928" name="l00928"></a><span class="lineno">  928</span>        }</div>
 <div class="line"><a id="l00929" name="l00929"></a><span class="lineno">  929</span> </div>
-<div class="line"><a id="l00930" name="l00930"></a><span class="lineno"><a class="line" href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">  930</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">operator/</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00930" name="l00930"></a><span class="lineno"><a class="line" href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">  930</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">operator*</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00931" name="l00931"></a><span class="lineno">  931</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
 <div class="line"><a id="l00932" name="l00932"></a><span class="lineno">  932</span>            std::exit(1);</div>
 <div class="line"><a id="l00933" name="l00933"></a><span class="lineno">  933</span>        }</div>
 <div class="line"><a id="l00934" name="l00934"></a><span class="lineno">  934</span> </div>
-<div class="line"><a id="l00935" name="l00935"></a><span class="lineno"><a class="line" href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">  935</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">operator&amp;&amp;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00935" name="l00935"></a><span class="lineno"><a class="line" href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">  935</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">operator/</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00936" name="l00936"></a><span class="lineno">  936</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
 <div class="line"><a id="l00937" name="l00937"></a><span class="lineno">  937</span>            std::exit(1);</div>
 <div class="line"><a id="l00938" name="l00938"></a><span class="lineno">  938</span>        }</div>
 <div class="line"><a id="l00939" name="l00939"></a><span class="lineno">  939</span> </div>
-<div class="line"><a id="l00940" name="l00940"></a><span class="lineno"><a class="line" href="classUnary.html#a2638db4c0efc54e12845d53db761e200">  940</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a2638db4c0efc54e12845d53db761e200">operator==</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00940" name="l00940"></a><span class="lineno"><a class="line" href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">  940</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">operator&amp;&amp;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00941" name="l00941"></a><span class="lineno">  941</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
 <div class="line"><a id="l00942" name="l00942"></a><span class="lineno">  942</span>            std::exit(1);</div>
 <div class="line"><a id="l00943" name="l00943"></a><span class="lineno">  943</span>        }</div>
 <div class="line"><a id="l00944" name="l00944"></a><span class="lineno">  944</span> </div>
-<div class="line"><a id="l00945" name="l00945"></a><span class="lineno"><a class="line" href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">  945</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">operator&lt;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00945" name="l00945"></a><span class="lineno"><a class="line" href="classUnary.html#a2638db4c0efc54e12845d53db761e200">  945</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a2638db4c0efc54e12845d53db761e200">operator==</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
 <div class="line"><a id="l00946" name="l00946"></a><span class="lineno">  946</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
 <div class="line"><a id="l00947" name="l00947"></a><span class="lineno">  947</span>            std::exit(1);</div>
 <div class="line"><a id="l00948" name="l00948"></a><span class="lineno">  948</span>        }</div>
 <div class="line"><a id="l00949" name="l00949"></a><span class="lineno">  949</span> </div>
-<div class="line"><a id="l00950" name="l00950"></a><span class="lineno"><a class="line" href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">  950</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">operator!</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>            <span class="keywordflow">return</span> !*this-&gt;op;</div>
-<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>        }</div>
-<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>};</div>
-<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00950" name="l00950"></a><span class="lineno"><a class="line" href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">  950</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">operator&lt;</a>(<a class="code hl_class" href="classOperand.html">Operand</a> &amp;)<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00951" name="l00951"></a><span class="lineno">  951</span>            std::cout &lt;&lt; <span class="stringliteral">&quot;Invalid operation\n&quot;</span>;</div>
+<div class="line"><a id="l00952" name="l00952"></a><span class="lineno">  952</span>            std::exit(1);</div>
+<div class="line"><a id="l00953" name="l00953"></a><span class="lineno">  953</span>        }</div>
+<div class="line"><a id="l00954" name="l00954"></a><span class="lineno">  954</span> </div>
+<div class="line"><a id="l00955" name="l00955"></a><span class="lineno"><a class="line" href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">  955</a></span>        <a class="code hl_class" href="classLiteral.html">Literal</a> <a class="code hl_function" href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">operator!</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a id="l00956" name="l00956"></a><span class="lineno">  956</span>            <span class="keywordflow">return</span> !*this-&gt;op;</div>
+<div class="line"><a id="l00957" name="l00957"></a><span class="lineno">  957</span>        }</div>
+<div class="line"><a id="l00958" name="l00958"></a><span class="lineno">  958</span>};</div>
+<div class="line"><a id="l00959" name="l00959"></a><span class="lineno">  959</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassBop_html"><div class="ttname"><a href="classBop.html">Bop</a></div><div class="ttdef"><b>Definition:</b> expr.h:511</div></div>
-<div class="ttc" id="aclassBop_html_a142f1a98669dd6ad6bfe47c78bbb48b7"><div class="ttname"><a href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">Bop::operator*</a></div><div class="ttdeci">virtual Literal operator*(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:629</div></div>
-<div class="ttc" id="aclassBop_html_a1e8d0a672370bfbb6e58a49fdd4e0ed8"><div class="ttname"><a href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">Bop::get_value</a></div><div class="ttdeci">virtual Literal * get_value() override</div><div class="ttdef"><b>Definition:</b> expr.h:542</div></div>
-<div class="ttc" id="aclassBop_html_a2203d7ec450d1eeaa391371cc300785e"><div class="ttname"><a href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">Bop::truthy</a></div><div class="ttdeci">bool truthy() override</div><div class="ttdef"><b>Definition:</b> expr.h:590</div></div>
-<div class="ttc" id="aclassBop_html_a2cfcb8455e5e23de2bc7f0bd4d692f04"><div class="ttname"><a href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">Bop::operator-</a></div><div class="ttdeci">virtual Literal operator-(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:625</div></div>
-<div class="ttc" id="aclassBop_html_a4bbb7a9c3ea494d31bcbe9ba3b60c423"><div class="ttname"><a href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">Bop::operator!</a></div><div class="ttdeci">virtual Literal operator!() override</div><div class="ttdef"><b>Definition:</b> expr.h:649</div></div>
-<div class="ttc" id="aclassBop_html_a69191d6fd12dc684c51f06ae66d41a60"><div class="ttname"><a href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">Bop::operator&lt;</a></div><div class="ttdeci">virtual Literal operator&lt;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:645</div></div>
-<div class="ttc" id="aclassBop_html_a7b681ba1a899fb6fe717aa302304d29a"><div class="ttname"><a href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">Bop::visit</a></div><div class="ttdeci">virtual void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:613</div></div>
-<div class="ttc" id="aclassBop_html_a7ba76a51676d066a2a183a1594a96111"><div class="ttname"><a href="classBop.html#a7ba76a51676d066a2a183a1594a96111">Bop::get_type</a></div><div class="ttdeci">virtual int get_type() override</div><div class="ttdef"><b>Definition:</b> expr.h:594</div></div>
-<div class="ttc" id="aclassBop_html_a8e43570b50f38fa9cfaf16de496d2efa"><div class="ttname"><a href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">Bop::operator&amp;&amp;</a></div><div class="ttdeci">virtual Literal operator&amp;&amp;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:637</div></div>
+<div class="ttc" id="aclassBop_html_a142f1a98669dd6ad6bfe47c78bbb48b7"><div class="ttname"><a href="classBop.html#a142f1a98669dd6ad6bfe47c78bbb48b7">Bop::operator*</a></div><div class="ttdeci">virtual Literal operator*(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:634</div></div>
+<div class="ttc" id="aclassBop_html_a1e8d0a672370bfbb6e58a49fdd4e0ed8"><div class="ttname"><a href="classBop.html#a1e8d0a672370bfbb6e58a49fdd4e0ed8">Bop::get_value</a></div><div class="ttdeci">virtual Literal * get_value() override</div><div class="ttdef"><b>Definition:</b> expr.h:547</div></div>
+<div class="ttc" id="aclassBop_html_a2203d7ec450d1eeaa391371cc300785e"><div class="ttname"><a href="classBop.html#a2203d7ec450d1eeaa391371cc300785e">Bop::truthy</a></div><div class="ttdeci">bool truthy() override</div><div class="ttdef"><b>Definition:</b> expr.h:595</div></div>
+<div class="ttc" id="aclassBop_html_a2cfcb8455e5e23de2bc7f0bd4d692f04"><div class="ttname"><a href="classBop.html#a2cfcb8455e5e23de2bc7f0bd4d692f04">Bop::operator-</a></div><div class="ttdeci">virtual Literal operator-(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:630</div></div>
+<div class="ttc" id="aclassBop_html_a4bbb7a9c3ea494d31bcbe9ba3b60c423"><div class="ttname"><a href="classBop.html#a4bbb7a9c3ea494d31bcbe9ba3b60c423">Bop::operator!</a></div><div class="ttdeci">virtual Literal operator!() override</div><div class="ttdef"><b>Definition:</b> expr.h:654</div></div>
+<div class="ttc" id="aclassBop_html_a69191d6fd12dc684c51f06ae66d41a60"><div class="ttname"><a href="classBop.html#a69191d6fd12dc684c51f06ae66d41a60">Bop::operator&lt;</a></div><div class="ttdeci">virtual Literal operator&lt;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:650</div></div>
+<div class="ttc" id="aclassBop_html_a7b681ba1a899fb6fe717aa302304d29a"><div class="ttname"><a href="classBop.html#a7b681ba1a899fb6fe717aa302304d29a">Bop::visit</a></div><div class="ttdeci">virtual void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:618</div></div>
+<div class="ttc" id="aclassBop_html_a7ba76a51676d066a2a183a1594a96111"><div class="ttname"><a href="classBop.html#a7ba76a51676d066a2a183a1594a96111">Bop::get_type</a></div><div class="ttdeci">virtual int get_type() override</div><div class="ttdef"><b>Definition:</b> expr.h:599</div></div>
+<div class="ttc" id="aclassBop_html_a8e43570b50f38fa9cfaf16de496d2efa"><div class="ttname"><a href="classBop.html#a8e43570b50f38fa9cfaf16de496d2efa">Bop::operator&amp;&amp;</a></div><div class="ttdeci">virtual Literal operator&amp;&amp;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:642</div></div>
 <div class="ttc" id="aclassBop_html_a9b5803caf0398a42bb46e59416009408"><div class="ttname"><a href="classBop.html#a9b5803caf0398a42bb46e59416009408">Bop::Bop</a></div><div class="ttdeci">Bop(std::unique_ptr&lt; Token &gt; tok, std::unique_ptr&lt; Operand &gt; left, std::unique_ptr&lt; Operand &gt; right)</div><div class="ttdef"><b>Definition:</b> expr.h:522</div></div>
-<div class="ttc" id="aclassBop_html_ac2504be10088640871bb1091f2b8abdf"><div class="ttname"><a href="classBop.html#ac2504be10088640871bb1091f2b8abdf">Bop::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:526</div></div>
-<div class="ttc" id="aclassBop_html_ace84769a052a00b372f5479b2b812645"><div class="ttname"><a href="classBop.html#ace84769a052a00b372f5479b2b812645">Bop::operator/</a></div><div class="ttdeci">virtual Literal operator/(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:633</div></div>
-<div class="ttc" id="aclassBop_html_ae5eb981175bd47348ecc4b243a7e77bd"><div class="ttname"><a href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">Bop::operator==</a></div><div class="ttdeci">virtual Literal operator==(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:641</div></div>
-<div class="ttc" id="aclassBop_html_af27eb426e70f7fc6220b5edb46b66ead"><div class="ttname"><a href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">Bop::operator+</a></div><div class="ttdeci">virtual Literal operator+(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:621</div></div>
+<div class="ttc" id="aclassBop_html_ac2504be10088640871bb1091f2b8abdf"><div class="ttname"><a href="classBop.html#ac2504be10088640871bb1091f2b8abdf">Bop::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:531</div></div>
+<div class="ttc" id="aclassBop_html_ace84769a052a00b372f5479b2b812645"><div class="ttname"><a href="classBop.html#ace84769a052a00b372f5479b2b812645">Bop::operator/</a></div><div class="ttdeci">virtual Literal operator/(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:638</div></div>
+<div class="ttc" id="aclassBop_html_ae5eb981175bd47348ecc4b243a7e77bd"><div class="ttname"><a href="classBop.html#ae5eb981175bd47348ecc4b243a7e77bd">Bop::operator==</a></div><div class="ttdeci">virtual Literal operator==(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:646</div></div>
+<div class="ttc" id="aclassBop_html_af27eb426e70f7fc6220b5edb46b66ead"><div class="ttname"><a href="classBop.html#af27eb426e70f7fc6220b5edb46b66ead">Bop::operator+</a></div><div class="ttdeci">virtual Literal operator+(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:626</div></div>
 <div class="ttc" id="aclassExpr_html"><div class="ttname"><a href="classExpr.html">Expr</a></div><div class="ttdef"><b>Definition:</b> expr.h:18</div></div>
 <div class="ttc" id="aclassExpr_html_a06ca8d56bc1a53dd4733fa0d107ccff6"><div class="ttname"><a href="classExpr.html#a06ca8d56bc1a53dd4733fa0d107ccff6">Expr::analyse</a></div><div class="ttdeci">virtual bool analyse() const =0</div></div>
 <div class="ttc" id="aclassExpr_html_a3edae65ed90b0e8fb073232c84b3bc3b"><div class="ttname"><a href="classExpr.html#a3edae65ed90b0e8fb073232c84b3bc3b">Expr::visit</a></div><div class="ttdeci">virtual void visit(void) const =0</div></div>
-<div class="ttc" id="aclassFor_html"><div class="ttname"><a href="classFor.html">For</a></div><div class="ttdef"><b>Definition:</b> expr.h:773</div></div>
-<div class="ttc" id="aclassFor_html_a2f1c4cbca016e55ee1063138a5f746e4"><div class="ttname"><a href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">For::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:795</div></div>
-<div class="ttc" id="aclassFor_html_a3d8cc1283fd82a3fd38f0cf001560d2b"><div class="ttname"><a href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">For::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:783</div></div>
-<div class="ttc" id="aclassIf_html"><div class="ttname"><a href="classIf.html">If</a></div><div class="ttdef"><b>Definition:</b> expr.h:664</div></div>
-<div class="ttc" id="aclassIf_html_a055769dab43bfd2f516b4b08ee97575d"><div class="ttname"><a href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">If::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:683</div></div>
-<div class="ttc" id="aclassIf_html_a1440af01a2ab6c6d0321e6ec76887704"><div class="ttname"><a href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">If::visit</a></div><div class="ttdeci">void visit() const override</div><div class="ttdef"><b>Definition:</b> expr.h:701</div></div>
-<div class="ttc" id="aclassIf_html_ab30a523e8480d20d34a65656f5dc0b67"><div class="ttname"><a href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">If::If</a></div><div class="ttdeci">If(std::unique_ptr&lt; Operand &gt; condition, std::unique_ptr&lt; StatementList &gt; truthy, std::unique_ptr&lt; StatementList &gt; falsy)</div><div class="ttdef"><b>Definition:</b> expr.h:678</div></div>
+<div class="ttc" id="aclassFor_html"><div class="ttname"><a href="classFor.html">For</a></div><div class="ttdef"><b>Definition:</b> expr.h:778</div></div>
+<div class="ttc" id="aclassFor_html_a2f1c4cbca016e55ee1063138a5f746e4"><div class="ttname"><a href="classFor.html#a2f1c4cbca016e55ee1063138a5f746e4">For::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:800</div></div>
+<div class="ttc" id="aclassFor_html_a3d8cc1283fd82a3fd38f0cf001560d2b"><div class="ttname"><a href="classFor.html#a3d8cc1283fd82a3fd38f0cf001560d2b">For::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:788</div></div>
+<div class="ttc" id="aclassIf_html"><div class="ttname"><a href="classIf.html">If</a></div><div class="ttdef"><b>Definition:</b> expr.h:669</div></div>
+<div class="ttc" id="aclassIf_html_a055769dab43bfd2f516b4b08ee97575d"><div class="ttname"><a href="classIf.html#a055769dab43bfd2f516b4b08ee97575d">If::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:688</div></div>
+<div class="ttc" id="aclassIf_html_a1440af01a2ab6c6d0321e6ec76887704"><div class="ttname"><a href="classIf.html#a1440af01a2ab6c6d0321e6ec76887704">If::visit</a></div><div class="ttdeci">void visit() const override</div><div class="ttdef"><b>Definition:</b> expr.h:706</div></div>
+<div class="ttc" id="aclassIf_html_ab30a523e8480d20d34a65656f5dc0b67"><div class="ttname"><a href="classIf.html#ab30a523e8480d20d34a65656f5dc0b67">If::If</a></div><div class="ttdeci">If(std::unique_ptr&lt; Operand &gt; condition, std::unique_ptr&lt; StatementList &gt; truthy, std::unique_ptr&lt; StatementList &gt; falsy)</div><div class="ttdef"><b>Definition:</b> expr.h:683</div></div>
 <div class="ttc" id="aclassLiteral_html"><div class="ttname"><a href="classLiteral.html">Literal</a></div><div class="ttdef"><b>Definition:</b> expr.h:187</div></div>
 <div class="ttc" id="aclassLiteral_html_a0a3a60fa3e75b2a1a6eee4c8e4b173f3"><div class="ttname"><a href="classLiteral.html#a0a3a60fa3e75b2a1a6eee4c8e4b173f3">Literal::operator*</a></div><div class="ttdeci">Literal operator*(Operand &amp;l) override</div><div class="ttdef"><b>Definition:</b> expr.h:275</div></div>
 <div class="ttc" id="aclassLiteral_html_a10ee7f4bf33f6d78bb113b05f442cb49"><div class="ttname"><a href="classLiteral.html#a10ee7f4bf33f6d78bb113b05f442cb49">Literal::operator&amp;&amp;</a></div><div class="ttdeci">Literal operator&amp;&amp;(Operand &amp;l) override</div><div class="ttdef"><b>Definition:</b> expr.h:293</div></div>
@@ -944,37 +949,37 @@ $(function() {
 <div class="ttc" id="aclassOperand_html_aca8b39aaa1f1f366f9d84cb6fe3ac1ad"><div class="ttname"><a href="classOperand.html#aca8b39aaa1f1f366f9d84cb6fe3ac1ad">Operand::operator&amp;&amp;</a></div><div class="ttdeci">virtual Literal operator&amp;&amp;(Operand &amp;l)=0</div></div>
 <div class="ttc" id="aclassOperand_html_ae6c792499b1ad0d6a1ad66b6690879ef"><div class="ttname"><a href="classOperand.html#ae6c792499b1ad0d6a1ad66b6690879ef">Operand::operator!</a></div><div class="ttdeci">virtual Literal operator!()=0</div></div>
 <div class="ttc" id="aclassOperand_html_af48346cf2f0e5c36a6cff9ff5d4f1174"><div class="ttname"><a href="classOperand.html#af48346cf2f0e5c36a6cff9ff5d4f1174">Operand::operator&lt;</a></div><div class="ttdeci">virtual Literal operator&lt;(Operand &amp;l)=0</div></div>
-<div class="ttc" id="aclassPrint_html"><div class="ttname"><a href="classPrint.html">Print</a></div><div class="ttdef"><b>Definition:</b> expr.h:808</div></div>
-<div class="ttc" id="aclassPrint_html_a009b71e6bb9813706aa9aa01b157cb0c"><div class="ttname"><a href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">Print::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:817</div></div>
-<div class="ttc" id="aclassPrint_html_a9410e69ea37e4991afbb1825be8b1673"><div class="ttname"><a href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">Print::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:822</div></div>
-<div class="ttc" id="aclassRange_html"><div class="ttname"><a href="classRange.html">Range</a></div><div class="ttdef"><b>Definition:</b> expr.h:719</div></div>
-<div class="ttc" id="aclassRange_html_a102920685f9fce3de95aa539d763702d"><div class="ttname"><a href="classRange.html#a102920685f9fce3de95aa539d763702d">Range::interpet</a></div><div class="ttdeci">void interpet() override</div><div class="ttdef"><b>Definition:</b> expr.h:757</div></div>
-<div class="ttc" id="aclassRange_html_a40da89d7d2c3f92ca379a80cd54f8ed5"><div class="ttname"><a href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">Range::get_next</a></div><div class="ttdeci">int get_next()</div><div class="ttdef"><b>Definition:</b> expr.h:732</div></div>
-<div class="ttc" id="aclassRange_html_a4d7e581038a13d50c74ccb07a9c2aee1"><div class="ttname"><a href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">Range::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:743</div></div>
-<div class="ttc" id="aclassRange_html_a5e34e2b7a1deccff96d2d57950d137e4"><div class="ttname"><a href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">Range::is_done</a></div><div class="ttdeci">bool is_done()</div><div class="ttdef"><b>Definition:</b> expr.h:739</div></div>
-<div class="ttc" id="aclassRange_html_a8c426ef5b0d3b9825f1077c2f6f85db9"><div class="ttname"><a href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">Range::visit</a></div><div class="ttdeci">void visit() const override</div><div class="ttdef"><b>Definition:</b> expr.h:763</div></div>
-<div class="ttc" id="aclassRead_html"><div class="ttname"><a href="classRead.html">Read</a></div><div class="ttdef"><b>Definition:</b> expr.h:828</div></div>
-<div class="ttc" id="aclassRead_html_a0e9727f11b3b62e6257356c469da7460"><div class="ttname"><a href="classRead.html#a0e9727f11b3b62e6257356c469da7460">Read::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:871</div></div>
-<div class="ttc" id="aclassRead_html_a6376f03c44d89b572cf72f9cd6ad060b"><div class="ttname"><a href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">Read::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:865</div></div>
+<div class="ttc" id="aclassPrint_html"><div class="ttname"><a href="classPrint.html">Print</a></div><div class="ttdef"><b>Definition:</b> expr.h:813</div></div>
+<div class="ttc" id="aclassPrint_html_a009b71e6bb9813706aa9aa01b157cb0c"><div class="ttname"><a href="classPrint.html#a009b71e6bb9813706aa9aa01b157cb0c">Print::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:822</div></div>
+<div class="ttc" id="aclassPrint_html_a9410e69ea37e4991afbb1825be8b1673"><div class="ttname"><a href="classPrint.html#a9410e69ea37e4991afbb1825be8b1673">Print::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:827</div></div>
+<div class="ttc" id="aclassRange_html"><div class="ttname"><a href="classRange.html">Range</a></div><div class="ttdef"><b>Definition:</b> expr.h:724</div></div>
+<div class="ttc" id="aclassRange_html_a102920685f9fce3de95aa539d763702d"><div class="ttname"><a href="classRange.html#a102920685f9fce3de95aa539d763702d">Range::interpet</a></div><div class="ttdeci">void interpet() override</div><div class="ttdef"><b>Definition:</b> expr.h:762</div></div>
+<div class="ttc" id="aclassRange_html_a40da89d7d2c3f92ca379a80cd54f8ed5"><div class="ttname"><a href="classRange.html#a40da89d7d2c3f92ca379a80cd54f8ed5">Range::get_next</a></div><div class="ttdeci">int get_next()</div><div class="ttdef"><b>Definition:</b> expr.h:737</div></div>
+<div class="ttc" id="aclassRange_html_a4d7e581038a13d50c74ccb07a9c2aee1"><div class="ttname"><a href="classRange.html#a4d7e581038a13d50c74ccb07a9c2aee1">Range::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:748</div></div>
+<div class="ttc" id="aclassRange_html_a5e34e2b7a1deccff96d2d57950d137e4"><div class="ttname"><a href="classRange.html#a5e34e2b7a1deccff96d2d57950d137e4">Range::is_done</a></div><div class="ttdeci">bool is_done()</div><div class="ttdef"><b>Definition:</b> expr.h:744</div></div>
+<div class="ttc" id="aclassRange_html_a8c426ef5b0d3b9825f1077c2f6f85db9"><div class="ttname"><a href="classRange.html#a8c426ef5b0d3b9825f1077c2f6f85db9">Range::visit</a></div><div class="ttdeci">void visit() const override</div><div class="ttdef"><b>Definition:</b> expr.h:768</div></div>
+<div class="ttc" id="aclassRead_html"><div class="ttname"><a href="classRead.html">Read</a></div><div class="ttdef"><b>Definition:</b> expr.h:833</div></div>
+<div class="ttc" id="aclassRead_html_a0e9727f11b3b62e6257356c469da7460"><div class="ttname"><a href="classRead.html#a0e9727f11b3b62e6257356c469da7460">Read::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:876</div></div>
+<div class="ttc" id="aclassRead_html_a6376f03c44d89b572cf72f9cd6ad060b"><div class="ttname"><a href="classRead.html#a6376f03c44d89b572cf72f9cd6ad060b">Read::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:870</div></div>
 <div class="ttc" id="aclassStatementList_html"><div class="ttname"><a href="classStatementList.html">StatementList</a></div><div class="ttdef"><b>Definition:</b> expr.h:133</div></div>
 <div class="ttc" id="aclassStatementList_html_a2091392fcd9ff091762d1f84c8bbe337"><div class="ttname"><a href="classStatementList.html#a2091392fcd9ff091762d1f84c8bbe337">StatementList::visit</a></div><div class="ttdeci">void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:157</div></div>
 <div class="ttc" id="aclassStatementList_html_a2f79218c178c7d27da57d6d75393e64c"><div class="ttname"><a href="classStatementList.html#a2f79218c178c7d27da57d6d75393e64c">StatementList::analyse</a></div><div class="ttdeci">bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:141</div></div>
 <div class="ttc" id="aclassSymbolTable_html_a4f95379ba298c1990f598df3d598320f"><div class="ttname"><a href="classSymbolTable.html#a4f95379ba298c1990f598df3d598320f">SymbolTable::add_symbol</a></div><div class="ttdeci">bool add_symbol(std::string_view symbol, std::unique_ptr&lt; Literal &gt; value)</div><div class="ttdef"><b>Definition:</b> symbols.cpp:12</div></div>
 <div class="ttc" id="aclassSymbolTable_html_ae7845b3b228471912ed39b1eb3df92b5"><div class="ttname"><a href="classSymbolTable.html#ae7845b3b228471912ed39b1eb3df92b5">SymbolTable::exists</a></div><div class="ttdeci">bool exists(std::string_view symbol)</div><div class="ttdef"><b>Definition:</b> symbols.cpp:46</div></div>
-<div class="ttc" id="aclassUnary_html"><div class="ttname"><a href="classUnary.html">Unary</a></div><div class="ttdef"><b>Definition:</b> expr.h:880</div></div>
-<div class="ttc" id="aclassUnary_html_a1f489fdb7f995f3bbbbc69ee8d68b97c"><div class="ttname"><a href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">Unary::analyse</a></div><div class="ttdeci">virtual bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:911</div></div>
-<div class="ttc" id="aclassUnary_html_a24feea5bb3a51d2c520c12a4b76d9fdd"><div class="ttname"><a href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">Unary::operator!</a></div><div class="ttdeci">Literal operator!() override</div><div class="ttdef"><b>Definition:</b> expr.h:950</div></div>
-<div class="ttc" id="aclassUnary_html_a2638db4c0efc54e12845d53db761e200"><div class="ttname"><a href="classUnary.html#a2638db4c0efc54e12845d53db761e200">Unary::operator==</a></div><div class="ttdeci">Literal operator==(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:940</div></div>
-<div class="ttc" id="aclassUnary_html_a2d6ccf52e88f6d8cce9676e4a9d296ea"><div class="ttname"><a href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">Unary::operator+</a></div><div class="ttdeci">Literal operator+(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:915</div></div>
-<div class="ttc" id="aclassUnary_html_a41b63291f9eeea3854d1897c8079fee5"><div class="ttname"><a href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">Unary::operator-</a></div><div class="ttdeci">Literal operator-(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:920</div></div>
-<div class="ttc" id="aclassUnary_html_a44282f7e04c61e1af3e1745ea2b307c4"><div class="ttname"><a href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">Unary::operator&amp;&amp;</a></div><div class="ttdeci">Literal operator&amp;&amp;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:935</div></div>
-<div class="ttc" id="aclassUnary_html_a726e14a154abc3a2620ad4236619d0b0"><div class="ttname"><a href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">Unary::operator&lt;</a></div><div class="ttdeci">Literal operator&lt;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:945</div></div>
-<div class="ttc" id="aclassUnary_html_ab15a59faff1ddccb7158887893b81d34"><div class="ttname"><a href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">Unary::get_type</a></div><div class="ttdeci">virtual int get_type() override</div><div class="ttdef"><b>Definition:</b> expr.h:897</div></div>
-<div class="ttc" id="aclassUnary_html_ac49d7b6b8a1875dcd89c0f2ecdf1ad90"><div class="ttname"><a href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">Unary::operator/</a></div><div class="ttdeci">Literal operator/(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:930</div></div>
-<div class="ttc" id="aclassUnary_html_acc442bc64f9d8d8763e03979a51a06ec"><div class="ttname"><a href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">Unary::truthy</a></div><div class="ttdeci">bool truthy() override</div><div class="ttdef"><b>Definition:</b> expr.h:893</div></div>
-<div class="ttc" id="aclassUnary_html_ae2c452fc180e1eb9d17f3704f930e95d"><div class="ttname"><a href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">Unary::visit</a></div><div class="ttdeci">virtual void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:905</div></div>
-<div class="ttc" id="aclassUnary_html_ae9daf4e57b28c67c06f28068742857fe"><div class="ttname"><a href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">Unary::operator*</a></div><div class="ttdeci">Literal operator*(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:925</div></div>
-<div class="ttc" id="aclassUnary_html_af67dd3a8c1b31647294224b8d1e1641f"><div class="ttname"><a href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">Unary::get_value</a></div><div class="ttdeci">virtual Literal * get_value() override</div><div class="ttdef"><b>Definition:</b> expr.h:887</div></div>
+<div class="ttc" id="aclassUnary_html"><div class="ttname"><a href="classUnary.html">Unary</a></div><div class="ttdef"><b>Definition:</b> expr.h:885</div></div>
+<div class="ttc" id="aclassUnary_html_a1f489fdb7f995f3bbbbc69ee8d68b97c"><div class="ttname"><a href="classUnary.html#a1f489fdb7f995f3bbbbc69ee8d68b97c">Unary::analyse</a></div><div class="ttdeci">virtual bool analyse() const override</div><div class="ttdef"><b>Definition:</b> expr.h:916</div></div>
+<div class="ttc" id="aclassUnary_html_a24feea5bb3a51d2c520c12a4b76d9fdd"><div class="ttname"><a href="classUnary.html#a24feea5bb3a51d2c520c12a4b76d9fdd">Unary::operator!</a></div><div class="ttdeci">Literal operator!() override</div><div class="ttdef"><b>Definition:</b> expr.h:955</div></div>
+<div class="ttc" id="aclassUnary_html_a2638db4c0efc54e12845d53db761e200"><div class="ttname"><a href="classUnary.html#a2638db4c0efc54e12845d53db761e200">Unary::operator==</a></div><div class="ttdeci">Literal operator==(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:945</div></div>
+<div class="ttc" id="aclassUnary_html_a2d6ccf52e88f6d8cce9676e4a9d296ea"><div class="ttname"><a href="classUnary.html#a2d6ccf52e88f6d8cce9676e4a9d296ea">Unary::operator+</a></div><div class="ttdeci">Literal operator+(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:920</div></div>
+<div class="ttc" id="aclassUnary_html_a41b63291f9eeea3854d1897c8079fee5"><div class="ttname"><a href="classUnary.html#a41b63291f9eeea3854d1897c8079fee5">Unary::operator-</a></div><div class="ttdeci">Literal operator-(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:925</div></div>
+<div class="ttc" id="aclassUnary_html_a44282f7e04c61e1af3e1745ea2b307c4"><div class="ttname"><a href="classUnary.html#a44282f7e04c61e1af3e1745ea2b307c4">Unary::operator&amp;&amp;</a></div><div class="ttdeci">Literal operator&amp;&amp;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:940</div></div>
+<div class="ttc" id="aclassUnary_html_a726e14a154abc3a2620ad4236619d0b0"><div class="ttname"><a href="classUnary.html#a726e14a154abc3a2620ad4236619d0b0">Unary::operator&lt;</a></div><div class="ttdeci">Literal operator&lt;(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:950</div></div>
+<div class="ttc" id="aclassUnary_html_ab15a59faff1ddccb7158887893b81d34"><div class="ttname"><a href="classUnary.html#ab15a59faff1ddccb7158887893b81d34">Unary::get_type</a></div><div class="ttdeci">virtual int get_type() override</div><div class="ttdef"><b>Definition:</b> expr.h:902</div></div>
+<div class="ttc" id="aclassUnary_html_ac49d7b6b8a1875dcd89c0f2ecdf1ad90"><div class="ttname"><a href="classUnary.html#ac49d7b6b8a1875dcd89c0f2ecdf1ad90">Unary::operator/</a></div><div class="ttdeci">Literal operator/(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:935</div></div>
+<div class="ttc" id="aclassUnary_html_acc442bc64f9d8d8763e03979a51a06ec"><div class="ttname"><a href="classUnary.html#acc442bc64f9d8d8763e03979a51a06ec">Unary::truthy</a></div><div class="ttdeci">bool truthy() override</div><div class="ttdef"><b>Definition:</b> expr.h:898</div></div>
+<div class="ttc" id="aclassUnary_html_ae2c452fc180e1eb9d17f3704f930e95d"><div class="ttname"><a href="classUnary.html#ae2c452fc180e1eb9d17f3704f930e95d">Unary::visit</a></div><div class="ttdeci">virtual void visit(void) const override</div><div class="ttdef"><b>Definition:</b> expr.h:910</div></div>
+<div class="ttc" id="aclassUnary_html_ae9daf4e57b28c67c06f28068742857fe"><div class="ttname"><a href="classUnary.html#ae9daf4e57b28c67c06f28068742857fe">Unary::operator*</a></div><div class="ttdeci">Literal operator*(Operand &amp;) override</div><div class="ttdef"><b>Definition:</b> expr.h:930</div></div>
+<div class="ttc" id="aclassUnary_html_af67dd3a8c1b31647294224b8d1e1641f"><div class="ttname"><a href="classUnary.html#af67dd3a8c1b31647294224b8d1e1641f">Unary::get_value</a></div><div class="ttdeci">virtual Literal * get_value() override</div><div class="ttdef"><b>Definition:</b> expr.h:892</div></div>
 <div class="ttc" id="aclassVarInst_html"><div class="ttname"><a href="classVarInst.html">VarInst</a></div><div class="ttdef"><b>Definition:</b> expr.h:435</div></div>
 <div class="ttc" id="aclassVarInst_html_a03783e3f3a4dcceb26733feb5c3a7cc4"><div class="ttname"><a href="classVarInst.html#a03783e3f3a4dcceb26733feb5c3a7cc4">VarInst::operator!</a></div><div class="ttdeci">Literal operator!() override</div><div class="ttdef"><b>Definition:</b> expr.h:501</div></div>
 <div class="ttc" id="aclassVarInst_html_a1d361d43e9b17034b45a167e9a25c07a"><div class="ttname"><a href="classVarInst.html#a1d361d43e9b17034b45a167e9a25c07a">VarInst::get_type</a></div><div class="ttdeci">int get_type() override</div><div class="ttdef"><b>Definition:</b> expr.h:445</div></div>
@@ -1005,7 +1010,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Mar 13 2023 00:37:19 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Mon Mar 13 2023 01:42:02 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>
