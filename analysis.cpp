@@ -12,7 +12,7 @@ bool Analyser::analyse(StatementList *ast) {
         if (current == nullptr) {
             break;
         }
-        has_error = has_error || current->analyse();
+        has_error = current->analyse() || has_error;
         next = next->get_next();
     };
 
