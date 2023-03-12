@@ -270,9 +270,10 @@ public:
     Literal operator!() override {
         if (std::holds_alternative<bool>(this->value)) {
             return Literal{!std::get<bool>(this->value)};
+        } else if(std::holds_alternative<int>(this->value)) {
+            return Literal{!std::get<int>(this->value)};
         }
-
-        std::cout << "Error invalid types in & operation";
+        std::cout << "Error invalid types in ! operation";
         std::exit(1);
 
     }
@@ -794,16 +795,19 @@ public:
  */
 class Unary : public Operand {
     std::unique_ptr<Operand> op;
+    std::unique_ptr<Literal> evaluated;
 
     public:
         Unary(std::unique_ptr<Operand> op) : Operand(), op {std::move(op)} {}
 
         virtual Literal *get_value() override {
-            return nullptr;
+            auto val = op->get_value();
+            evaluated = std::make_unique<Literal>(!*val);
+            return evaluated.get();
         }
 
         bool truthy() override {
-            return false;
+            return !op->truthy();
         }
 
         virtual int get_type() override {
@@ -821,7 +825,7 @@ class Unary : public Operand {
         }
 
         virtual bool analyse() const override {
-            return false;
+            return op->analyse();
         }
 
         Literal operator+(Operand &) override {
