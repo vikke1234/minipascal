@@ -356,7 +356,7 @@ class Var : public Operand {
 
         bool analyse() const override {
             if (!symbol_table.exists(token->token)) {
-                std::cout << "Error no variable named " << token->token << "\n";
+                std::cout << "Error no variable named " << token->token << " line: " << token->line << "\n";
                 return true;
             }
             return false;
