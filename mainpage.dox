@@ -4,7 +4,9 @@
 @section sec0 Building
 The project requires the build system `meson` and `ninja`,  compilation is trivial; if you
 want to specify which compiler to use set the environmental variable `CC`
-before running `meson`.
+before running `meson`. You may install meson with your favorite package
+manager, it should be available on all major distributions. Non-linux platforms
+that are unix like may work but are not supported.
 
      meson setup build && cd build && ninja
 
@@ -30,20 +32,29 @@ together when encountering a token. Supports most control characters; octal,
 hexadecimal and unicode code points are not currently supported.
 
 @section sec4 Parsing
-Parsing consists of a top-down parser (LL1 where convenient, peek ahed a bit),
-it does not create a parse tree, instead creates an AST directly. You may view
-the structure of the AST in UML diagrams in relevant chapters below. @see Expr
+Parsing consists of a top-down parser (LL(1)), it does not create a parse tree,
+instead creates an AST directly. You may view the different nodes relationships
+in the AST with UML diagrams in relevant chapters below. A brief explanation is
+also shown in \ref req_info. @see Expr
 
 @section sec5 Semantical analysis
 Currently the only semantical analysis done is initialization of variables and
 type checking. Since minipascal is globally scoped, no scope checking is done.
 
 @section errors Error handling
-Error handling is implemented to make it exit if it encounters a fatal error
-like missing tokens such as do or end. I did not have enough time to implement
-proper error handling. Future work would consist of adding an error type which
-has ways to handle such errors. %For example skipping tokens until a valid one
-is encountered and getting a new statement from there.
+Error handling is implemented using the crash and burn approach in the parser.
+It will  exit if it encounters a fatal error like missing tokens such as do or
+end. I did not have enough time to implement proper error handling. The
+analyser will analyse the entire file though, it will report all errors it
+finds.
+
+The lexer currently is incapable of detecting non-terminated strings, it also
+implements the crash and burn approach, if it encounters a symbol that is not
+expected, it will exit.
+
+Future work would consist of adding an error type which has ways to handle such
+errors. %For example skipping tokens until a valid one is encountered and
+getting a new statement from there.
 
 @section testing Testing
 I was not proficient in automatic testing from earlier and I did not have time
@@ -77,6 +88,8 @@ It can be found below:
 
 @section hours Hours
 
+Rough estimate of hours, I'm very bad at tracking time, I easily forget how
+much time I've actually spent.
 
 | Date          | Hours |
 |---------------|-------|
@@ -101,7 +114,7 @@ It can be found below:
 | Total         | 106   |
 
 
-@section sec9 Required info
+@section req_info Required info
 1.
 A dot is considered any character in this context. An unescaped '*' is zero or
 more, an unescaped '+' is one or more, a pipe '|' is or.
@@ -145,7 +158,7 @@ See children of Expr, TL;DR, tree looks like this:
 \endcode
 `Expr` can be any statement (a little confusing naming convention, it was named
 such at first and now it's a bit too much work to rename it), a binary
-operation, print etc. StatementList is just a tree structure to contain all of
+operation, %print etc. StatementList is just a tree structure to contain all of
 the different statements.
 
 4.
