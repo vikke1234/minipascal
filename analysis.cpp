@@ -5,7 +5,6 @@
 bool Analyser::analyse(StatementList *ast) {
     const StatementList * next = ast;
     const Expr *current = nullptr;
-    std::cout << "Semantical analysis\n";
 
     bool has_error = false;
     while(next != nullptr) {
