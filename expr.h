@@ -36,6 +36,10 @@ public:
     virtual bool analyse() const = 0;
 };
 
+/**
+ * Abstract class that handles is base for all derived nodes that can do
+ * arithmetic.
+ */
 class Operand : public Expr {
     public:
 
@@ -43,24 +47,78 @@ class Operand : public Expr {
         Operand(const Token &t) : Expr(t) {}
         Operand(const Token &&t) : Expr(t) {}
         Operand() = default;
+
         /**
          * Gets the value of a variable/literal/operation.
          */
         virtual Literal *get_value() = 0;
-        virtual std::unique_ptr<Literal> own_value() { return nullptr; };
+
+        /**
+         * Evaluates the expression and checks if it's truthy, all non-zero
+         * values and non-empty strings are considered truthy.
+         */
         virtual bool truthy() = 0;
 
         /**
          * Gets the type of a variable/literal/operation.
          */
         virtual int get_type() = 0;
+
+        /**
+         * Does addition on a literal, defined for integers and strings.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator+(Operand &l) = 0;
+
+        /**
+         * Does subtraction on an Operand, only defined for integers.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator-(Operand &l) = 0;
+
+        /**
+         * Does multiplication on a literal, only defined for integers.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator*(Operand &l) = 0;
+
+        /**
+         * Does division on a literal, only defined for integers.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator/(Operand &l) = 0;
+
+        /**
+         * Does logical AND on a literal, only defined for booleans.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator&&(Operand &l) = 0;
+
+        /**
+         * Does logical EQUALS on a literal.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator==(Operand &l) = 0;
+
+        /**
+         * Does logical LESS THAN on a literal, defined for any any type.
+         *
+         * @return The result placed into a Literal
+         */
         virtual Literal operator<(Operand &l)= 0;
+
+        /**
+         * Does unary on a literal, extended from the miniPL spec to
+         * be defined for both integers and booleans.
+         *
+         * @return
+         */
         virtual Literal operator!() = 0;
 };
 
@@ -122,7 +180,9 @@ public:
 
 /**
  * A literal, a digit or string, since booleans are not part of the spec, they
- * can not exist as a literal.
+ * can not exist as a literal. Internally the symbol table contains Literals,
+ * so they're possible to store in a Literal but can't be created without an
+ * expression in the language.
  */
 class Literal : public Operand {
 
@@ -476,7 +536,8 @@ class Bop : public Operand {
         }
 
         /**
-         * Gets the value of the binary operation, has to be free'd when done.
+         * Evaluates the binary expression, if called multiple times it will
+         * use a cached value.
          */
         virtual Literal *get_value() override {
             if (evaluated) {
@@ -606,6 +667,14 @@ class If : public Expr {
     std::unique_ptr<StatementList> falsy;
 
     public:
+        /**
+         * @param condition - Expression to be checked if truthy, if true
+         *                    it will execute the `truthy` tree, else the
+         *                    `falsy`.
+         * @param truthy    - tree to evaluate if the condition is true.
+         * @param falsy     - tree to evaluate if the condition is false, if
+         *                    any.
+         */
         If(std::unique_ptr<Operand> condition, std::unique_ptr<StatementList> truthy,
                 std::unique_ptr<StatementList> falsy) :
             Expr(), condition{std::move(condition)}, truthy{std::move(truthy)},
