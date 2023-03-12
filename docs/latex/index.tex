@@ -30,18 +30,52 @@ if !(0) do // foo bar
     print "!(0 is true)";
     if x do
         print "truthy!\n";
-    end
-end
+    end if;
+end if;
 
 for x in x..(1 + 20 / 4) do
     print x;
-end
+end if;
 \end{DoxyVerb}
  \hypertarget{index_hours}{}\doxysection{Hours}\label{index_hours}
+\tabulinesep=1mm
+\begin{longtabu}spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Date   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Hours    }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Date   }&\PBS\centering \cellcolor{\tableheadbgcolor}\textbf{ Hours    }\\\cline{1-2}
+\endhead
+Sun Mar 12   &6    \\\cline{1-2}
+Sat Mar 11   &5    \\\cline{1-2}
+Fri Mar 10   &6    \\\cline{1-2}
+Thu Mar 9   &6    \\\cline{1-2}
+Wed Mar 8   &6    \\\cline{1-2}
+Thu Mar 2   &8    \\\cline{1-2}
+Wed Mar 1   &6    \\\cline{1-2}
+Tue Feb 28   &6    \\\cline{1-2}
+Mon Feb 27   &6    \\\cline{1-2}
+Wed Feb 22   &5    \\\cline{1-2}
+Tue Feb 21   &6    \\\cline{1-2}
+Sun Feb 19   &6    \\\cline{1-2}
+Thu Feb 2   &6    \\\cline{1-2}
+Tue Jan 31   &8    \\\cline{1-2}
+Mon Jan 30   &4    \\\cline{1-2}
+Sun Jan 29   &5    \\\cline{1-2}
+Wed Jan 18   &5    \\\cline{1-2}
+Tue Jan 17   &6    \\\cline{1-2}
+Total   &106   \\\cline{1-2}
+\end{longtabu}
 \hypertarget{index_sec9}{}\doxysection{Required info}\label{index_sec9}
-1.
-
-2. {\ttfamily e} is considered as epsilon in this context. \begin{DoxyVerb}program     -> stmt_list $$
+1. A dot is considered any character in this context. An unescaped \textquotesingle{}$\ast$\textquotesingle{} is zero or more, an unescaped \textquotesingle{}+\textquotesingle{} is one or more, a pipe \textquotesingle{}$\vert$\textquotesingle{} is or. \begin{DoxyVerb}token = [A-z]+[A-z0-9]*
+digit = [0-9]+
+string = ".*"
+symbols = [!\+-\*<=&/] | :=
+language_tokens = (token | digit | symbols | string)
+\end{DoxyVerb}
+ 2. {\ttfamily e} is considered as epsilon in this context. \begin{DoxyVerb}program     -> stmt_list $$
 stmt_list   -> stmt stmt_list | e
 stmt        -> var id : type := expr;
             | id := expr;
@@ -60,7 +94,7 @@ term        -> factor factor_tail
 factor_tail -> mult_op factor factor_tail | e
 factor      -> ( expr ) | id | digit
 add_op      -> + | -
-mult_op     ->
+mult_op     -> * | /
 \end{DoxyVerb}
  3. See children of \mbox{\hyperlink{classExpr}{Expr}}, TL;DR, tree looks like this\+: 
 \begin{DoxyCode}{0}

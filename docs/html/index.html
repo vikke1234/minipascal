@@ -113,18 +113,64 @@ if !(0) do // foo bar
     print "!(0 is true)";
     if x do
         print "truthy!\n";
-    end
-end
+    end if;
+end if;
 
 for x in x..(1 + 20 / 4) do
     print x;
-end
+end if;
 </pre> <h1><a class="anchor" id="hours"></a>
 Hours</h1>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Date   </th><th class="markdownTableHeadNone">Hours    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Sun Mar 12   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Sat Mar 11   </td><td class="markdownTableBodyNone">5    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Fri Mar 10   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Thu Mar 9   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Wed Mar 8   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Thu Mar 2   </td><td class="markdownTableBodyNone">8    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Wed Mar 1   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tue Feb 28   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Mon Feb 27   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Wed Feb 22   </td><td class="markdownTableBodyNone">5    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Tue Feb 21   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Sun Feb 19   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Thu Feb 2   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tue Jan 31   </td><td class="markdownTableBodyNone">8    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Mon Jan 30   </td><td class="markdownTableBodyNone">4    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Sun Jan 29   </td><td class="markdownTableBodyNone">5    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Wed Jan 18   </td><td class="markdownTableBodyNone">5    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Tue Jan 17   </td><td class="markdownTableBodyNone">6    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Total   </td><td class="markdownTableBodyNone">106   </td></tr>
+</table>
 <h1><a class="anchor" id="sec9"></a>
 Required info</h1>
-<p>1.</p>
-<p>2. <code>e</code> is considered as epsilon in this context. </p><pre class="fragment">program     -&gt; stmt_list $$
+<p>1. A dot is considered any character in this context. An unescaped '*' is zero or more, an unescaped '+' is one or more, a pipe '|' is or. </p><pre class="fragment">token = [A-z]+[A-z0-9]*
+digit = [0-9]+
+string = ".*"
+symbols = [!\+-\*&lt;=&amp;/] | :=
+language_tokens = (token | digit | symbols | string)
+</pre><p> 2. <code>e</code> is considered as epsilon in this context. </p><pre class="fragment">program     -&gt; stmt_list $$
 stmt_list   -&gt; stmt stmt_list | e
 stmt        -&gt; var id : type := expr;
             | id := expr;
@@ -143,7 +189,7 @@ term        -&gt; factor factor_tail
 factor_tail -&gt; mult_op factor factor_tail | e
 factor      -&gt; ( expr ) | id | digit
 add_op      -&gt; + | -
-mult_op     -&gt;
+mult_op     -&gt; * | /
 </pre><p> 3. See children of <a class="el" href="classExpr.html">Expr</a>, TL;DR, tree looks like this: </p><div class="fragment"><div class="line">    <a class="code hl_class" href="classStatementList.html">StatementList</a></div>
 <div class="line"><a class="code hl_class" href="classExpr.html">Expr</a>        <a class="code hl_class" href="classStatementList.html">StatementList</a></div>
 <div class="line">        <a class="code hl_class" href="classExpr.html">Expr</a>        <a class="code hl_class" href="classStatementList.html">StatementList</a></div>
@@ -156,7 +202,7 @@ mult_op     -&gt;
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 12 2023 22:37:47 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Mon Mar 13 2023 00:37:22 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

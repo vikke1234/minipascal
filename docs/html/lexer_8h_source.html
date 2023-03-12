@@ -106,7 +106,7 @@ $(function() {
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_class" href="classLexer.html">Lexer</a>(std::string_view filename) :</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        content(read_file(filename)), length(content.length()), index(0ULL),</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        line(1ULL), current_char(EOF), previous{<span class="stringliteral">&quot;&quot;</span>, 0, NO_SYMBOLS}, reserved{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        line(0ULL), current_char(EOF), previous{<span class="stringliteral">&quot;&quot;</span>, 0, NO_SYMBOLS}, reserved{</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>                {<span class="stringliteral">&quot;!&quot;</span>, NOT},  {<span class="stringliteral">&quot;+&quot;</span>, ADDITION}, {<span class="stringliteral">&quot;-&quot;</span>, SUBTRACTION},</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>                {<span class="stringliteral">&quot;&amp;&quot;</span>, AND}, {<span class="stringliteral">&quot;*&quot;</span>, MULTIPLICATION}, {<span class="stringliteral">&quot;/&quot;</span>, DIVISION}, {<span class="stringliteral">&quot;&lt;&quot;</span>, LT}, {<span class="stringliteral">&quot;=&quot;</span>, EQ},</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>                {<span class="stringliteral">&quot;:=&quot;</span>, ASSIGN}, {<span class="stringliteral">&quot;\&quot;&quot;</span>, STRING}, {<span class="stringliteral">&quot;(&quot;</span>, LPARENTHESES},</div>
@@ -165,13 +165,13 @@ $(function() {
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><span class="preprocessor">#endif </span><span class="comment">/* LEXER_H */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="aclassLexer_html"><div class="ttname"><a href="classLexer.html">Lexer</a></div><div class="ttdef"><b>Definition:</b> lexer.h:14</div></div>
 <div class="ttc" id="aclassLexer_html_a0c988d746fff9c8e5ab86985d7b60996"><div class="ttname"><a href="classLexer.html#a0c988d746fff9c8e5ab86985d7b60996">Lexer::is_reserved</a></div><div class="ttdeci">bool is_reserved(std::string_view lexeme)</div><div class="ttdef"><b>Definition:</b> lexer.h:83</div></div>
-<div class="ttc" id="aclassLexer_html_a953001fc0603ba345e9a59fd4b48b478"><div class="ttname"><a href="classLexer.html#a953001fc0603ba345e9a59fd4b48b478">Lexer::peek_token</a></div><div class="ttdeci">std::unique_ptr&lt; Token &gt; peek_token(void)</div><div class="ttdef"><b>Definition:</b> lexer.cpp:99</div></div>
+<div class="ttc" id="aclassLexer_html_a953001fc0603ba345e9a59fd4b48b478"><div class="ttname"><a href="classLexer.html#a953001fc0603ba345e9a59fd4b48b478">Lexer::peek_token</a></div><div class="ttdeci">std::unique_ptr&lt; Token &gt; peek_token(void)</div><div class="ttdef"><b>Definition:</b> lexer.cpp:101</div></div>
 <div class="ttc" id="aclassLexer_html_aa8e54938853863a4508b621a12dadee2"><div class="ttname"><a href="classLexer.html#aa8e54938853863a4508b621a12dadee2">Lexer::get_token</a></div><div class="ttdeci">std::unique_ptr&lt; Token &gt; get_token(bool consume=true)</div><div class="ttdef"><b>Definition:</b> lexer.cpp:54</div></div>
 <div class="ttc" id="astructToken_html"><div class="ttname"><a href="structToken.html">Token</a></div><div class="ttdef"><b>Definition:</b> token.h:54</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 12 2023 22:37:44 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Mon Mar 13 2023 00:37:19 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

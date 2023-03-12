@@ -9,7 +9,7 @@
 \contentsline {section}{\numberline {1.7}Error handling}{2}{section.1.7}%
 \contentsline {section}{\numberline {1.8}Testing}{2}{section.1.8}%
 \contentsline {section}{\numberline {1.9}Hours}{2}{section.1.9}%
-\contentsline {section}{\numberline {1.10}Required info}{2}{section.1.10}%
+\contentsline {section}{\numberline {1.10}Required info}{3}{section.1.10}%
 \contentsline {chapter}{\numberline {2}Hierarchical Index}{5}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Class Hierarchy}{5}{section.2.1}%
 \contentsline {chapter}{\numberline {3}Class Index}{7}{chapter.3}%

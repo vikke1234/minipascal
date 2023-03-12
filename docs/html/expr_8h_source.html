@@ -351,7 +351,7 @@ $(function() {
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span> </div>
 <div class="line"><a id="l00357" name="l00357"></a><span class="lineno"><a class="line" href="classVar.html#ade1c1e34c363f494b2f42fd0a62f48c1">  357</a></span>        <span class="keywordtype">bool</span> <a class="code hl_function" href="classVar.html#ade1c1e34c363f494b2f42fd0a62f48c1">analyse</a>()<span class="keyword"> const override </span>{</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>            <span class="keywordflow">if</span> (!symbol_table.<a class="code hl_function" href="classSymbolTable.html#ae7845b3b228471912ed39b1eb3df92b5">exists</a>(token-&gt;token)) {</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Error no variable named &quot;</span> &lt;&lt; token-&gt;token &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>                std::cout &lt;&lt; <span class="stringliteral">&quot;Error no variable named &quot;</span> &lt;&lt; token-&gt;token &lt;&lt; <span class="stringliteral">&quot; line: &quot;</span> &lt;&lt; token-&gt;line &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span>                <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>            }</div>
 <div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>            <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
@@ -1005,7 +1005,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Mar 12 2023 22:37:44 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
+Generated on Mon Mar 13 2023 00:37:19 for Minipascal by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.6
 </small></address>
 </body>
 </html>

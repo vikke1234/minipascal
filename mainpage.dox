@@ -68,14 +68,38 @@ It can be found below:
         print "!(0 is true)";
         if x do
             print "truthy!\n";
-        end
-    end
+        end if;
+    end if;
 
     for x in x..(1 + 20 / 4) do
         print x;
-    end
+    end if;
 
 @section hours Hours
+
+
+| Date          | Hours |
+|---------------|-------|
+| Sun Mar 12    |  6    |
+| Sat Mar 11    |  5    |
+| Fri Mar 10    |  6    |
+| Thu Mar 9     |  6    |
+| Wed Mar 8     |  6    |
+| Thu Mar 2     |  8    |
+| Wed Mar 1     |  6    |
+| Tue Feb 28    |  6    |
+| Mon Feb 27    |  6    |
+| Wed Feb 22    |  5    |
+| Tue Feb 21    |  6    |
+| Sun Feb 19    |  6    |
+| Thu Feb 2     |  6    |
+| Tue Jan 31    |  8    |
+| Mon Jan 30    |  4    |
+| Sun Jan 29    |  5    |
+| Wed Jan 18    |  5    |
+| Tue Jan 17    |  6    |
+| Total         | 106   |
+
 
 @section sec9 Required info
 1.
@@ -85,7 +109,7 @@ more, an unescaped '+' is one or more, a pipe '|' is or.
     token = [A-z]+[A-z0-9]*
     digit = [0-9]+
     string = ".*"
-    symbols = [!\+-\*/<=&] | :=
+    symbols = [!\+-\*<=&/] | :=
     language_tokens = (token | digit | symbols | string)
 
 2.

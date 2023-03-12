@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.23)  12 MAR 2023 22:37
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022/Arch Linux) (preloaded format=pdflatex 2022.12.23)  13 MAR 2023 00:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1215,7 +1215,7 @@ Underfull \hbox (badness 10000) detected at line 24
  []
 
 ) (./classBop.tex <./classBop.pdf>
-<classBop.pdf, id=1141, 501.875pt x 860.3543pt>
+<classBop.pdf, id=1142, 501.875pt x 860.3543pt>
 File: classBop.pdf Graphic file (type pdf)
 <use classBop.pdf>
 Package pdftex.def Info: classBop.pdf  used on input line 10.
@@ -1261,7 +1261,7 @@ Underfull \hbox (badness 10000) detected at line 285
  []
 
 [16]) (./classExpr.tex <./classExpr.pdf>
-<classExpr.pdf, id=1338, 501.875pt x 123.35083pt>
+<classExpr.pdf, id=1339, 501.875pt x 123.35083pt>
 File: classExpr.pdf Graphic file (type pdf)
 <use classExpr.pdf>
 Package pdftex.def Info: classExpr.pdf  used on input line 6.
@@ -1286,7 +1286,7 @@ e5008276da1dc67a0c831b85fb05c0}) has been already used, duplicate ignored
 l.27 ...ssExpr_adee5008276da1dc67a0c831b85fb05c0}}
                                                    [17]) (./classFor.tex <./cla
 ssFor.pdf>
-<classFor.pdf, id=1379, 501.875pt x 872.8309pt>
+<classFor.pdf, id=1380, 501.875pt x 872.8309pt>
 File: classFor.pdf Graphic file (type pdf)
 <use classFor.pdf>
 Package pdftex.def Info: classFor.pdf  used on input line 10.
@@ -1311,7 +1311,7 @@ e5008276da1dc67a0c831b85fb05c0}) has been already used, duplicate ignored
 l.44 ...ssExpr_adee5008276da1dc67a0c831b85fb05c0}}
                                                    [19]) (./classIf.tex <./clas
 sIf.pdf>
-<classIf.pdf, id=1441, 501.875pt x 872.8309pt>
+<classIf.pdf, id=1442, 501.875pt x 872.8309pt>
 File: classIf.pdf Graphic file (type pdf)
 <use classIf.pdf>
 Package pdftex.def Info: classIf.pdf  used on input line 10.
@@ -1353,7 +1353,7 @@ Underfull \hbox (badness 10000) detected at line 55
  []
 
 ) (./classLiteral.tex <./classLiteral.pdf>
-<classLiteral.pdf, id=1505, 501.875pt x 860.3543pt>
+<classLiteral.pdf, id=1506, 501.875pt x 860.3543pt>
 File: classLiteral.pdf Graphic file (type pdf)
 <use classLiteral.pdf>
 Package pdftex.def Info: classLiteral.pdf  used on input line 10.
@@ -1435,7 +1435,7 @@ Underfull \hbox (badness 10000) detected at line 283
  []
 
 ) (./classOperand.tex <./classOperand.pdf>
-<classOperand.pdf, id=1676, 501.875pt x 286.7814pt>
+<classOperand.pdf, id=1677, 501.875pt x 286.7814pt>
 File: classOperand.pdf Graphic file (type pdf)
 <use classOperand.pdf>
 Package pdftex.def Info: classOperand.pdf  used on input line 10.
@@ -1517,7 +1517,7 @@ Underfull \hbox (badness 10000) detected at line 208
  []
 
 ) (./classParser.tex [32]) (./classPrint.tex <./classPrint.pdf>
-<classPrint.pdf, id=1854, 501.875pt x 872.8309pt>
+<classPrint.pdf, id=1855, 501.875pt x 872.8309pt>
 File: classPrint.pdf Graphic file (type pdf)
 <use classPrint.pdf>
 Package pdftex.def Info: classPrint.pdf  used on input line 10.
@@ -1542,7 +1542,7 @@ e5008276da1dc67a0c831b85fb05c0}) has been already used, duplicate ignored
 l.44 ...ssExpr_adee5008276da1dc67a0c831b85fb05c0}}
                                                    [33]) (./classRange.tex <./c
 lassRange.pdf>
-<classRange.pdf, id=1889, 501.875pt x 716.96857pt>
+<classRange.pdf, id=1890, 501.875pt x 716.96857pt>
 File: classRange.pdf Graphic file (type pdf)
 <use classRange.pdf>
 Package pdftex.def Info: classRange.pdf  used on input line 10.
@@ -1567,7 +1567,7 @@ e5008276da1dc67a0c831b85fb05c0}) has been already used, duplicate ignored
 l.48 ...ssExpr_adee5008276da1dc67a0c831b85fb05c0}}
                                                    [35]) (./classRead.tex <./cl
 assRead.pdf>
-<classRead.pdf, id=1935, 501.875pt x 819.39125pt>
+<classRead.pdf, id=1936, 501.875pt x 819.39125pt>
 File: classRead.pdf Graphic file (type pdf)
 <use classRead.pdf>
 Package pdftex.def Info: classRead.pdf  used on input line 10.
@@ -1592,7 +1592,7 @@ e5008276da1dc67a0c831b85fb05c0}) has been already used, duplicate ignored
 l.44 ...ssExpr_adee5008276da1dc67a0c831b85fb05c0}}
                                                    [37])
 (./classStatementList.tex <./classStatementList.pdf>
-<classStatementList.pdf, id=1972, 501.875pt x 431.7229pt>
+<classStatementList.pdf, id=1973, 501.875pt x 431.7229pt>
 File: classStatementList.pdf Graphic file (type pdf)
 <use classStatementList.pdf>
 Package pdftex.def Info: classStatementList.pdf  used on input line 10.
@@ -1630,7 +1630,7 @@ Underfull \hbox (badness 10000) detected at line 43
  []
 
 ) (./structToken.tex) (./classUnary.tex <./classUnary.pdf>
-<classUnary.pdf, id=2036, 501.875pt x 860.3543pt>
+<classUnary.pdf, id=2037, 501.875pt x 860.3543pt>
 File: classUnary.pdf Graphic file (type pdf)
 <use classUnary.pdf>
 Package pdftex.def Info: classUnary.pdf  used on input line 10.
@@ -1712,7 +1712,7 @@ Underfull \hbox (badness 10000) detected at line 262
  []
 
 ) (./classVar.tex <./classVar.pdf>
-<classVar.pdf, id=2189, 501.875pt x 1147.1457pt>
+<classVar.pdf, id=2190, 501.875pt x 1147.1457pt>
 File: classVar.pdf Graphic file (type pdf)
 <use classVar.pdf>
 Package pdftex.def Info: classVar.pdf  used on input line 10.
@@ -1794,7 +1794,7 @@ Underfull \hbox (badness 10000) detected at line 307
  []
 
 [51]) (./classVarInst.tex <./classVarInst.pdf>
-<classVarInst.pdf, id=2354, 501.875pt x 1147.1457pt>
+<classVarInst.pdf, id=2355, 501.875pt x 1147.1457pt>
 File: classVarInst.pdf Graphic file (type pdf)
 <use classVarInst.pdf>
 Package pdftex.def Info: classVarInst.pdf  used on input line 10.
@@ -1925,13 +1925,13 @@ Package rerunfilecheck Info: File `refman.out' has not changed.
 (rerunfilecheck)             Checksum: CFEF863E1EA0A9A0CFB74E138CF2A8B9;34333.
  ) 
 Here is how much of TeX's memory you used:
- 18924 strings out of 478238
- 311841 string characters out of 5850455
- 645388 words of memory out of 5000000
- 36232 multiletter control sequences out of 15000+600000
+ 18958 strings out of 478238
+ 312168 string characters out of 5850455
+ 645422 words of memory out of 5000000
+ 36265 multiletter control sequences out of 15000+600000
  525089 words of font info for 97 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,16n,117p,864b,632s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 99i,16n,117p,864b,626s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
@@ -1942,10 +1942,10 @@ urier/ucrr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/courier/ucrro8a.pfb></u
 sr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf-dist/
 fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/share/texmf-dist/fonts/type1/urw/hel
 vetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (85 pages, 339852 bytes).
+Output written on refman.pdf (85 pages, 341635 bytes).
 PDF statistics:
- 3397 PDF objects out of 3580 (max. 8388607)
- 3227 compressed objects within 33 object streams
- 540 named destinations out of 1000 (max. 500000)
+ 3400 PDF objects out of 3580 (max. 8388607)
+ 3230 compressed objects within 33 object streams
+ 541 named destinations out of 1000 (max. 500000)
  1570 words of extra memory for PDF output out of 10000 (max. 10000000)
 
