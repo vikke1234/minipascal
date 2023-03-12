@@ -464,42 +464,42 @@ class VarInst : public Var {
         }
 
         Literal operator+(Operand &) override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator-(Operand &) override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator*(Operand &) override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator/(Operand &) override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator&&(Operand &) override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator==(Operand &) override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator<(Operand &) override {
-            std::cout << "Invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 
         Literal operator!() override {
-            std::cout << "invalid operation\n";
+            std::cout << "VarInst invalid operation\n";
             std::exit(1);
         }
 };
@@ -581,7 +581,7 @@ class Bop : public Operand {
                     }
                     break;
                 default:
-                    std::cout << "Invalid operation " << token->token;
+                    std::cout << "Invalid operation (" << token->token << ")";
                     break;
             }
             return evaluated.get();
