@@ -57,6 +57,8 @@ private:
         match(token_type::DO);
         std::unique_ptr<StatementList> body = statement_list(true);
         match(token_type::END);
+        match(token_type::FOR);
+        match(token_type::SEMICOLON);
         return std::make_unique<For>(std::move(identifier), std::move(range), std::move(body));;
     }
 
@@ -75,6 +77,8 @@ private:
                 // fallthrough
             case token_type::END:
                 match(token_type::END); // expect an end if coming from else
+                match(token_type::IF);
+                match(token_type::SEMICOLON);
                 break;
 
             default:
