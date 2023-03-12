@@ -100,11 +100,7 @@ std::unique_ptr<Token> Lexer::peek_token() {
     auto token = get_token(false);
     return token;
 }
-/**
- * Gets the next character from the file
- *
- * Note: skips comments
- */
+
 char Lexer::get_char(void) {
     enum comment_type comment_type = NONE;
     // skip whitespace and comments

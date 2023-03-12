@@ -74,6 +74,12 @@ public:
      * @return The next token from the file.
      */
     std::unique_ptr<Token> peek_token(void);
+
+    /**
+     * Checks whether a lexeme is reserved.
+     *
+     * @param lexeme - Lexeme to validate.
+     */
     bool is_reserved(std::string_view lexeme) {
         return reserved.find(lexeme.data()) != reserved.end();
     }
@@ -81,7 +87,24 @@ public:
 private:
     using identifier = int (*)(int);
 
+    /**
+     * Reads all of the content in a file.
+     *
+     * @param filename - name of the file
+     *
+     * @return a string that contains all of the content in the file
+     */
     std::string read_file(std::string_view filename);
+
+    /**
+     * Gets a string containing symbols that pass the identifier function
+     * confirms should be in the string, such as digits or alphanumeric
+     * sequences.
+     *
+     * @param f - identifier function such as std::isdigit, or std::isalpha.
+     *            Can be any though, as long as it returns an int and accepts
+     *            an int as argument.
+     */
     std::string parse(identifier f);
 
     /**
@@ -103,12 +126,33 @@ private:
      * Gets a string literal, does not include the qoutes.
      */
     std::string get_string(void);
+    /**
+     * Interprets escape characters, currently does not support octals,
+     * hexadecimals or unicode code points.
+     *
+     * @param c - end character to interpret (example: `\n`, pass the `n`).
+     */
     char interpret_escape(char c);
     std::string parse_octal();
     std::string parse_hex();
+
+    /**
+     * Gets the next character from the file
+     *
+     * Note: skips comments
+     */
     char get_char(void);
+
+    /**
+     * Peeks a char, does not increment position in file.
+     */
     char peek_char(void);
 
+    /**
+     * Interprets what type of token it is.
+     *
+     * @return enum entry of which token type it is.
+     */
     enum token_type get_token_type(std::string current);
 };
 
